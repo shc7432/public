@@ -6,6 +6,11 @@ QUOTE=<script src="https://shc7432.github.io/public/getLinkInput.js"></script>
 QUOTEOR=<script src="https://shc0743.github.io/getLinkInput.js"></script>
 ********/
 
+/********
+You can also use this link:
+<script src="https://shc7432.github.io/public/getLinkInput.js"></script>
+********/
+
 function findInput(name,succeed,error){try{
 eval(name+"=undefined")
 var path=location.href
