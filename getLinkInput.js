@@ -1,6 +1,6 @@
 /********
-DATA=2020-02-22
-LASTDATA=2020-02-22
+DATE=2020-02-22
+LASTDATE=2020-02-22
 METHOD=GET
 QUOTE=<script src="https://shc7432.github.io/public/getLinkInput.js"></script>
 QUOTEOR=<script src="https://shc0743.github.io/getLinkInput.js"></script>
