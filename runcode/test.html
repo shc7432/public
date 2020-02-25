@@ -1,5 +1,5 @@
 <script>
-(function(){try{
+(function(){
 type=code=undefined
 var path=location.href
 if(path.search("\\?")!==-1){
@@ -32,7 +32,12 @@ code=inputContent.replace(/code=/,"")
 if(type&&code){
 
 if(type=="html"){
+try{
 document.write(decodeURIComponent(code))
+}
+catch(err){
+document.write(err)
+}
 } else if(type=="js"){
 try{
 document.write(eval(decodeURIComponent(code)))
@@ -44,5 +49,5 @@ document.write(err)
  } else {
 document.write("<center><h1>404</h1><p>您要访问的页面似乎出错了...</p></center>")
  }
-}catch(err){alert(err)}})()
+})()
 </script>
