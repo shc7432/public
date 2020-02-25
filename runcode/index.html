@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
+<title>代码编辑器</title>
+<body style="width:90%;margin: 0 auto;text-align:center;">
+<h1>代码编辑器</h1><div style="text-align:right;font-size:10px">编程语言:<select id=sct1><option>C</option><option>C#</option><option>C++</option><option>CSS</option><option id=sct1html value=html>HTML</option><option>Java</option><option id=sct1js value=js>JavaScript</option><option>JSON</option><option>PHP</option><option>Python</option><option>R</option><option>RD</option><option>SQL</option><option>XML</option></select></div>
+<textarea cols=50 rows=10 placeholder="输入代码,自动执行" onkeyup="stathtml()" id=intxt></textarea>
+<br>执行结果<iframe src="" style="border:1px solid;text-align:left;"></iframe>
+<script>
+tmp=document.getElementById("sct1").getElementsByTagName('option')
+for(i=0;i<tmp.length;i++){tmp[i].disabled=1}
+sct1html.disabled=0
+sct1js.disabled=0
+sct1html.selected=1
+delete tmp;delete a;
+function stathtml(){
+document.getElementsByTagName('iframe')[0].src="test.html?type=html&code="+intxt.value
+}
+function statjs(){
+try{
+if(intxt.value.search("alert()")!==-1||intxt.value.search("document.documentElement.innerHTML=")!==-1||intxt.value.search("document.body.innerHTML=")!==-1||intxt.value.search("document.write")!==-1){document.getElementsByTagName('div')[0+1].innerHTML="External error:The operation has been disabled by the administrator.";return;}
+document.getElementsByTagName('iframe')[0].src="test.html?type=js&code="+(intxt.value)
+}catch(err){document.getElementsByTagName('iframe')[0].innerHTML=err}
+}
+sct1.onchange=function(){
+if(this.value=="html"){intxt.onkeyup=stathtml;intxt.onblur="";intxt.placeholder="输入代码,自动执行"} else 
+if(this.value=="js"){intxt.onkeyup=statjs;intxt.onblur="";intxt.placeholder="输入代码,自动执行"}
+}
+</script>
