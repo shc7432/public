@@ -34,16 +34,16 @@ if(type&&code){
 
 if(type=="html"){
 try{
-document.write(decodeURIComponent(code))
+window.document.documentElement.innerHTML+=(decodeURIComponent(code))
 }
 catch(err){
-document.write(err)
+window.document.documentElement.innerHTML+=(err)
 }
 } else if(type=="js"){
 try{
-document.write("<pre>"+eval(decodeURIComponent(code))+"</pre>")
+window.document.documentElement.innerHTML+=("<pre>"+eval(decodeURIComponent(code))+"</pre>")
 }catch(err){
-document.write(err)
+window.document.documentElement.innerHTML+=(err)
 }
 } else {document.write("您还没有开始执行!")}
 
