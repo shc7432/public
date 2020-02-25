@@ -6,7 +6,7 @@
 <h1>在线代码编辑器</h1><div style="text-align:right;font-size:10px">编程语言:<select id=sct1><option>C</option><option>C#</option><option>C++</option><option>CSS</option><option id=sct1html value=html>HTML</option><option>Java</option><option id=sct1js value=js>JavaScript</option><option>JSON</option><option>PHP</option><option>Python</option><option>R</option><option>RD</option><option>SQL</option><option>XML</option></select></div>
 <textarea cols=50 rows=10 placeholder="输入代码,自动执行" onkeyup="stathtml()" id=intxt></textarea>
 <br>执行结果<br><iframe src="javascript:document.write('您还没有开始执行!')" style="border:1px solid;text-align:left;"></iframe>
-<div style="font-size:6px">友情链接:<a href="https://shc0743.github.io/MyFile/index1/demo/mdn/html/form/forms/code-test/mob/">本地代码编辑器</a></div><script>
+<div style="font-size:1px">友情链接:<a href="https://shc0743.github.io/MyFile/index1/demo/mdn/html/form/forms/code-test/mob/">本地代码编辑器</a>(若出错,请选择此项)</div><script>
 tmp=document.getElementById("sct1").getElementsByTagName('option')
 for(i=0;i<tmp.length;i++){tmp[i].disabled=1}
 sct1html.disabled=0
@@ -18,7 +18,7 @@ document.getElementsByTagName('iframe')[0].src="test.html?type=html&code="+intxt
 }
 function statjs(){
 try{
-if(intxt.value.search("alert()")!==-1||intxt.value.search("document.documentElement.innerHTML=")!==-1||intxt.value.search("document.body.innerHTML=")!==-1||intxt.value.search("document.write")!==-1){document.getElementsByTagName('div')[0+1].innerHTML="External error:The operation has been disabled by the administrator.";return;}
+if(intxt.value.search("alert()")!==-1||intxt.value.search("document.documentElement.innerHTML=")!==-1||intxt.value.search("document.body.innerHTML=")!==-1||intxt.value.search("document.write")!==-1){document.getElementsByTagName('iframe')[0].innerHTML="External error:The operation has been disabled by the administrator.";return;}
 document.getElementsByTagName('iframe')[0].src="test.html?type=js&code="+(intxt.value)
 }catch(err){document.getElementsByTagName('iframe')[0].innerHTML=err}
 }
