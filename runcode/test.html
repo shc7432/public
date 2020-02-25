@@ -41,7 +41,7 @@ document.write(err)
 }
 } else if(type=="js"){
 try{
-document.write(eval(decodeURIComponent(code)))
+document.write("<pre>"+eval(decodeURIComponent(code))+"</pre>")
 }catch(err){
 document.write(err)
 }
