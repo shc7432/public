@@ -29,7 +29,7 @@ code=inputContent.replace(/code=/,"")
 }
   }
 
-if(type&code!==undefined){
+if(type&&code){
 
 if(type=="html"){
 document.write(code)
