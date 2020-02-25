@@ -32,10 +32,10 @@ code=inputContent.replace(/code=/,"")
 if(type&&code){
 
 if(type=="html"){
-document.write(code)
+document.write(decodeURIComponent(code))
 } else if(type=="js"){
 try{
-document.write(eval(code))
+document.write(eval(decodeURIComponent(code)))
 }catch(err){
 document.write(err)
 }
