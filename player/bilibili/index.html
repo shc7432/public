@@ -11,16 +11,17 @@ cid:<input name=cid type=number><input type=hidden name=page value=1><br>
 页面内打开<br>
 aid:<input name=aidb type=number><br>
 cid:<input name=cidb type=number><input type=hidden name=page value=1><br>
-<input type=button value="使用iframe(推荐)" onclick="pageopen(0)"><input type=button value="确定" onclick="pageopen(1)"><input type=reset value="重置">
+<input type=button value="使用iframe(推荐)" onclick="pageopen()"><input type=button value="确定" onclick="pageopen2()"><input type=reset value="重置">
 </form>
 <script>
-function pageopen(inp){
+function pageopen(){
 var aid=document.querySelectorAll("input[name=aidb]")
 var cid=document.querySelectorAll("input[name=cidb]")
-if(!inp){
 document.documentElement.innerHTML+="<iframe src='https://player.bilibili.com/player.html?aid="+aid+"&cid="+cid+"&page=1' style='border:0'>抱歉，您的浏览器不支持此元素，请换一种方法</iframe>"
-} else {
-if(confirm("警告!\n您即将离开本站,前往新页面!!!\n真的要继续吗?")){location.href="https://player.bilibili.com/player.html?aid="+aid+"&cid="+cid+"&page=1"}
 }
+function pageopen2(){
+var aid=document.querySelectorAll("input[name=aidb]")
+var cid=document.querySelectorAll("input[name=cidb]")
+if(confirm("警告!\n您即将离开本站,前往新页面!!!\n真的要继续吗?")){location.href="https://player.bilibili.com/player.html?aid="+aid+"&cid="+cid+"&page=1"}
 }
 </script>
