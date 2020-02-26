@@ -30,6 +30,6 @@ if(getUrlValue("whatisaid")){
 var sub=document.querySelectorAll("button[type=submit]")[0]
 var forms=document.querySelectorAll("form")[2]
 sub.hidden=1
-forms.innerHTML="<img src='whatisaid.jpg' width="+screen.width+" height="+screen.height+">"
+forms.innerHTML="<img src='whatisaid.jpg' width="+screen.width-30+" height="+screen.height+">"
 } else document.querySelectorAll("form")[2].action=location.href
 </script>
