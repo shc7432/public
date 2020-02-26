@@ -2,16 +2,16 @@
 <title>Bilibili视频播放器</title>
 <h1>Bilibili视频播放器</h1>
 <form action="https://player.bilibili.com/player.html" target="_blank" style="border:1px solid #ccc" onsubmit="this.reset()">
-新页面打开(效果更佳,但可能会遇到图片比例错误)<br>
+新页面打开<br>
 aid:<input name=aid type=number><br>
 cid:<input name=cid type=number><input type=hidden name=page value=1><br>
 <input type=submit value="提交"><input type=reset value="重置">
 </form>
 <form action="" style="border:1px solid #ccc">
-页面内打开(比例完全正确,但观看体验不佳)<br>
+页面内打开<br>
 aid:<input name=aidb type=number><br>
 cid:<input name=cidb type=number><input type=hidden name=page value=1><br>
-<input type=button value="使用iframe(推荐)" onclick="pageopen()"><input type=button value="确定(建议使用新页面打开替代)" onclick="pageopen(1)"><input type=reset value="重置">
+<input type=button value="使用iframe(推荐)" onclick="pageopen(0)"><input type=button value="确定" onclick="pageopen(1)"><input type=reset value="重置">
 </form>
 <script>
 function pageopen(inp){
