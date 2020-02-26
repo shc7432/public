@@ -15,13 +15,13 @@ cid:<input name=cidb type=number><input type=hidden name=page value=1><br>
 </form>
 <script>
 function pageopen(){
-var aid=document.querySelectorAll("input[name=aidb]")[0]
-var cid=document.querySelectorAll("input[name=cidb]")[0]
+var aid=document.querySelectorAll("input[name=aidb]")[0].value
+var cid=document.querySelectorAll("input[name=cidb]")[0].value
 document.documentElement.innerHTML+="<iframe src='https://player.bilibili.com/player.html?aid="+aid+"&cid="+cid+"&page=1' style='border:0'>抱歉，您的浏览器不支持此元素，请换一种方法</iframe>"
 }
 function pageopen2(){
-var aid=document.querySelectorAll("input[name=aidb]")[0]
-var cid=document.querySelectorAll("input[name=cidb]")[0]
+var aid=document.querySelectorAll("input[name=aidb]")[0].value
+var cid=document.querySelectorAll("input[name=cidb]")[0].value
 if(confirm("警告!\n您即将离开本站,前往新页面!!!\n真的要继续吗?")){location.href="https://player.bilibili.com/player.html?aid="+aid+"&cid="+cid+"&page=1"}
 }
 </script>
