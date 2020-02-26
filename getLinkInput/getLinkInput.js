@@ -1,27 +1,22 @@
-(function(){try{
-=undefined
-var path=location.href
-if(path.search("\\?")!==-1){
-var inputContent=path.split("?")[1]
-if(inputContent.search("&")!==-1) { 
-inputContent=inputContent.split("&") 
-var i
-for(i=0;i<inputContent.length;i++){
-if(inputContent[i].search(/=/)!==-1){
-=inputContent[i].replace("=","");/*/SUM=8/*/
-break;
- }
-}
-} else {
-if(inputContent.search(/=/)!==-1){
-=inputContent.replace(/=/,"")
- }
-}
-  }
+/********
+DATA=2020-02-26
+LASTDATA=2020-02-26
+********/
 
-if(){
+/****
+You can also use this link:
+<script src="https://shc7432.github.io/public/getLinkInput/getLinkInput.js"></script>
+****/
 
- } else {
-
- }
-}catch(err){alert(err)}})()
+getUrlValue = function (name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            try {
+                return decodeURIComponent(r[2]);
+            } catch (e) {
+                return null;
+            }
+        }
+        return null;
+    }
