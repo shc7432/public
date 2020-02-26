@@ -1,16 +1,16 @@
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
 <title>Bilibili视频播放器</title>
 <h1>Bilibili视频播放器</h1>
-<form action="https://player.bilibili.com/player.html" target="_blank" style="border:1px solid #ccc">
+<form action="https://player.bilibili.com/player.html" target="_blank" style="border:1px solid #ccc" onsubmit="this.reset()">
 新页面打开<br>
-aid:<input name=aid><br>
-cid:<input name=cid><input type=hidden name=page value=1><br>
+aid:<input name=aid type=number><br>
+cid:<input name=cid type=number><input type=hidden name=page value=1><br>
 <input type=submit value="提交"><input type=reset value="重置">
 </form>
 <form action="" style="border:1px solid #ccc">
 页面内打开<br>
-aid:<input name=aidb><br>
-cid:<input name=cidb><input type=hidden name=page value=1><br>
+aid:<input name=aidb type=number><br>
+cid:<input name=cidb type=number><input type=hidden name=page value=1><br>
 <input type=button value="确定" onclick="pageopen()"><input type=reset value="重置">
 </form>
 <script>
