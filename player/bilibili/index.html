@@ -14,7 +14,7 @@ aid:<input name=aidb type=number><br>
 <!--cid:<input name=cidb type=number><input type=hidden name=page value=1><br>-->
 <input type=button value="使用iframe(推荐)" onclick="pageopen()"><input type=button value="确定" onclick="pageopen2()"><input type=reset value="重置">
 </form>
-<form action="####" style="border:1px solid #ccc">
+<form action="" style="border:1px solid #ccc">
 <input type=hidden name=whatisaid value=true><button type="submit">啥是aid?</button>
 </form>
 <script>
@@ -31,5 +31,5 @@ var sub=document.querySelectorAll("button[type=submit]")[0]
 var forms=document.querySelectorAll("form")[2]
 sub.hidden=1
 forms.innerHTML="<img src='whatisaid.jpg'>"
-}
+} else document.querySelectorAll("form")[2].action=location.href
 </script>
