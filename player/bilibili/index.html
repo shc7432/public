@@ -20,7 +20,7 @@ aid:<input name=aidb type=number><br>
 <script>
 function pageopen(){
 var aid=document.querySelectorAll("input[name=aidb]")[0].value
-document.documentElement.innerHTML+="<iframe src='https://player.bilibili.com/player.html?aid="+aid+"' style='border:0'>抱歉，您的浏览器不支持此元素，请换一种方法</iframe>"
+document.documentElement.innerHTML+="<iframe src='https://player.bilibili.com/player.html?aid="+aid+"' scrolling='no' border='0' frameborder='no' framespacing='0' allowfullscreen='true'>抱歉，您的浏览器不支持此元素，请换一种方法</iframe>"
 }
 function pageopen2(){
 var aid=document.querySelectorAll("input[name=aidb]")[0].value
