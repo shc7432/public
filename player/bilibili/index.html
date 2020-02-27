@@ -2,7 +2,7 @@
 <script src="https://shc7432.github.io/public/getLinkInput/getLinkInput.js"></script>
 <title>Bilibili视频播放器</title>
 <h1>Bilibili视频播放器</h1>
-<form action="https://player.bilibili.com/player.html" target="_blank" style="border:1px solid #ccc" onsubmit="setTimeout(function(){this.reset()},10)">
+<form action="https://bilibili.com/blackboard/html5player.html" target="_blank" style="border:1px solid #ccc" onsubmit="setTimeout(function(){this.reset()},10)">
 新页面打开<br>
 aid:<input name=aid type=number><br>
 <!--cid:<input name=cid type=number><input type=hidden name=page value=1><br>-->
@@ -20,11 +20,12 @@ aid:<input name=aidb type=number><br>
 <script>
 function pageopen(){
 var aid=document.querySelectorAll("input[name=aidb]")[0].value
-document.documentElement.innerHTML+="<iframe src='https://player.bilibili.com/player.html?aid="+aid+"' scrolling='no' border='0' frameborder='no' framespacing='0' allowfullscreen='true'>抱歉，您的浏览器不支持此元素，请换一种方法</iframe>"
+//document.documentElement.innerHTML+="<iframe src='https://player.bilibili.com/player.html?aid="+aid+"' scrolling='no' border='0' frameborder='no' framespacing='0' allowfullscreen='true'>抱歉，您的浏览器不支持此元素，请换一种方法</iframe>"
+document.documentElement.innerHTML+="<iframe src='https://bilibili.com/blackboard/html5player.html?aid="+aid+"' scrolling='no' border='0' frameborder='no' framespacing='0' allowfullscreen='true'>抱歉，您的浏览器不支持此元素，请换一种方法</iframe>"
 }
 function pageopen2(){
 var aid=document.querySelectorAll("input[name=aidb]")[0].value
-if(confirm("警告!\n您即将离开本站,前往新页面!!!\n真的要继续吗?")){location.href="https://player.bilibili.com/player.html?aid="+aid}
+if(confirm("警告!\n您即将离开本站,前往新页面!!!\n真的要继续吗?")){location.href="https://bilibili.com/blackboard/html5player.html?aid="+aid}
 }
 if(getUrlValue("whatisaid")){
 var sub=document.querySelectorAll("button[type=submit]")[0]
