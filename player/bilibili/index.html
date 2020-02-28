@@ -29,13 +29,14 @@ var aid=document.querySelectorAll("input[name=aidb]")[0].value
 var cid=document.querySelectorAll("input[name=cidb]")[0].value
 if(confirm("警告!\n您即将离开本站,前往新页面!!!\n真的要继续吗?")){location.href="https://bilibili.com/blackboard/html5player.html?aid="+aid+"&cid="+cid}
 }
-if(getUrlValue("whatisaid")=="true"){
+if(getUrlValue("whatisaid")){
 var sub=document.querySelectorAll("button[type=submit]")[0]
 var forms=document.querySelectorAll("form")[2]
 sub.hidden=1
 forms.innerHTML="笨蛋,就是av号,视频里面都有的<input type=hidden name=mashangganxiezuozhe value=true><button type=submit>懂啦,马上感谢作者</button><button type=button onclick='location.href=\"whatisaid.jpg\"'>还是不懂怎么办?</button>"
 } //else document.querySelectorAll("form")[2].action=location.href
-if(getUrlValue("mashangganxiezuozhe")=="true") {
+if(getUrlValue("mashangganxiezuozhe")){
+var forms=document.querySelectorAll("form")[2]
 forms.innerHTML+="谢谢!"
 setTimeout("location.href=location.href.split('?')[0]",1500)
 }
