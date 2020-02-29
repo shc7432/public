@@ -6,6 +6,8 @@ LASTDATE=2020-02-26
 /****
 You can also use this link:
 <script src="https://shc7432.github.io/public/getLinkInput/getLinkInput.js"></script>
+Are you want test your code's error?You can use this link:
+<script src="https://shc7432.github.io/public/getLinkInput/testcode.js"></script>
 ****/
 
 getUrlValue = function (name) {
