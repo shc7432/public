@@ -1,91 +1,91 @@
 <!DOCTYPE html>
-<!-- 
- aim：csdn example
- date：2018-09
- author:clearlove
- bug:0%
- environment:osx
- introduce:Progress bar introduction
- -->
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title></title>
-		<style type="text/css">
-			.style_input{
-				width: 3rem;
-				margin-bottom: 2rem;
-			}
-			#context{
-				height: 1.5rem;
-				border: 1px solid black;
-				float: left;
-				border-radius:10px;
-			}
-			#ner_con{
-				background-color: aqua;
-				height: 100%;
-				border-radius:10px;
-			}
-			#text_contest{
-				height: 1.5rem;
-				width: 3rem;
-				float: left;
-				margin-left: 0.3rem;
-			}
-			#pro_div{
-				height: 1.5rem;
-				width: 3rem;
-				float: left;
-			}
-		</style>
-		<script src="js/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
-	</head>
-	<body>
-		<input type="number" name="" id="user_number" value="" class="style_input"/>
-	  <input type="button" name="" id="" value="生成" οnclick="change()"/>
-		
-		<div id="">
-			<div id="context">
-				<div id="ner_con">
-				</div>
-			</div>
-			<div id="text_contest">
-			</div>
-		</div>
-		<script type="text/javascript">
-				var count = 1;
-				var screewidth = document.body.clientWidth;
-				function change(){
-					/* 拿到ID以改变样式 */
-					var nercon = document.getElementById("ner_con");
-					var context = document.getElementById("context");
-					var text_contest = document.getElementById("text_contest");
-					var user_number = $("#user_number").val();
-					/* 判断一下是不是超过了可见区域 */
-					if(Number(user_number)>=(screewidth/2)){
-						console.log(screewidth);
-						alert("输入过长，请重新输入！");
-						return false;
-					}
-					else{
-						context.style.width = user_number+"px";
-						/* 只需要将内部的div的宽度递增就可以了*/
-						if(count !== Number(user_number)){
-							/* 改变样式的宽度 */
-							nercon.style.width = count+"px";
-							/* count自加 */
-							count++;
-							/* 百分比的显示，保留两位小数 */
-							text_contest.textContent = (parseFloat(count/user_number)*100).toFixed(2)+"%";
-						}else{
-							return false;
-						}
-							setTimeout("change()",100);
-					}
-					
-				}
-		</script>
-	</body>
+   <head>
+     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+     <title>进度条 </title>    
+   </head>
+   <style>
+     #progress{
+       position: relative;
+       margin: auto;
+       top: 200px;
+       display: block;
+       width: 200px;
+       height: 20px;
+       border-style: dotted;
+       border-width: thin;
+       border-color: darkgreen;
+      }
+    #filldiv{
+      position:absolute;
+      top: 0px;
+      left: 0px;
+      width: 0px;
+      height: 20px;
+      background: blue;
+    }
+   #percent{
+      position: absolute;
+      top: 0px;
+      left: 200px;    
+    }
+    </style>
+<body>
+    <div id="progress">
+        <div id="filldiv"></div>
+        <span id="percent">0</span>
+    </div>
+</body>
 </html>
+     <script type="text/javascript">
+     //获取所有需要的元素
+     var progress = document.getElementById("progress");
+     var filldiv = document.getElementById("filldiv");
+     var percent = document.getElementById("percent");
 
+     var w = progress.clientWidth;//获取整个进度条的长度
+
+     //开启一个定时器
+     var timer = setInterval(function(){
+     //filldiv的宽度递增
+     //filldiv.offsetWidth，每一次获取的都是当前的宽
+     filldiv.style.width = filldiv.offsetWidth + 1 + "px";
+     //filldiv添加一个随机背景颜色 
+     filldiv.style.background = getColor();
+     //percent统计百分比
+     percent.innerHTML = parseInt((filldiv.offsetWidth/w)*100) + "%";
+     //当filldiv的宽到了200的宽就停止定时器
+     if(filldiv.offsetWidth == w){
+     clearInterval(timer);//当进度达到100%时，关闭定时器，进度停止。
+      }
+     },10);
+
+     //获取十六进制的随机颜色值
+     function getColor(){
+     var str = "0123456789abcdef";
+     var color = "#";
+     var rand;
+     //str有下标 0-15
+     //获取0-15的随机数
+     //通过这个随机数作为str的下标，
+     //获取随机字符
+     //获取六个随机字符拼成一个字符串
+     for(var i = 0 ; i < 6 ;i++){
+     rand = getRand(0,15);
+     color += str.charAt(rand);
+     }
+       return color;
+     }
+
+     //获取min-max之间的随机整数
+     function getRand(min,max){
+     return parseInt(Math.random() * (max - min + 1) + min);
+     }
+
+</script>
+
+
+运行效果：
+
+ 
+**可以将 getColor() 和 getRand() 函数放入一个公共的JS库，下次使用时可以直接调用。
