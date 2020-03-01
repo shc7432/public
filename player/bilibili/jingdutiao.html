@@ -12,7 +12,7 @@
        display: block;
        width: 200px;
        height: 20px;
-       border-style: dotted;
+       border-style: solid;
        border-width: thin;
        border-color: darkgreen;
       }
@@ -62,6 +62,7 @@
 
      //获取十六进制的随机颜色值
      function getColor(){
+     /*
      var str = "0123456789abcdef";
      var color = "#";
      var rand;
@@ -74,7 +75,8 @@
      rand = getRand(0,15);
      color += str.charAt(rand);
      }
-       return color;
+       return color;*/
+     return ("#00ff00"||"#0000ff")
      }
 
      //获取min-max之间的随机整数
