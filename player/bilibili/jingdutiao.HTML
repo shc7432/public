@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!-- 
+ aim：csdn example
+ date：2018-09
+ author:clearlove
+ bug:0%
+ environment:osx
+ introduce:Progress bar introduction
+ -->
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			.style_input{
+				width: 3rem;
+				margin-bottom: 2rem;
+			}
+			#context{
+				height: 1.5rem;
+				border: 1px solid black;
+				float: left;
+				border-radius:10px;
+			}
+			#ner_con{
+				background-color: aqua;
+				height: 100%;
+				border-radius:10px;
+			}
+			#text_contest{
+				height: 1.5rem;
+				width: 3rem;
+				float: left;
+				margin-left: 0.3rem;
+			}
+			#pro_div{
+				height: 1.5rem;
+				width: 3rem;
+				float: left;
+			}
+		</style>
+		<script src="js/jquery-1.11.2.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<input type="number" name="" id="user_number" value="" class="style_input"/>
+	  <input type="button" name="" id="" value="生成" οnclick="change()"/>
+		
+		<div id="">
+			<div id="context">
+				<div id="ner_con">
+				</div>
+			</div>
+			<div id="text_contest">
+			</div>
+		</div>
+		<script type="text/javascript">
+				var count = 1;
+				var screewidth = document.body.clientWidth;
+				function change(){
+					/* 拿到ID以改变样式 */
+					var nercon = document.getElementById("ner_con");
+					var context = document.getElementById("context");
+					var text_contest = document.getElementById("text_contest");
+					var user_number = $("#user_number").val();
+					/* 判断一下是不是超过了可见区域 */
+					if(Number(user_number)>=(screewidth/2)){
+						console.log(screewidth);
+						alert("输入过长，请重新输入！");
+						return false;
+					}
+					else{
+						context.style.width = user_number+"px";
+						/* 只需要将内部的div的宽度递增就可以了*/
+						if(count !== Number(user_number)){
+							/* 改变样式的宽度 */
+							nercon.style.width = count+"px";
+							/* count自加 */
+							count++;
+							/* 百分比的显示，保留两位小数 */
+							text_contest.textContent = (parseFloat(count/user_number)*100).toFixed(2)+"%";
+						}else{
+							return false;
+						}
+							setTimeout("change()",100);
+					}
+					
+				}
+		</script>
+	</body>
+</html>
+
