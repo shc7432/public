@@ -23,7 +23,7 @@
 要提交?
 <br>
 <span id=rg3rst>请拖到<span id=rg3yd></span>处;当前<span id=rg3xz>0</span>[允许误差0.02]</span><span id=rg3rst2 hidden style="color:red">怪物吃了拼图,请重试</span>
-<span id=rg3eerr style="color:red" hidden>我们无法判断你是不是人类,请稍后再试</span><br />
+<span id=rg3eerr style="color:red" hidden>我们无法判断你是不是人类,请稍后再试</span><span id=rg3chk hidden style="color:#ff0000">请把拼图拖到正确的位置</span><br />
 请把拼图拖到正确位置<input id=e type=range min=0 max=1 step=0.01 style="width:200px" value=0 form=b>
 </div>
 
@@ -34,6 +34,7 @@ rg3yd.innerHTML=rg3ydd
 }
 
 rg3err=0
+rg3tme=[]
 
 e.onchange=function(){
 if((rg3err>(5-2))||getCookie("ban")!=""){
@@ -75,13 +76,26 @@ this.disabled=1;
 rg3xz=0;
 rg3err++;
 rg3rst.hidden=1;
-rg3rst2.hidden=0;
+rg3chk.hidden=0;
 sumrdmfrg3();
-setTimeout("rg3rst.hidden=0;rg3rst2.hidden=1;e.disabled=0",2000);
+setTimeout("rg3rst.hidden=0;rg3chk.hidden=1;e.disabled=0",2000);
+rg3tme=[]
 }
 }
 e.oninput=function(){
 document.querySelectorAll("#rg3xz")[0].innerHTML=this.value
+rg3tme.push(new Date())
+if((rg3tme[rg3tme.length-1]-rg3tme[0])>10000){
+this.value=0;
+this.disabled=1;
+rg3xz=0;
+rg3err++;
+rg3rst.hidden=1;
+rg3rst2.hidden=0;
+sumrdmfrg3();
+setTimeout("rg3rst.hidden=0;rg3rst2.hidden=1;e.disabled=0",2000);
+rg3tme=[]
+}
 }
 </script>
 
