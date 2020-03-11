@@ -10,7 +10,7 @@
 
 <h1 id=h><img src="hdhfyge.exe.jpg" onerror="h.innerHTML=document.title"></h1>
 
-<form id=b action="output.html" method="get" onsubmit="var d=confirm('你真要提交???');if(!d){e.value=0};if(d){setCookie('sub',true,1)};return d;">
+<form id=b action="output.html" method="get" onsubmit="if(!rg3topass){return false;};var d=confirm('你真要提交???');if(!d){e.value=0};if(d){setCookie('sub',true,1)};return d;">
 <a name=E1>不准拖我 &nbsp;&nbsp;<input type="range" name="NoToWo" readonly step="0.00000000000001" min=0 max=1 id=a vAlUe=0 /></a>
 <input type="submit" id=c hidden />
 <input type=button value=提交 onclick="g.hidden=0;sumrdmfrg3();e.oninput();">
@@ -44,6 +44,7 @@ return tmpa;
 
 rg3err=0
 rg3tme=[]
+rg3topass=1
 
 e.onchange=function(){
 if((rg3err>(5-2))||getCookie("ban")!=""){
@@ -87,13 +88,14 @@ rg3rst2.hidden=0;
 sumrdmfrg3();
 setTimeout("rg3rst.hidden=0;rg3rst2.hidden=1;e.disabled=0",3000);
 rg3tme=[]
-return;
-}
+rg3topass=0
+return false;
+} else rg3topass=1
 
 if(this.value>checkFloor(((rg3ydd*100)-2)/100)&&this.value<checkFloor(((rg3ydd*100)+2)/100)) {
-c.click();
 sumrdmfrg3();
-rg3tme=[]
+rg3tme=[];
+c.click();
 } else {
 this.value=0;
 this.disabled=1;
