@@ -40,7 +40,28 @@ if((rg3err>(5-2))||getCookie("ban")=="shide"){
 rg3rst.hidden=1;
 rg3eerr.hidden=0;
 //setTimeout("rg3rst.hidden=0;rg3eerr.hidden=1",2000);
-setCookie("ban","shide",60)
+if(rg3err>(5-2)){ 
+var d=new Date()
+function checkHad0(inp){
+if(inp<10||String(inp).length<2) return "0"+inp;
+return inp;
+}
+d.setHours(d.getHours() + 1)
+var tmpa=d.getFullYear()+"-"+checkHad0(d.getMonth()+1)+"-"+checkHad0(d.getDate())+
+"T"+checkHad0(d.getHours())+":"+checkHad0(d.getMinutes())+":"+checkHad0(d.getSeconds())+"+08:00"
+setCookie("ban",tmpa,60);
+}
+var rd=new Date(getCookie("ban"));
+var nd=new Date();
+var timeDiff = (rd - nd)/1000
+var xch = Math.floor(timeDiff / 3600);
+timeDiff = timeDiff % 3600;
+var xcm = Math.floor(timeDiff / 60);
+timeDiff = timeDiff % 60;
+var xcs = Math.floor(timeDiff);
+
+var xc=xch+"时"+xcm+"分"+xcs+"秒"
+rg3eerr.innerHTML+="<br>请"+xc+"后再试"
 return;
 }
 if(this.value==rg3ydd) {
