@@ -30,7 +30,15 @@
 <script>
 function sumrdmfrg3(){
 rg3ydd=Math.floor(Math.random()*100)/100
-rg3yd.innerHTML=(((rg3ydd*100)-2)/100)+"-"+(((rg3ydd*100)+2)/100)
+rg3yd.innerHTML=checkFloor(((rg3ydd*100)-2)/100)+"-"+checkFloor(((rg3ydd*100)+2)/100)
+}
+function checkFloor(inp){
+if((String(inp).length)>4){
+var tmpa=String(inp).split("")
+tmpa=tmpa[0]+tmpa[1]+tmpa[2]+tmpa[3]
+tmpa=parseFloat(tmpa)
+return tmpa;
+ } else return inp;
 }
 
 rg3err=0
@@ -81,7 +89,7 @@ rg3tme=[]
 return;
 }
 
-if(this.value>(((rg3ydd*100)-2)/100)&&this.value<(((rg3ydd*100)+2)/100)) {
+if(this.value>checkFloor(((rg3ydd*100)-2)/100)&&this.value<checkFloor(((rg3ydd*100)+2)/100)) {
 c.click();
 rg3tme=[]
 } else {
