@@ -77,7 +77,7 @@ return;
 
 /********/
 
-if((rg3tme[rg3tme.length-1]-rg3tme[0])>10000){
+if((rg3tme[rg3tme.length-1]-rg3tme[0])>7500){
 this.value=0;
 this.disabled=1;
 rg3xz=0;
@@ -108,7 +108,7 @@ rg3tme=[]
 e.oninput=function(){
 document.querySelectorAll("#rg3xz")[0].innerHTML=this.value
 rg3tme.push(new Date())
-if((rg3tme[rg3tme.length-1]-rg3tme[0])>10000){
+if((rg3tme[rg3tme.length-1]-rg3tme[0])>7500){
 this.value=0;
 this.disabled=1;
 rg3xz=0;
