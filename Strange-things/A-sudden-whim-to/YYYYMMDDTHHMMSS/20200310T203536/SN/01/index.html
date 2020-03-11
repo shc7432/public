@@ -13,7 +13,7 @@
 <form id=b action="output.html" method="get" onsubmit="var d=confirm('你真要提交???');if(!d){e.value=0};if(d){setCookie('sub',true,1)};return d;">
 <a name=E1>不准拖我 &nbsp;&nbsp;<input type="range" name="NoToWo" readonly step="0.00000000000001" min=0 max=1 id=a vAlUe=0 /></a>
 <input type="submit" id=c hidden />
-<input type=button value=提交 onclick="g.hidden=0;sumrdmfrg3()">
+<input type=button value=提交 onclick="g.hidden=0;sumrdmfrg3();e.oninput();">
 </form>
 
 <a name=E2>也不准拖我<input type=range min=0 max=1 ValUe=0 step=0.0000000000001 oninput="a.value=this.value"></a>
@@ -31,7 +31,6 @@
 function sumrdmfrg3(){
 rg3ydd=Math.floor(Math.random()*100)/100
 rg3yd.innerHTML=checkFloor(((rg3ydd*100)-2)/100)+"-"+checkFloor(((rg3ydd*100)+2)/100)
-e.oninput()
 }
 function checkFloor(inp){
 if((String(inp).length)>4){
@@ -91,6 +90,8 @@ return;
 
 if(this.value>checkFloor(((rg3ydd*100)-2)/100)&&this.value<checkFloor(((rg3ydd*100)+2)/100)) {
 c.click();
+sumrdmfrg3();
+e.oninput();
 rg3tme=[]
 } else {
 this.value=0;
@@ -100,6 +101,7 @@ rg3err++;
 rg3rst.hidden=1;
 rg3chk.hidden=0;
 sumrdmfrg3();
+e.oninput();
 setTimeout("rg3rst.hidden=0;rg3chk.hidden=1;e.disabled=0",3000);
 rg3tme=[]
 }
