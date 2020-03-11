@@ -24,7 +24,7 @@
 <br>
 <span id=rg3rst>请拖到<span id=rg3yd></span>处;当前<span id=rg3xz>0</span></span><span id=rg3rst2 hidden style="color:red">怪物吃了拼图,请重试</span>
 <span id=rg3eerr style="color:red" hidden>我们无法判断你是不是人类,请稍后再试</span><br />
-请把拼图拖到正确位置<input id=e type=range min=0 max=1 step=0.01 style="width:200px" value=0 form=b oninput="rg3xz.innerHTML=this.value">
+请把拼图拖到正确位置<input id=e type=range min=0 max=1 step=0.01 style="width:200px" value=0 form=b>
 </div>
 
 <script>
@@ -36,7 +36,7 @@ rg3yd.innerHTML=rg3ydd
 rg3err=0
 
 e.onchange=function(){
-if(rg3err>5){
+if(rg3err>(5-2)){
 rg3rst.hidden=1;
 rg3eerr.hidden=0;
 //setTimeout("rg3rst.hidden=0;rg3eerr.hidden=1",2000);
@@ -54,6 +54,9 @@ rg3rst2.hidden=0;
 sumrdmfrg3();
 setTimeout("rg3rst.hidden=0;rg3rst2.hidden=1;e.disabled=0",2000);
 }
+}
+e.oninput=function(){
+document.querySelectorAll("#rg3xz").innerHTML=this.value
 }
 </script>
 
