@@ -22,21 +22,25 @@
 <br><br>
 要提交?
 <br>
-<span id=rg3rst>请拖到<span id=rg3yd></span>处;当前<span id=rg3xz></span></span><br />
-<input id=e type=range min=0 max=1 step=0.01 style="width:200px" value=0 form=b oninput="rg3xz.innerHTML=this.value">
+<span id=rg3rst>请拖到<span id=rg3yd></span>处;当前<span id=rg3xz></span></span><span id=rg3rst2 hidden style="color:red">怪物吃了拼图,请重试</span><br />
+请把拼图拖到正确位置<input id=e type=range min=0 max=1 step=0.01 style="width:200px" value=0 form=b oninput="rg3xz.innerHTML=this.value">
 </div>
 
 <script>
 function sumrdmfrg3(){
-
+rg3ydd=Math.floor(Math.random()*100)/100
+rg3yd.innerHTML=rg3ydd
 }
 
 e.onchange=function(){
-if(this.value>rg3ydd&&this.value<rg3yxd) {
+if(this.value==rg3ydd) {
 c.click();
 } else {
 this.value=0;
-rg3rst.innerHTML="怪物吃了拼图,请重试"
+rg3rst.hidden=1
+rg3rst2.hidden=0
+sumrdmfrg3()
+setTimeout("rg3rst.hidden=1;rg3rst2.hidden=0",2000)
 }
 }
 </script>
