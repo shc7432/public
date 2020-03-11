@@ -68,6 +68,19 @@ return;
 
 /********/
 
+if((rg3tme[rg3tme.length-1]-rg3tme[0])>10000){
+this.value=0;
+this.disabled=1;
+rg3xz=0;
+rg3err++;
+rg3rst.hidden=1;
+rg3rst2.hidden=0;
+sumrdmfrg3();
+setTimeout("rg3rst.hidden=0;rg3rst2.hidden=1;e.disabled=0",3000);
+rg3tme=[]
+return;
+}
+
 if(this.value>(((rg3ydd*100)-2)/100)&&this.value<(((rg3ydd*100)+2)/100)) {
 c.click();
 rg3tme=[]
@@ -79,7 +92,7 @@ rg3err++;
 rg3rst.hidden=1;
 rg3chk.hidden=0;
 sumrdmfrg3();
-setTimeout("rg3rst.hidden=0;rg3chk.hidden=1;e.disabled=0",2000);
+setTimeout("rg3rst.hidden=0;rg3chk.hidden=1;e.disabled=0",3000);
 rg3tme=[]
 }
 }
@@ -94,7 +107,7 @@ rg3err++;
 rg3rst.hidden=1;
 rg3rst2.hidden=0;
 sumrdmfrg3();
-setTimeout("rg3rst.hidden=0;rg3rst2.hidden=1;e.disabled=0",2000);
+setTimeout("rg3rst.hidden=0;rg3rst2.hidden=1;e.disabled=0",3000);
 rg3tme=[]
 }
 }
