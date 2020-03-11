@@ -13,7 +13,7 @@
 <form id=b action="output.html" method="get" onsubmit="var d=confirm('你真要提交???');if(!d){e.value=0};if(d){setCookie('sub',true,1)};return d;">
 <a name=E1>不准拖我 &nbsp;&nbsp;<input type="range" name="NoToWo" readonly step="0.00000000000001" min=0 max=1 id=a vAlUe=0 /></a>
 <input type="submit" id=c hidden />
-<input type=button value=提交 onclick="g.hidden=0">
+<input type=button value=提交 onclick="g.hidden=0;sumrdmfrg3()">
 </form>
 
 <a name=E2>也不准拖我<input type=range min=0 max=1 ValUe=0 step=0.0000000000001 onchange="a.value=this.value"></a>
@@ -22,10 +22,24 @@
 <br><br>
 要提交?
 <br>
-取消
-<input id=e type=range min=0 max=1 step=0.01 value=0 form=b onchange="if(this.value==1) {c.click();} else {this.value=0}">
-确定
+<span id=rg3rst>请拖到<span id=rg3yd></span>处;当前<span id=rg3xz></span></span><br />
+<input id=e type=range min=0 max=1 step=0.01 style="width:200px" value=0 form=b oninput="rg3xz.innerHTML=this.value">
 </div>
+
+<script>
+function sumrdmfrg3(){
+
+}
+
+e.onchange=function(){
+if(this.value>rg3ydd&&this.value<rg3yxd) {
+c.click();
+} else {
+this.value=0;
+rg3rst.innerHTML="怪物吃了拼图,请重试"
+}
+}
+</script>
 
 </body>
 </html>
