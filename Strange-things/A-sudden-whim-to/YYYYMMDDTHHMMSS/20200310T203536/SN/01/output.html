@@ -10,9 +10,9 @@ location.href="../01/"
 document.write('<h1>提交了。</h1><hr />');
 var a=getUrlValue("NoToWo")
 if(a==0){
-document.write('谢谢你刚才没有拖不准拖我!现在它还是0!非常感谢!')
+document.write('谢谢你刚才没有拖不准拖我!现在它还是'+Number(getUrlValue('NoToWo'))+'!非常感谢!')
 } else if((!(isNaN(Number(a))))&&(Number(a)>0)) {
-document.write('你刚才拖了不准拖我!你看看,现在它变成'+getUrlValue('NoToWo')+"了!")
+document.write('你刚才拖了不准拖我!你看看,现在它变成'+Number(getUrlValue('NoToWo'))+"了!")
 } else {
 document.write("抱歉,出现了一点小错误...")
 }
