@@ -53,6 +53,7 @@ rg3eerr.hidden=0;
 //setTimeout("rg3rst.hidden=0;rg3eerr.hidden=1",2000);
 if(rg3err>(5-2)){ 
 var d=new Date()
+rg3err=0
 function checkHad0(inp){
 if(inp<10||String(inp).length<2) return "0"+inp;
 return inp;
@@ -73,6 +74,7 @@ var xcs = Math.floor(timeDiff);
 
 var xc=xch+"时"+xcm+"分"+xcs+"秒"
 rg3eerr.innerHTML+="<br>请"+xc+"后再试"
+this.value=0
 return;
 }
 
