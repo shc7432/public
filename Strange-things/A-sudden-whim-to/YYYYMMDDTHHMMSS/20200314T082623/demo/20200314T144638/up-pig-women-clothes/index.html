@@ -77,6 +77,7 @@
       },
       close: function() {
         form[ 0 ].reset();
+        uname.value=unmev
         allFields.removeClass( "ui-state-error" );
       }
     });
@@ -132,6 +133,7 @@ out2=out2||(pwme==pwnme[i])
 if(out1&&out2){
 lotmsg.innerHTML="登录成功!<br>"
 uname.value=user.value
+window.unmev=user.value
 setTimeout(function(){lin.dialog( "close" );document.getElementById("login").hidden=true;},2000)
 } else {
 lotmsg.innerHTML="账号或密码错误<br>"
