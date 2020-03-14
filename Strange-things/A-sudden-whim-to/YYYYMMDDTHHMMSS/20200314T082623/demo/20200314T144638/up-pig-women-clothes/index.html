@@ -111,12 +111,15 @@ $(function(){
     });
 
     function logi(){
-if(user.value=="admin"&&pw.value=="admin"){
+var unme=new RegExp(user.value)
+var pwme=new RegExp(pw.value)
+if(unme.test(localStorage.unme)&&pwme.test(localStorage.pwme)){
 lotmsg.innerHTML="登录成功!"
 document.getElementById("login").hidden=true;
 setTimeout(function(){lin.dialog( "close" );},2000)
 } else {
-lotmsg.innerHTML="账号或密码错误"
+lotmsg.innerHTML="账号或密码错误<br>"
+setTimeout("lotmsg.innerHTML=''",1500)
 }
     }
  
@@ -173,7 +176,7 @@ lotmsg.innerHTML="账号或密码错误"
 
  <div id="dialog-login" title="登录">
 
-<p id=lotmsg></p>
+<span id=lotmsg></span>
  
   <form>
     <fieldset>
