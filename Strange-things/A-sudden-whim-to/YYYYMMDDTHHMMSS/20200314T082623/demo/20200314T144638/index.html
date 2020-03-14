@@ -9,7 +9,6 @@
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
-$("#cotp").hide()
   $( function() {
     $( "#dialog-confirm" ).dialog({
       //autoOpen: false,
@@ -20,9 +19,11 @@ $("#cotp").hide()
       buttons: {
         "确定": function() {
           $( this ).dialog( "close" );
+          location.href="toq"
         },
         "取消": function() {
-          $("#cotp").show()
+          $( this ).dialog( "close" );
+          cotp.hidden=0
           setTimeout("location.reload(1)",2000)
         }
       }
@@ -36,7 +37,7 @@ $("#cotp").hide()
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>你中毒了!!!<br>支付$9.99即可解毒!</p>
 </div>
 
-<div id=cotp>你竟敢不支付!!!</div>
+<div id=cotp hidden>你竟敢不支付!!!</div>
  
 </body>
 </html>
