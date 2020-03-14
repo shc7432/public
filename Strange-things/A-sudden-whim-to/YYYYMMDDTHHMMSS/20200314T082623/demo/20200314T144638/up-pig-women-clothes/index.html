@@ -42,6 +42,9 @@
  
     function addUser() {
       var valid = true;
+      valid=valid&&(name.val()!="")
+      valid=valid&&(email.val()!="")
+      valid=valid&&(password.val()!="")
       allFields.removeClass( "ui-state-error" );
  
       if ( valid ) {
@@ -51,6 +54,9 @@
           "<td>" + password.val() + "</td>" +
         "</tr>" );
         dialog.dialog( "close" );
+      } else {
+        o.addClass( "ui-state-error" );
+        updateTips( "所有都是必填的" );
       }
       return valid;
     }
@@ -86,7 +92,7 @@
 <body>
  
 <div id="dialog-form" title="新增记录">
-  <p class="validateTips">所有都是必填的。</p>
+  <p class="validateTips">请如实填写</p>
  
   <form>
     <fieldset>
