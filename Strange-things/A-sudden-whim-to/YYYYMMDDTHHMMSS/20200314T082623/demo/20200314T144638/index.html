@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="zh">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>你中毒了!!!</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+$("#cotp").hide()
+  $( function() {
+    $( "#dialog-confirm" ).dialog({
+      //autoOpen: false,
+      resizable: false,
+      height: "auto",
+      width: 400,
+      modal: true,
+      buttons: {
+        "确定": function() {
+          $( this ).dialog( "close" );
+        },
+        "取消": function() {
+          $("#cotp").show()
+          setTimeout("location.reload(1)",2000)
+        }
+      }
+    });
+  } );
+  </script>
+</head>
+<body>
+ 
+<div id="dialog-confirm" title="你中毒了">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>你中毒了!!!<br>支付$9.99即可解毒!</p>
+</div>
+
+<div id=cotp>你竟敢不支付!!!</div>
+ 
+</body>
+</html>
