@@ -26,6 +26,7 @@
  
       // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
       emailRegex = /^[a-zA-Z0-9.!#$%&'*+\/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/,
+      uname = $( "#uname" ),
       name = $( "#name" ),
       email = $( "#email" ),
       password = $( "#password" ),
@@ -50,6 +51,7 @@
  
       if ( valid ) {
         $( "#users tbody" ).append( "<tr>" +
+          "<td>" + uname.val() + "</td>" +
           "<td>" + name.val() + "</td>" +
           "<td>" + email.val() + "</td>" +
           "<td>" + password.val() + "</td>" +
@@ -115,8 +117,8 @@ var unme=new RegExp(user.value)
 var pwme=new RegExp(pw.value)
 if(unme.test(localStorage.unme)&&pwme.test(localStorage.pwme)){
 lotmsg.innerHTML="登录成功!"
-document.getElementById("login").hidden=true;
-setTimeout(function(){lin.dialog( "close" );},2000)
+uname.value=user.value
+setTimeout(function(){lin.dialog( "close" );document.getElementById("login").hidden=true;},2000)
 } else {
 lotmsg.innerHTML="账号或密码错误<br>"
 setTimeout("lotmsg.innerHTML=''",1500)
@@ -138,6 +140,8 @@ setTimeout("lotmsg.innerHTML=''",1500)
  
   <form>
     <fieldset>
+      <label for="uname">账号</label>
+      <input type="text" name="uname" id="uname" value="未登录" readonly class="text ui-widget-content ui-corner-all">
       <label for="name">哪个阿婆猪</label>
       <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all">
       <label for="email">想不想要它女装</label>
@@ -157,6 +161,7 @@ setTimeout("lotmsg.innerHTML=''",1500)
   <table id="users" class="ui-widget ui-widget-content">
     <thead>
       <tr class="ui-widget-header ">
+        <th>账号</th>
         <th>哪个阿婆猪</th>
         <th>想不想要它女装</th>
         <th>它有没有女装</th>
@@ -164,6 +169,7 @@ setTimeout("lotmsg.innerHTML=''",1500)
     </thead>
     <tbody>
       <tr>
+        <td>???</td>
         <td>???</td>
         <td>???</td>
         <td>???</td>
