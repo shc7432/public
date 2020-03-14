@@ -19,6 +19,7 @@
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://shc7432.github.io/public/getLinkInput/getLinkInput.js"></script>
   <script>
   $( function() {
     var dialog, form,
@@ -87,6 +88,39 @@
       dialog.dialog( "open" );
     });
   } );
+
+$(function(){ 
+    $( "#login" ).button().on( "click", function() {
+      lin.dialog( "open" );
+    });
+ 
+    lin = $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: "auto",
+      width: "auto",
+      modal: true,
+      buttons: {
+        "确定": logi,
+        "取消": function() {
+          lin.dialog( "close" );
+        }
+      },
+      close: function() {
+        return false;
+      }
+    });
+
+    function logi(){
+if(user.value=="admin"&&pw.value="admin"){
+lotmsg.innerHTML="登录成功!"
+login.hidden=1;
+setTimeout(function(){lin.dialog( "close" );},2000)
+} else {
+lotmsg.innerHTML="账号或密码错误"
+}
+    }
+
+})
   </script>
 </head>
 <body>
@@ -130,7 +164,24 @@
   </table>
 </div>
 <button id="create-user">新增记录</button>
+<button id="login">登录</button>
+
+ <div id="dialog-form" title="登录">
+
+<p id=lotmsg></p>
  
+  <form>
+    <fieldset>
+      <label for="user">账号</label>
+      <input type="text" name="name" id="user" value="" class="text ui-widget-content ui-corner-all">
+      <label for="pw">密码</label>
+      <input type="text" name="email" id="pw" value="" class="text ui-widget-content ui-corner-all">
+ 
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div>
  
 </body>
 </html>
