@@ -124,7 +124,7 @@ out1=out1||(unme==uunme[i])
 for(i=0;i<pwnme.length;i++){
 out2=out2||(pwme==pwnme[i])
 }
-if(out1&&out2){
+if(out1&&out2&&unme!=""&&pwme!=""){
 lotmsg.innerHTML="登录成功!<br>"
 uname.value=user.value
 setTimeout(function(){lin.dialog( "close" );document.getElementById("login").hidden=true;},2000)
