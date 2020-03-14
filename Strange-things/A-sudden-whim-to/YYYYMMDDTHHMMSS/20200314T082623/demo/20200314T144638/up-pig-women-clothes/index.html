@@ -115,6 +115,11 @@ $(function(){
     function logi(){
 var unme=(user.value)
 var pwme=(pw.value)
+if(unme==""||pwme==""){
+lotmsg.innerHTML="账号或密码错误<br>"
+setTimeout("lotmsg.innerHTML=''",1500)
+return;
+}
 var uunme=localStorage.unme.split(",")
 var pwnme=localStorage.pwme.split(",")
 var i,out1=false,out2=false
@@ -124,7 +129,7 @@ out1=out1||(unme==uunme[i])
 for(i=0;i<pwnme.length;i++){
 out2=out2||(pwme==pwnme[i])
 }
-if(out1&&out2&&unme!=""&&pwme!=""){
+if(out1&&out2){
 lotmsg.innerHTML="登录成功!<br>"
 uname.value=user.value
 setTimeout(function(){lin.dialog( "close" );document.getElementById("login").hidden=true;},2000)
