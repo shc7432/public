@@ -113,10 +113,19 @@ $(function(){
     });
 
     function logi(){
-var unme=new RegExp(user.value)
-var pwme=new RegExp(pw.value)
-if(unme.test(localStorage.unme)&&pwme.test(localStorage.pwme)){
-lotmsg.innerHTML="登录成功!"
+var unme=(user.value)
+var pwme=(pw.value)
+var uunme=localStorage.unme.split(",")
+var pwnme=localStorage.pwme.split(",")
+var i,out1=false,out2=false
+for(i=0;i<uunme.length;i++){
+out1=out1||(unme==uunme[i])
+}
+for(i=0;i<pwnme.length;i++){
+out2=out2||(pwme==pwnme[i])
+}
+if(out1&&out2){
+lotmsg.innerHTML="登录成功!<br>"
 uname.value=user.value
 setTimeout(function(){lin.dialog( "close" );document.getElementById("login").hidden=true;},2000)
 } else {
