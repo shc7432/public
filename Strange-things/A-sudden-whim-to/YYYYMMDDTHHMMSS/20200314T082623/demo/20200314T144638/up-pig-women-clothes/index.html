@@ -61,8 +61,8 @@
       width: 350,
       modal: true,
       buttons: {
-        "Create an account": addUser,
-        Cancel: function() {
+        "确定": addUser,
+        "取消": function() {
           dialog.dialog( "close" );
         }
       },
@@ -85,7 +85,7 @@
 </head>
 <body>
  
-<div id="dialog-form" title="Create new user">
+<div id="dialog-form" title="新增记录">
   <p class="validateTips">所有都是必填的。</p>
  
   <form>
