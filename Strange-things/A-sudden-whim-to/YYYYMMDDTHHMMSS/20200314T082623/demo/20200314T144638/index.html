@@ -23,8 +23,8 @@
         },
         "取消": function() {
           $( this ).dialog( "close" );
-          cotp.hidden=0
-          setTimeout("location.reload(1)",2000)
+          cotp.hidden=0;var a=false
+          while(!a){a=comfirm("支不支付?")}
         }
       }
     });
