@@ -113,7 +113,7 @@ $(function(){
     function logi(){
 if(user.value=="admin"&&pw.value=="admin"){
 lotmsg.innerHTML="登录成功!"
-login.hidden=1;
+document.getElementById("login").hidden=true;
 setTimeout(function(){lin.dialog( "close" );},2000)
 } else {
 lotmsg.innerHTML="账号或密码错误"
