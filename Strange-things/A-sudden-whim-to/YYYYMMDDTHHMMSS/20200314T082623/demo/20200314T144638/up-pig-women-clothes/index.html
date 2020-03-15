@@ -97,6 +97,9 @@ $(function(){
     $( "#login" ).button().on( "click", function() {
       lin.dialog( "open" );
     });
+    $( "#newuserto" ).button().on( "click", function() {
+      location.href='https://shc7432.github.io/download/user-center/new/'+'?returnto='+encodeURIComponent(location.href)
+    });
  
     lin = $( "#dialog-login" ).dialog({
       autoOpen: false,
@@ -196,7 +199,7 @@ setTimeout("lotmsg.innerHTML=''",1500)
 </div>
 <button id="create-user">新增记录</button>
 <button id="login">登录</button>
-<button onclick="location.href='https://shc7432.github.io/download/user-center/new/'+'?returnto='+encodeURIComponent(location.href)">注册</button>
+<button id="newuserto">注册</button>
 
  <div id="dialog-login" title="登录">
 
