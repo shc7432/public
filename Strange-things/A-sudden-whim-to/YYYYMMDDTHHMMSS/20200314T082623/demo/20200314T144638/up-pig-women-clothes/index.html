@@ -59,7 +59,8 @@
         dialog.dialog( "close" );
       } else {
         o.addClass( "ui-state-error" );
-        updateTips( "所有都是必填的" );
+        errorout.innerHTML=( "所有都是必填的" );
+        setTimeout('errorout.innerHTML=( "请如实填写" );',2000)
       }
       return valid;
     }
@@ -152,7 +153,7 @@ setTimeout("lotmsg.innerHTML=''",1500)
 <body>
  
 <div id="dialog-form" title="新增记录">
-  <p class="validateTips">请如实填写</p>
+  <p class="validateTips" id="errorout">请如实填写</p>
  
   <form>
     <fieldset>
@@ -195,6 +196,7 @@ setTimeout("lotmsg.innerHTML=''",1500)
 </div>
 <button id="create-user">新增记录</button>
 <button id="login">登录</button>
+<button onclick="location.href='https://shc7432.github.io/download/user-center/new/'+'?returnto='+encodeURIComponent(location.href)">注册</button>
 
  <div id="dialog-login" title="登录">
 
