@@ -95,7 +95,16 @@
 
 $(function(){ 
     $( "#login" ).button().on( "click", function() {
-      lin.dialog( "open" );
+      jQuery(".loading").dialog( "open" );
+      setTimeout(function(){
+        jQuery(".loading").dialog( "close" );
+        if(getCookie("signin")==null){
+          dialog.dialog("open")
+        } else {
+          uname.value=getCookie("signin")
+          window.unmev=getCookie("signin")
+        }
+      },1200)
     });
     $( "#newuserto" ).button().on( "click", function() {
       location.href='https://shc7432.github.io/download/user-center/new/'+'?returnto='+encodeURIComponent(location.href)
@@ -149,6 +158,11 @@ setTimeout("lotmsg.innerHTML=''",1500)
       event.preventDefault();
       addUser();
     });
+
+    $(".loading").dialog({
+      autoOpen: false,
+      modal: true
+    })
 
 })
   </script>
@@ -216,6 +230,71 @@ setTimeout("lotmsg.innerHTML=''",1500)
       <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
     </fieldset>
   </form>
+</div>
+
+<div class="loading" title="">
+
+<style>
+.loading {
+   background:#00aa00;
+   margin:50px;
+}
+
+.loaderinloading {
+   text-indent: -9999em;
+   position: relative;
+   width: 200px;
+   height: 200px;
+   background: #ffffff;
+
+   /*从左向右0~10%位置纯白，10%~50%纯白~透明*/
+   background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0)  50%);
+   border-radius: 50%;
+   box-shadow:inset 0 0 0 20px rgba(255,255,255,.2);
+   -webkit-animation: load-effect 2s infinite linear;
+   animation: load-effect 2s infinite linear;
+}
+/*绘制纯白1/4圆*/
+
+.loaderinloading::before {
+   position: absolute;
+   content: '';
+   width: 50%;
+   height: 50%;
+   background: #ffffff;
+   border-radius: 100% 0 0 0;
+
+   
+   left:0;
+   top:0;
+}
+
+ 
+
+/*绘制绿色背景内圆，挡住白色*/
+.loaderinloading::after  {
+   background: #00aa00;
+   width: 160px;
+   height: 160px;
+   border-radius: 50%;
+   content: '';
+   position: absolute;
+   top: 20px;
+   left: 20px;
+}
+
+@keyframes load-effect {
+   0% {
+      transform: rotate(0deg);
+   }
+   100% {
+      transform: rotate(360deg);
+   }
+}
+</style>
+
+<div class="loaderinloading"></div>
+
 </div>
  
 </body>
