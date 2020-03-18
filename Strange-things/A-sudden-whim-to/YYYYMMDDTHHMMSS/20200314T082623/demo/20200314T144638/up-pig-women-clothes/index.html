@@ -100,7 +100,7 @@ $(function(){
       setTimeout(function(){
         jQuery(".loading").dialog( "close" );
         if(getCookie("signin")==null||getCookie("signin")==""){
-          dialog.dialog("open")
+          $( "#dialog-login" ).dialog("open")
         } else {
           uname.value=getCookie("signin")
           window.unmev=getCookie("signin")
