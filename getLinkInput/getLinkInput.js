@@ -89,7 +89,7 @@ function setCookie(cname, cvalue, exdays ,s) {
     }
     var expires = "expires="+d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    return getCookie(cvalue)
+    return getCookie(cname)
 }
 function getCookie(cname) {
     var name = cname + "=";
