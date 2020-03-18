@@ -21,7 +21,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script src="https://shc7432.github.io/public/getLinkInput/getLinkInput.js"></script>
   <script src="spin.js" type="module"></script>
-  <script>
+  <script id=srt1 type="test/javascript">
   $( function() {
     var dialog, form,
  
@@ -197,9 +197,13 @@ var target = document.querySelectorAll('.loadinloading')[0];
 var spinner = new Spinner(opts).spin(target);
  
 return spinner;
-  })
+  })()
 })
   </script>
+<script>
+try{eval(srt1.innerHTML)}
+catch(err){alert(err)}
+</script>
 </head>
 <body>
  
