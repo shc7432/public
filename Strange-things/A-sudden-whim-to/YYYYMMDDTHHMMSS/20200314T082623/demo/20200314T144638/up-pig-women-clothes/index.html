@@ -165,6 +165,7 @@ setTimeout("lotmsg.innerHTML=''",1500)
       closeOnEscape:false, 
       modal: true
     })
+    document.querySelectorAll(".loading")[0].$(".ui-dialog-titlebar-close").hide();
 
     $(".loginsuses").dialog({
       autoOpen: false,
