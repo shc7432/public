@@ -172,7 +172,8 @@ setTimeout("lotmsg.innerHTML=''",1500)
       modal: true,
       buttons: {
         "取消": function(){
-          clearTimeout(openloginwin)
+          clearTimeout(openloginwin);
+          $(this).dialog("close");
         }
       },
       close: function(){
