@@ -68,8 +68,6 @@
  
     dialog = $( "#dialog-form" ).dialog({
       autoOpen: false,
-      height: 400,
-      width: 350,
       modal: true,
       buttons: {
         "确定": addUser,
@@ -79,7 +77,7 @@
       },
       close: function() {
         form[ 0 ].reset();
-        document.getElementById("uname").value=unmev
+        document.getElementById("uname").value=window.unmev
         allFields.removeClass( "ui-state-error" );
       }
     });
@@ -90,7 +88,7 @@
     });
  
     $( "#create-user" ).button().on( "click", function() {
-      dialog.dialog( "open" );
+      $( "#dialog-form" ).dialog( "open" );
     });
   } );
 
