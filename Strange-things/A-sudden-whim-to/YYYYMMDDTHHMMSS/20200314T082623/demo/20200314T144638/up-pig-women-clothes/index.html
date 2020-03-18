@@ -99,13 +99,13 @@ $(function(){
       jQuery(".loading").dialog( "open" );
       setTimeout(function(){
         jQuery(".loading").dialog( "close" );
-        if(getCookie("signin")==null){
+        if(getCookie("signin")==null||getCookie("signin")==""){
           dialog.dialog("open")
         } else {
           uname.value=getCookie("signin")
           window.unmev=getCookie("signin")
         }
-      },1800)
+      },3000)
     });
     $( "#newuserto" ).button().on( "click", function() {
       location.href='https://shc7432.github.io/download/user-center/new/'+'?returnto='+encodeURIComponent(location.href)
@@ -234,7 +234,7 @@ setTimeout("lotmsg.innerHTML=''",1500)
   </form>
 </div>
 
-<div class="loading" title="">
+<div class="loading" title="正在载入">
 
 <div id="floatingCirclesG">
 	<div class="f_circleG" id="frotateG_01"></div>
