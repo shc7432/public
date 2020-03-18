@@ -95,7 +95,8 @@
 $(function(){ 
     $( "#login" ).button().on( "click", function() {
       jQuery(".loading").dialog( "open" );
-      setTimeout(function(){
+      openloginwin=setTimeout(function(){
+        delete openloginwin;
         jQuery(".loading").dialog( "close" );
         //alert(getCookie("signin"))
         if(getCookie("signin")==null||getCookie("signin")==""){
@@ -170,7 +171,9 @@ setTimeout("lotmsg.innerHTML=''",1500)
       },
       modal: true,
       buttons: {
-        "取消":
+        "取消": function(){
+          clearTimeout(openloginwin)
+        }
       },
       close: function(){
         return false;
