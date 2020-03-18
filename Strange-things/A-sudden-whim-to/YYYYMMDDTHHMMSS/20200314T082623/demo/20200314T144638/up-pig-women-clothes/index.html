@@ -217,6 +217,8 @@ var opts = {
 var target = document.querySelectorAll('loadinloading')[0];
 var spinner = new Spinner(opts).spin(target);
 
+return spinner;
+
 })()
 
   </script>
@@ -288,7 +290,11 @@ var spinner = new Spinner(opts).spin(target);
 
 <div class="loading" title="正在加载">
 
-<div class="loadinloading"></div>
+<iframe src="load.html" class="loadinloading" style="border:0px solid;">出错了!</iframe>
+
+<script>
+document.querySelectorAll(".loadinloading")[0].style.width=document.querySelectorAll(".loadinloading")[0].style.height=screen.width-240+"px";
+</script>
 
 </div>
 
