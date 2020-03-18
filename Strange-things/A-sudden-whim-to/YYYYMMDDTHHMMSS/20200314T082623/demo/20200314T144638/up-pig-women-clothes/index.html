@@ -148,6 +148,7 @@ if(out1&&out2){
 lotmsg.innerHTML="登录成功!<br>"
 uname.value=user.value
 window.unmev=user.value
+setCookie("signin",user.value,120)
 setTimeout(function(){lin.dialog( "close" );document.getElementById("login").hidden=true;},2000)
 } else {
 lotmsg.innerHTML="账号或密码错误<br>"
@@ -167,7 +168,13 @@ setTimeout("lotmsg.innerHTML=''",1500)
       //hide close button.
       $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
       },
-      modal: true
+      modal: true,
+      buttons: {
+        "取消":
+      },
+      close: function(){
+        return false;
+      }
     })
 
     $(".loginsuses").dialog({
@@ -179,9 +186,35 @@ setTimeout("lotmsg.innerHTML=''",1500)
         }
       }
     })
-    document.querySelectorAll(".loading")[0].querySelectorAll(".ui-dialog-titlebar-close")[0].style.display=("none");
 
 })
+
+(function(){
+var opts = {
+  lines: 12, // The number of lines to draw
+  length: 15, // The length of each line
+  width: 5, // The line thickness
+  radius: 9, // The radius of the inner circle
+  scale: 1, // Scales overall size of the spinner
+  corners: 1, // Corner roundness (0..1)
+  color: '#000000', // CSS color or array of colors
+  fadeColor: 'transparent', // CSS color or array of colors
+  speed: 1.25, // Rounds per second
+  rotate: 0, // The rotation offset
+  animation: 'spinner-line-fade-quick', // The CSS animation name for the lines
+  direction: 1, // 1: clockwise, -1: counterclockwise
+  zIndex: 2e9, // The z-index (defaults to 2000000000)
+  className: 'spinner', // The CSS class to assign to the spinner
+  top: '50%', // Top position relative to parent
+  left: '50%', // Left position relative to parent
+  shadow: '0 0 1px transparent', // Box-shadow for the lines
+  position: 'absolute' // Element positioning
+};
+
+var target = document.querySelectorAll('loadinloading')[0];
+var spinner = new Spinner(opts).spin(target);
+
+})()
 
   </script>
 </head>
@@ -252,194 +285,7 @@ setTimeout("lotmsg.innerHTML=''",1500)
 
 <div class="loading" title="正在加载">
 
-<div id="floatingCirclesG">
-	<div class="f_circleG" id="frotateG_01"></div>
-	<div class="f_circleG" id="frotateG_02"></div>
-	<div class="f_circleG" id="frotateG_03"></div>
-	<div class="f_circleG" id="frotateG_04"></div>
-	<div class="f_circleG" id="frotateG_05"></div>
-	<div class="f_circleG" id="frotateG_06"></div>
-	<div class="f_circleG" id="frotateG_07"></div>
-	<div class="f_circleG" id="frotateG_08"></div>
-</div>
-
-<style>
-#floatingCirclesG{
-	position:relative;
-	width:125px;
-	height:125px;
-	margin:auto;
-	transform:scale(0.6);
-		-o-transform:scale(0.6);
-		-ms-transform:scale(0.6);
-		-webkit-transform:scale(0.6);
-		-moz-transform:scale(0.6);
-}
-
-.f_circleG{
-	position:absolute;
-	background-color:rgb(255,255,255);
-	height:22px;
-	width:22px;
-	border-radius:12px;
-		-o-border-radius:12px;
-		-ms-border-radius:12px;
-		-webkit-border-radius:12px;
-		-moz-border-radius:12px;
-	animation-name:f_fadeG;
-		-o-animation-name:f_fadeG;
-		-ms-animation-name:f_fadeG;
-		-webkit-animation-name:f_fadeG;
-		-moz-animation-name:f_fadeG;
-	animation-duration:0.882s;
-		-o-animation-duration:0.882s;
-		-ms-animation-duration:0.882s;
-		-webkit-animation-duration:0.882s;
-		-moz-animation-duration:0.882s;
-	animation-iteration-count:infinite;
-		-o-animation-iteration-count:infinite;
-		-ms-animation-iteration-count:infinite;
-		-webkit-animation-iteration-count:infinite;
-		-moz-animation-iteration-count:infinite;
-	animation-direction:normal;
-		-o-animation-direction:normal;
-		-ms-animation-direction:normal;
-		-webkit-animation-direction:normal;
-		-moz-animation-direction:normal;
-}
-
-#frotateG_01{
-	left:0;
-	top:51px;
-	animation-delay:0.3295s;
-		-o-animation-delay:0.3295s;
-		-ms-animation-delay:0.3295s;
-		-webkit-animation-delay:0.3295s;
-		-moz-animation-delay:0.3295s;
-}
-
-#frotateG_02{
-	left:15px;
-	top:15px;
-	animation-delay:0.446s;
-		-o-animation-delay:0.446s;
-		-ms-animation-delay:0.446s;
-		-webkit-animation-delay:0.446s;
-		-moz-animation-delay:0.446s;
-}
-
-#frotateG_03{
-	left:51px;
-	top:0;
-	animation-delay:0.5525s;
-		-o-animation-delay:0.5525s;
-		-ms-animation-delay:0.5525s;
-		-webkit-animation-delay:0.5525s;
-		-moz-animation-delay:0.5525s;
-}
-
-#frotateG_04{
-	right:15px;
-	top:15px;
-	animation-delay:0.659s;
-		-o-animation-delay:0.659s;
-		-ms-animation-delay:0.659s;
-		-webkit-animation-delay:0.659s;
-		-moz-animation-delay:0.659s;
-}
-
-#frotateG_05{
-	right:0;
-	top:51px;
-	animation-delay:0.7755s;
-		-o-animation-delay:0.7755s;
-		-ms-animation-delay:0.7755s;
-		-webkit-animation-delay:0.7755s;
-		-moz-animation-delay:0.7755s;
-}
-
-#frotateG_06{
-	right:15px;
-	bottom:15px;
-	animation-delay:0.882s;
-		-o-animation-delay:0.882s;
-		-ms-animation-delay:0.882s;
-		-webkit-animation-delay:0.882s;
-		-moz-animation-delay:0.882s;
-}
-
-#frotateG_07{
-	left:51px;
-	bottom:0;
-	animation-delay:0.9985s;
-		-o-animation-delay:0.9985s;
-		-ms-animation-delay:0.9985s;
-		-webkit-animation-delay:0.9985s;
-		-moz-animation-delay:0.9985s;
-}
-
-#frotateG_08{
-	left:15px;
-	bottom:15px;
-	animation-delay:1.105s;
-		-o-animation-delay:1.105s;
-		-ms-animation-delay:1.105s;
-		-webkit-animation-delay:1.105s;
-		-moz-animation-delay:1.105s;
-}
-
-
-
-@keyframes f_fadeG{
-	0%{
-		background-color:rgb(0,0,0);
-	}
-
-	100%{
-		background-color:rgb(255,255,255);
-	}
-}
-
-@-o-keyframes f_fadeG{
-	0%{
-		background-color:rgb(0,0,0);
-	}
-
-	100%{
-		background-color:rgb(255,255,255);
-	}
-}
-
-@-ms-keyframes f_fadeG{
-	0%{
-		background-color:rgb(0,0,0);
-	}
-
-	100%{
-		background-color:rgb(255,255,255);
-	}
-}
-
-@-webkit-keyframes f_fadeG{
-	0%{
-		background-color:rgb(0,0,0);
-	}
-
-	100%{
-		background-color:rgb(255,255,255);
-	}
-}
-
-@-moz-keyframes f_fadeG{
-	0%{
-		background-color:rgb(0,0,0);
-	}
-
-	100%{
-		background-color:rgb(255,255,255);
-	}
-}
-</style>
+<div class="loadinloading"></div>
 
 </div>
 
