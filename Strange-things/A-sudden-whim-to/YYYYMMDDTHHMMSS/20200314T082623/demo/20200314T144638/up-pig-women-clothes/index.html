@@ -162,7 +162,11 @@ setTimeout("lotmsg.innerHTML=''",1500)
 
     $(".loading").dialog({
       autoOpen: false,
-      closeOnEscape:false, 
+      closeOnEscape:false,
+      open: function(event, ui) {
+      //hide close button.
+      $(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+      },
       modal: true
     })
 
