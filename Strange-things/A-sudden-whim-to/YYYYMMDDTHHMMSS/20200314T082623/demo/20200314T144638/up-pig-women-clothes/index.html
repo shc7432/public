@@ -97,7 +97,7 @@ $(function(){
       jQuery(".loading").dialog( "open" );
       setTimeout(function(){
         jQuery(".loading").dialog( "close" );
-        alert(getCookie("signin"))
+        //alert(getCookie("signin"))
         if(getCookie("signin")==null||getCookie("signin")==""){
           $( "#dialog-login" ).dialog("open")
         } else {
