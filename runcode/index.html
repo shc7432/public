@@ -2,11 +2,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=yes">
 <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="https://shc7432.github.io/public/getLinkInput/getLinkInput.js"></script>
 <title>在线代码编辑器</title>
 <body style="width:90%;margin: 0 auto;text-align:center;">
 <h1>在线代码编辑器</h1><div style="text-align:right;font-size:10px">编程语言:<select id=sct1><option>C</option><option>C#</option><option>C++</option><option>CSS</option><option id=sct1html value=html>HTML</option><option>Java</option><option id=sct1js value=js>JavaScript</option><option>JSON</option><option>PHP</option><option>Python</option><option>R</option><option>RD</option><option>SQL</option><option>XML</option></select></div>
 <textarea cols=50 rows=10 placeholder="输入代码,自动执行" onkeyup="stathtml()" id=intxt></textarea>
 <br>执行结果<br><iframe src="javascript:document.write('您还没有开始执行!')" style="border:1px solid;text-align:left;"></iframe>
+<button id="resulttoother">分享结果</button>
 <div style="font-size:1px">友情链接:<a href="https://shc0743.github.io/MyFile/index1/demo/mdn/html/form/forms/code-test/mob/" style="text-decoration:none">本地代码编辑器</a>(若出错,请选择此项)</div><script>
 tmp=document.getElementById("sct1").getElementsByTagName('option')
 for(i=0;i<tmp.length;i++){tmp[i].disabled=1}
@@ -27,4 +31,35 @@ sct1.onchange=function(){
 if(this.value=="html"){intxt.onkeyup=stathtml;intxt.onblur="";intxt.placeholder="输入代码,自动执行"} else 
 if(this.value=="js"){intxt.onkeyup=statjs;intxt.onblur="";intxt.placeholder="输入代码,自动执行,支持jQuery哦"}
 }
+
+$(function(){
+$("#resulttoother").button()
+$("#resulttoother").on("click",function(){
+copytext(document.getElementsByTagName('iframe')[0].src,document.getElementById("resulttoother"))
+  })
+})
+
+function copytext(val,obj) {
+  try{
+    var inputElement =  document.getElementById("copy_inputbox");  //获取要赋值的input的元素
+    inputElement.value = val;  //给input框赋值   
+    inputElement.select();//选中input框的内容
+    document.execCommand("Copy");// 执行浏览器复制命令
+    if(obj!=undefined&&typeof(obj)=="object"&&obj.length>0){
+      obj.returnval=true
+      obj.innerHTML="复制成功"
+    }
+    return true;
+  }
+  catch(err){
+      if(obj!=undefined&&typeof(obj)=="object"&&obj.length>0){
+      obj.returnval=false
+      obj.innerHTML="复制失败"
+    }
+    return false;
+  }
+}
+
+
 </script>
+<input type=text hidden id="copy_inputbox" />
