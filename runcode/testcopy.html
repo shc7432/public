@@ -1,16 +1,18 @@
-<script type="text/javascript">
-function copyUrl2()
-    {
-        var Url2=document.getElementById("biao1").innerText;
-        var oInput = document.createElement('input');
-        oInput.value = Url2;
-        document.body.appendChild(oInput);
-        oInput.select(); // 选择对象
-        document.execCommand("Copy"); // 执行浏览器复制命令
-        oInput.className = 'oInput';
-        oInput.style.display='none';
-        alert('复制成功');
-    }
+<script src="//shc7432.github.io/copytext/dist/ZeroClipboard.Core.js"></script> <script src="//shc7432.github.io/copytext/dist/ZeroClipboard.js"></script>
+<p><span ><a title="复制" class="yelow submit" οnclick="copyToClipBoard(this)" data-clipboard-target="code">复制代码</a></span></p>
+<pre id="code">function(){
+alert()
+}</pre>
+
+<script>
+function copyToClipBoard(ele) {
+	var clip = new ZeroClipboard( ele, {
+		moviePath: "/copytext/dist/ZeroClipboard.swf"
+	});
+	clip.on( 'complete', function(client, args) {
+	   alert("代码已复制到剪切板");
+	});
+}
+
+
 </script>
-<div cols="20" id="biao1">12345678</div>
-<input type="button" onClick="copyUrl2()" value="点击复制代码" />
