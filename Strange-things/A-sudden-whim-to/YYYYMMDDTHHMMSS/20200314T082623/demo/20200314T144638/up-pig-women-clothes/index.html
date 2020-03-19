@@ -136,8 +136,13 @@ lotmsg.innerHTML="账号或密码错误<br>"
 setTimeout("lotmsg.innerHTML=''",1500)
 return;
 }
-var uunme=localStorage.unme.split(",")
-var pwnme=localStorage.pwme.split(",")
+var uunme=localStorage.unme/*.split(",")*/
+var pwnme=localStorage.pwme/*.split(",")*/
+if(uunme==null||pwnme==null||uunme==""||pwnme==""){
+out1=out2=out1i=out2i=0
+} else {
+uunme=uunme.split(",")
+pwnme=pwnme.split(",")
 var i,out1=false,out2=false
 for(i=0;i<uunme.length;i++){
 out1=out1||(unme==uunme[i])
@@ -146,6 +151,7 @@ out1i=i
 for(i=0;i<pwnme.length;i++){
 out2=out2||(pwme==pwnme[i])
 out2i=i
+}
 }
 if(out1&&out2&&(out1i==out2i)){
 lotmsg.innerHTML="登录成功!<br>"
