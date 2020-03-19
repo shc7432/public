@@ -34,10 +34,11 @@ if(this.value=="js"){intxt.onkeyup=statjs;intxt.onblur="";intxt.placeholder="输
 
 $(function(){
 $("#resulttoother").button()
-$("#resulttoother").on("click",function(){
-copytext(document.getElementsByTagName('iframe')[0].src,document.getElementById("resulttoother"))
-  })
 })
+
+document.querySelectorAll("#resulttoother")[0].onclick=function(){
+copytext(document.getElementsByTagName('iframe')[0].src,document.getElementById("resulttoother"))
+  }
 
 function copytext(val,obj) {
   try{
