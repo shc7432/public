@@ -141,14 +141,16 @@ var pwnme=localStorage.pwme.split(",")
 var i,out1=false,out2=false
 for(i=0;i<uunme.length;i++){
 out1=out1||(unme==uunme[i])
+out1i=i
 }
 for(i=0;i<pwnme.length;i++){
 out2=out2||(pwme==pwnme[i])
+out2i=i
 }
-if(out1&&out2){
+if(out1&&out2&&(out1i==out2i)){
 lotmsg.innerHTML="登录成功!<br>"
-uname.value=user.value
-window.unmev=user.value
+uname.value=document.getElementById("user").value
+window.unmev=document.getElementById("user").value
 setCookie("signin",user.value,120)
 setTimeout(function(){lin.dialog( "close" );document.getElementById("login").hidden=true;},2000)
 } else {
