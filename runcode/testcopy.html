@@ -1,18 +1,29 @@
-<script src="//shc7432.github.io/copytext/dist/ZeroClipboard.Core.js"></script> <script src="//shc7432.github.io/copytext/dist/ZeroClipboard.js"></script>
-<p><span ><a title="复制" class="yelow submit" οnclick="copyToClipBoard(this)" data-clipboard-target="code">复制代码</a></span></p>
-<pre id="code">function(){
-alert()
-}</pre>
-
-<script>
-function copyToClipBoard(ele) {
-	var clip = new ZeroClipboard( ele, {
-		moviePath: "/copytext/dist/ZeroClipboard.swf"
-	});
-	clip.on( 'complete', function(client, args) {
-	   alert("代码已复制到剪切板");
-	});
-}
-
-
-</script>
+<html>
+ <body>
+  <button id="copy-button" data-clipboard-text="Copy Me!" title="Click to copy me.">Copy to Clipboard</button>
+  <script src="//code.jquery.com/jquery-3.4.1.js"></script>
+  <script src="/copytext/dist/ZeroClipboard.js"></script>
+ </body>
+ <script>
+ 
+ var client = new ZeroClipboard( $("#copy-button") );
+  client.on('ready', function (event) {
+ 
+      client.on('copy', function (event) {
+        event.clipboardData.setData('text/plain', event.target.innerHTML);
+        alert("复制成功");
+      });
+ 
+      client.on('aftercopy', function (event) {
+        //复制之后的操作，如果不是自动在本页面粘贴，请把此事件备注掉
+        //console.log('Copied text to clipboard: ' + event.data['text/plain']);
+      });
+    });
+ 
+    client.on('error', function (event) {
+      //出错的时候该干嘛
+      document.write( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
+      ZeroClipboard.destroy();
+    });
+ </script>
+</html>
