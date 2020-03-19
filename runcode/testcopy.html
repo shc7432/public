@@ -1,24 +1,16 @@
-<script> 
-
-/**
- * 复制内容到粘贴板
- * content : 需要复制的内容
- * message : 复制完后的提示，不传则默认提示"复制成功"
- */
-function copyToClip(content, message) {
-    var aux = document.createElement("input"); 
-    aux.setAttribute("value", content); 
-    document.body.appendChild(aux); 
-    aux.select();
-    document.execCommand("copy"); 
-    document.body.removeChild(aux);
-    if (message == null) {
-        alert("复制成功");
-    } else{
-        alert(message);
+<script type="text/javascript">
+function copyUrl2()
+    {
+        var Url2=document.getElementById("biao1").innerText;
+        var oInput = document.createElement('input');
+        oInput.value = Url2;
+        document.body.appendChild(oInput);
+        oInput.select(); // 选择对象
+        document.execCommand("Copy"); // 执行浏览器复制命令
+        oInput.className = 'oInput';
+        oInput.style.display='none';
+        alert('复制成功');
     }
-}
-
 </script>
-
-<button onclick="copyToClip(location.href,'OK!')">复制链接</button>
+<div cols="20" id="biao1">12345678</div>
+<input type="button" onClick="copyUrl2()" value="点击复制代码" />
