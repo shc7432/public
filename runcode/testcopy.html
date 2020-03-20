@@ -1,12 +1,51 @@
 <a onclick="copyTxt('这是要复制的内容')">点击复制</a>
-js：
 
+
+<div class="copytextsucce" title="复制成功">
+复制成功!
+</div>
+<div class="copytextfail" title="复制失败">
+<div style="border:1px solid #ccc;background-color:#aaa;">
+请按 Ctrl + C 复制<br>
+<textarea class="copyfailoutput" style="background-color:#fff;border:0px solid #ccc;"></textarea></div>
+</div>
 <script>
 //原生js实现复制内容到剪切板，兼容pc、移动端（支持Safari浏览器）
-function copyTxt(text){
+$(function(){
+
+$(".copytextsucce").dialog({
+autoOpen: false,
+modal: true,
+buttons: {
+"确定": function(){
+$(this).dialog("close");
+}
+ },
+close: function(){
+
+}
+  })
+$(".copytextfail").dialog({
+autoOpen: false,
+modal: true,
+buttons: {
+"确定": function(){
+$(this).dialog("close");
+}
+ },
+close: function(){
+
+}
+  })
+
+} )
+function copytext(text){
 if(typeof document.execCommand!=="function"){
-alert("复制失败，请长按复制");
-return;
+$(function(){
+$(".copytextfail").dialog("open");
+document.querySelectorAll(".copyfailoutput")[0].value=text;
+})
+return false;
 }
 var dom = document.createElement("textarea");
 dom.value = text;
@@ -16,12 +55,17 @@ dom.select();
 var result = document.execCommand('copy');
 document.body.removeChild(dom);
 if (result) {
-alert("复制成功");
-return;
+$(function(){
+$(".copytextsucce").dialog("open");
+})
+return true;
 }
 if(typeof document.createRange!=="function"){
-alert("复制失败，请长按复制");
-return;
+$(function(){
+$(".copytextfail").dialog("open");
+document.querySelectorAll(".copyfailoutput")[0].value=text;
+})
+return false;
 }
 var range = document.createRange();
 var div=document.createElement('div');
@@ -35,6 +79,9 @@ selection.removeAllRanges();
 }
 selection.addRange(range);
 document.execCommand('copy');
-alert("复制成功")
+$(function(){
+$(".copytextsucce").dialog("open");
+})
+return true;
 }
 </script>
