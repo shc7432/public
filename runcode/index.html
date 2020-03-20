@@ -42,7 +42,7 @@ copytext(document.getElementsByTagName('iframe')[0].src)
 
 </script>
 <div class="copytextsucce" title="复制成功">
-复制成功!
+<div style="font-size:16px;height:30px;">复制成功!</div>
 </div>
 <div class="copytextfail" title="复制失败">
 <div style="border:1px solid #ccc;background-color:#aaa;">
@@ -56,7 +56,7 @@ $(function(){
 $(".copytextsucce").dialog({
 autoOpen: false,
 modal: true,
-width: 100,
+width: 125,
 height: "auto",
 buttons: {
 "确定": function(){
