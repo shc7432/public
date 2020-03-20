@@ -37,30 +37,91 @@ $("#resulttoother").button()
 })
 
 document.querySelectorAll("#resulttoother")[0].onclick=function(){
-copytext(document.getElementsByTagName('iframe')[0].src,document.getElementById("resulttoother"))
+copytext(document.getElementsByTagName('iframe')[0].src)
   }
-
-function copytext(val,obj) {
-  try{
-    var inputElement =  document.getElementById("copy_inputbox");  //获取要赋值的input的元素
-    inputElement.value = val;  //给input框赋值   
-    inputElement.select();//选中input框的内容
-    document.execCommand("Copy");// 执行浏览器复制命令
-    if(obj!=undefined&&typeof(obj)=="object"&&obj.length>0){
-      obj.returnval=true
-      obj.innerHTML="复制成功"
-    }
-    return true;
-  }
-  catch(err){
-      if(obj!=undefined&&typeof(obj)=="object"&&obj.length>0){
-      obj.returnval=false
-      obj.innerHTML="复制失败"
-    }
-    return false;
-  }
-}
-
 
 </script>
-<input type=text hidden id="copy_inputbox" />
+<div class="copytextsucce" title="复制成功">
+复制成功!
+</div>
+<div class="copytextfail" title="复制失败">
+<div style="border:1px solid #ccc;background-color:#aaa;">
+请按 Ctrl + C 复制<br>
+<textarea class="copyfailoutput" style="background-color:#fff;border:0px solid #ccc;"></textarea></div>
+</div>
+<script>
+//原生js实现复制内容到剪切板，兼容pc、移动端（支持Safari浏览器）
+$(function(){
+
+$(".copytextsucce").dialog({
+autoOpen: false,
+modal: true,
+buttons: {
+"确定": function(){
+$(this).dialog("close");
+}
+ },
+close: function(){
+
+}
+  })
+$(".copytextfail").dialog({
+autoOpen: false,
+modal: true,
+buttons: {
+"确定": function(){
+$(this).dialog("close");
+}
+ },
+close: function(){
+
+}
+  })
+
+} )
+function copytext(text){
+if(typeof document.execCommand!=="function"){
+$(function(){
+$(".copytextfail").dialog("open");
+document.querySelectorAll(".copyfailoutput")[0].value=text;
+})
+return false;
+}
+var dom = document.createElement("textarea");
+dom.value = text;
+dom.setAttribute('style', 'display: block;width: 1px;height: 1px;');
+document.body.appendChild(dom);
+dom.select();
+var result = document.execCommand('copy');
+document.body.removeChild(dom);
+if (result) {
+$(function(){
+$(".copytextsucce").dialog("open");
+})
+return true;
+}
+if(typeof document.createRange!=="function"){
+$(function(){
+$(".copytextfail").dialog("open");
+document.querySelectorAll(".copyfailoutput")[0].value=text;
+})
+return false;
+}
+var range = document.createRange();
+var div=document.createElement('div');
+div.innerHTML=text;
+div.setAttribute('style', 'height: 1px;fontSize: 1px;overflow: hidden;');
+document.body.appendChild(div);
+range.selectNode(div);
+const selection = window.getSelection();
+if (selection.rangeCount > 0){
+selection.removeAllRanges();
+}
+selection.addRange(range);
+document.execCommand('copy');
+$(function(){
+$(".copytextsucce").dialog("open");
+})
+return true;
+}
+</script>
