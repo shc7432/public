@@ -55,11 +55,27 @@ $(function(){
 
 $(".copytextsucce").dialog({
 autoOpen: false,
-modal: true
+modal: true,
+width: "auto",
+height: "auto",
+buttons: {
+"确定": function(){
+$(this).dialog("close");
+}
+ },
+close: function(){
+}
   })
 $(".copytextfail").dialog({
 autoOpen: false,
-modal: true
+modal: true,
+buttons: {
+"确定": function(){
+$(this).dialog("close");
+}
+ },
+close: function(){
+}
   })
 
 } )
@@ -84,7 +100,7 @@ $(".copytextsucce").dialog("open");
 })
 return true;
 }
-if(typeof document.createRange!=="function"){
+if(typeof document.createRange=="function"){
 $(function(){
 $(".copytextfail").dialog("open");
 document.querySelectorAll(".copyfailoutput")[0].value=text;
