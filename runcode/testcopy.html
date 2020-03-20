@@ -1,29 +1,44 @@
-<html>
- <body>
-  <button id="copy-button" data-clipboard-text="Copy Me!" title="Click to copy me.">Copy to Clipboard</button>
-  <script src="//code.jquery.com/jquery-3.4.1.js"></script>
-  <script src="/copytext/dist/ZeroClipboard.js"></script>
- </body>
- <script>
- 
- var client = new ZeroClipboard( $("#copy-button") );
-  client.on('ready', function (event) {
- 
-      client.on('copy', function (event) {
-        event.clipboardData.setData('text/plain', event.target.innerHTML);
-        alert("复制成功");
-      });
- 
-      client.on('aftercopy', function (event) {
-        //复制之后的操作，如果不是自动在本页面粘贴，请把此事件备注掉
-        //console.log('Copied text to clipboard: ' + event.data['text/plain']);
-      });
-    });
- 
-    client.on('error', function (event) {
-      //出错的时候该干嘛
-      document.write( 'ZeroClipboard error of type "' + event.name + '": ' + event.message );
-      ZeroClipboard.destroy();
-    });
- </script>
-</html>
+<input readOnly="true" style="outline: none;border: 0px; color: rgba(0,0,0,0.0);position: absolute;left:-200px; background-color: transparent" id="biao1" value=""/>
+<div id="biaoios" style="position: absolute;left:-200px; color: rgba(0,0,0,0);background-color: transparent" ></div>
+<button type="button" οnclick="newCopy()" >复制</button>
+<script>
+function newCopy(){
+    $("#biao1").val("要复制的内容");//安卓
+    if (navigator.userAgent.match(/(iPhone|iPod|iPad);?/i)) {
+        var el = document.createElement('input');
+        el.value = "要复制的内容";//要复制的内容
+        el.style.opacity = '0';
+        document.body.appendChild(el);
+        var editable = el.contentEditable;
+        var readOnly = el.readOnly;
+        el.contentEditable = true;
+        el.readOnly = false;
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+        el.setSelectionRange(0, 999999);
+        el.contentEditable = editable;
+        el.readOnly = readOnly;
+        var ret = document.execCommand('copy');
+        el.blur();
+        if(ret){
+            alert("成功")
+        }else{
+            alert("失败")  
+        }
+    }else{
+        var Url2=document.getElementById("biao1");
+        Url2.select(); // 选择对象
+        $("#biao1").blur();
+        if(document.execCommand('copy', false, null)){
+        var successful = document.execCommand('copy');
+            alert("成功")
+        }else{
+            alert("失败")
+        };
+    }
+}
+
+</script>
