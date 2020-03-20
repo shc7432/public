@@ -47,7 +47,7 @@ copytext(document.getElementsByTagName('iframe')[0].src)
 <div class="copytextfail" title="复制失败">
 <div style="border:1px solid #ccc;background-color:#aaa;">
 请按 Ctrl + C 复制<br>
-<textarea class="copyfailoutput" style="background-color:#fff;border:0px solid #ccc;"></textarea></div>
+<textarea class="copyfailoutput" cols="40" rows="6" style="background-color:#fff;border:0px solid #ccc;"></textarea></div>
 </div>
 <script>
 //原生js实现复制内容到剪切板，兼容pc、移动端（支持Safari浏览器）
@@ -100,7 +100,7 @@ $(".copytextsucce").dialog("open");
 })
 return true;
 }
-if(typeof document.createRange=="function"){
+if(typeof document.createRange!=="function"){
 $(function(){
 $(".copytextfail").dialog("open");
 document.querySelectorAll(".copyfailoutput")[0].value=text;
