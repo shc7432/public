@@ -15,14 +15,13 @@ Are you want test your code's error?You can use this link:
 "use strict";
 
 function createErr(name,message){
-if(this===window){
-return {
-name: "createErrFunctionError",
-message: 'The "createErr" function needs a "new" identifier.'
-    };
-  }
-this.name=name;
-this.message=message;
+let obj={};
+if(typeof(name)!=="string"||typeof(message)!=="string"){
+return createErr("createErrError",'The "createErr" function is needs two parameter.')
+}
+obj.name=name;
+obj.message=message;
+return obj;
 }
 
 Number.prototype.pow=function(a){
