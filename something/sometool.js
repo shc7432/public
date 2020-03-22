@@ -14,16 +14,6 @@ Are you want test your code's error?You can use this link:
 
 "use strict";
 
-window.createErr=function (name,message){
-let obj={};
-if(typeof(name)!=="string"||typeof(message)!=="string"){
-throw createErr("createErrError",'The "createErr" function is needs two parameter.')
-}
-obj.name=name;
-obj.message=message;
-throw obj;
-}
-
 Number.prototype.pow=function(a){
 if(isNaN(a)) a=1;
 return (this**a);
@@ -38,5 +28,10 @@ Object.prototype.clone=function(){
 let a=JSON.stringify(this);
 return JSON.parse(a);
 }
+Object.defineProperty(Object.prototype, "clone", {
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
 
 })()
