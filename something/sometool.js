@@ -21,7 +21,7 @@ throw createErr("createErrError",'The "createErr" function is needs two paramete
 }
 obj.name=name;
 obj.message=message;
-return obj;
+throw obj;
 }
 
 Number.prototype.pow=function(a){
