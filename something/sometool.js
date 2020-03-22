@@ -14,7 +14,7 @@ Are you want test your code's error?You can use this link:
 
 "use strict";
 
-function createErr(name,message){
+window.createErr=function (name,message){
 let obj={};
 if(typeof(name)!=="string"||typeof(message)!=="string"){
 return createErr("createErrError",'The "createErr" function is needs two parameter.')
