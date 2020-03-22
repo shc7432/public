@@ -17,7 +17,7 @@ Are you want test your code's error?You can use this link:
 window.createErr=function (name,message){
 let obj={};
 if(typeof(name)!=="string"||typeof(message)!=="string"){
-return createErr("createErrError",'The "createErr" function is needs two parameter.')
+throw createErr("createErrError",'The "createErr" function is needs two parameter.')
 }
 obj.name=name;
 obj.message=message;
