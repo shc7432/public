@@ -29,21 +29,25 @@ let a=JSON.stringify(this);
 return JSON.parse(a);
 }
 Object.defineProperty(Number.prototype, "pow", {
+  value: function(){},
   writable: false,
   enumerable: false,
   configurable: true
 });
 Object.defineProperty(String.prototype, "showByAlert", {
+  value: function(){},
   writable: false,
   enumerable: false,
   configurable: true
 });
 Object.defineProperty(String.prototype, "dmwrite", {
+  value: function(){},
   writable: false,
   enumerable: false,
   configurable: true
 });
 Object.defineProperty(Object.prototype, "clone", {
+  value: function(){},
   writable: false,
   enumerable: false,
   configurable: true
@@ -90,7 +94,7 @@ return disabledEval_b;
  }
 }
 
-window.calc=function(n1,n2){
+window.Calc=function(n1=1,n2=1){
 
   if(!new.target){ // 如果你没有通过 new 运行我
     return new calc(n1,n2); // ......我会给你添加 new
