@@ -53,14 +53,6 @@ Object.defineProperty(Object.prototype, "clone", {
   configurable: true
 });
 
-window.sum=function(){
-let tsum=0;    //temp_sum
-    for (let i = 0; i < arguments.length; i++) {
-        if(!(isNaN(arguments[i]))) tsum += arguments[i];
-    }
-return tsum;
-}
-
 {
 window.disabledEval=function(strone){
 let eval_b=window.eval;
@@ -95,6 +87,21 @@ return disabledEval_b;
  }
 }
 
+window.sum=function(){
+let tsum=0,tsum2=[];    //temp_sum
+    for (let i = 0; i < arguments.length; i++) {
+if(Array.isArray(arguments[i])) {
+tsum2=arguments[i];
+break;
+}
+        if(!(isNaN(arguments[i]))) tsum2[i].push(arguments[i]) ;
+    }
+    for (let i = 0; i < tsum2.length; i++) {
+        if(!(isNaN(arguments[i]))) tsum += arguments[i];
+    }
+
+return tsum;
+}
 window.Calc=function(...num){
 
   if(!new.target){              /////////// \\\\\\\\\\\\
@@ -116,7 +123,7 @@ if(typeof num[i] !== "number") num[i]=Number(num[i]);
 this.read=function(){
 return num;
 }
-this.add=function(){
+this.add=this.sum=function(){
 let s=0;
 for(let i=0;i<num.length;i++){
 s+=num[i]
