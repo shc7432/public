@@ -62,7 +62,7 @@ let eval_b=window.eval;
 if(strone){
 window.eval=undefined;
 Object.defineProperty(window, "eval", {
-  value: false,
+  value: undefined,
   writable: false,
   enumerable: false,
   configurable: false
@@ -80,7 +80,7 @@ let disabledEval_b=window.disabledEval;
 window.disabledEval=undefined;
 if(stone){
 Object.defineProperty(window, "disabledEval", {
-  value: false,
+  value: undefined,
   writable: false,
   enumerable: false,
   configurable: false
