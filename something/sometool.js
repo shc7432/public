@@ -48,5 +48,46 @@ Object.defineProperty(Object.prototype, "clone", {
   enumerable: false,
   configurable: true
 });
+window.sum=function(){
+let tsum=0;    //temp_sum
+    for (i = 0; i < arguments.length; i++) {
+        if(!(isNaN(arguments[i]))) tsum += arguments[i];
+    }
+return tsum;
+}
+
+{
+window.disabledEval=function(strone){
+let eval_b=window.eval;
+if(strone){
+window.eval=undefined;
+Object.defineProperty(window, "eval", {
+  value: false,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+return eval_b;
+}
+
+window.eval=undefined;
+
+return eval_b;
+
+ }
+window.disabledDisabledEval=function(stone){
+let disabledEval_b=window.disabledEval;
+window.disabledEval=undefined;
+if(stone){
+Object.defineProperty(window, "disabledEval", {
+  value: false,
+  writable: false,
+  enumerable: false,
+  configurable: false
+});
+}
+return disabledEval_b;
+ }
+}
 
 })()
