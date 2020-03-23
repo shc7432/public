@@ -52,9 +52,10 @@ Object.defineProperty(Object.prototype, "clone", {
   enumerable: false,
   configurable: true
 });
+
 window.sum=function(){
 let tsum=0;    //temp_sum
-    for (i = 0; i < arguments.length; i++) {
+    for (let i = 0; i < arguments.length; i++) {
         if(!(isNaN(arguments[i]))) tsum += arguments[i];
     }
 return tsum;
