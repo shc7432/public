@@ -28,6 +28,16 @@ Object.prototype.clone=function(){
 let a=JSON.stringify(this);
 return JSON.parse(a);
 }
+Object.defineProperty(Number.prototype, "pow", {
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+Object.defineProperty(String.prototype, "showByAlert", {
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
 Object.defineProperty(Object.prototype, "clone", {
   writable: false,
   enumerable: false,
