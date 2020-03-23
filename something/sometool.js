@@ -38,6 +38,11 @@ Object.defineProperty(String.prototype, "showByAlert", {
   enumerable: false,
   configurable: true
 });
+Object.defineProperty(String.prototype, "dmwrite", {
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
 Object.defineProperty(Object.prototype, "clone", {
   writable: false,
   enumerable: false,
