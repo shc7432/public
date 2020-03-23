@@ -95,29 +95,63 @@ return disabledEval_b;
  }
 }
 
-window.Calc=function(n1=1,n2=1){
+window.Calc=function(...num){
 
-  if(!new.target){ // 如果你没有通过 new 运行我
-    return new calc(n1,n2); // ......我会给你添加 new
-  }
+  if(!new.target){ ///////////
+    return 0;      // Hello //
+  }                ///////////
+
+if(num==undefined||num.length==0){
+return 0;
+}
+for(let i=0;i<num.length;i++){
+if(Array.isArray(num[i])) {
+num=num[i];
+break;
+}
+if(isNaN(num[i])) num[i]=0;
+}
 
 this.read=function(){
-return [n1,n2]
+return num;
 }
 this.add=function(){
-return n1+n2;
+let s=0;
+for(let i=0;i<num.length;i++){
+s+=num[i]
+}
+return s;
 }
 this.unadd=function(){
-return n1-n2;
+let s=0;
+for(let i=0;i<num.length;i++){
+s-=num[i]
+}
+return s;
 }
 this.multiply=function(){
-return n1*n2;
+let s=0;
+for(let i=0;i<num.length;i++){
+s*=num[i]
+}
+return s;
 }
 this.unmultiply=function(){
-return n1/n2;
+let s=0;
+for(let i=0;i<num.length;i++){
+s/=num[i]
 }
-this.pow=function(){
-return n1**n2;
+return s;
+}
+this.pow=function(onlytwo){
+if(onlytwo){
+return num[0]**num[1];
+}
+let s=num[0];
+for(let i=1;i<num.length;i++){
+s=s**num[i]
+}
+return s;
 }
 
 }
