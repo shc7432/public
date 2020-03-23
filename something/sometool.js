@@ -110,6 +110,7 @@ num=num[i];
 break;
 }
 if(isNaN(num[i])) num[i]=0;
+if(typeof num[i] !== "number") num[i]=Number(num[i]);
 }
 
 this.read=function(){
