@@ -87,6 +87,7 @@ return disabledEval_b;
  }
 }
 
+////////
 window.sum=function(){
 let tsum=0,tsum2=[];    //temp_sum
     for (let i = 0; i < arguments.length; i++) {
@@ -162,6 +163,12 @@ s=s**num[i]
 return s;
 }
 
+}
+
+////////
+
+window.random=function(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
 })()
