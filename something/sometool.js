@@ -94,10 +94,10 @@ if(Array.isArray(arguments[i])) {
 tsum2=arguments[i];
 break;
 }
-        if(!(isNaN(arguments[i]))) tsum2[i].push(arguments[i]) ;
+        if(!(isNaN(arguments[i]))) tsum2.push(arguments[i]) ;
     }
     for (let i = 0; i < tsum2.length; i++) {
-        if(!(isNaN(arguments[i]))) tsum += arguments[i];
+        if(!(isNaN(arguments[i]))) tsum += tsum2[i];
     }
 
 return tsum;
