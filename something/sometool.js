@@ -97,9 +97,9 @@ return disabledEval_b;
 
 window.Calc=function(...num){
 
-  if(!new.target){ ///////////
-    return 0;      // Hello //
-  }                ///////////
+  if(!new.target){              /////////// \\\\\\\\\\\\
+    return new Calc(num);      // Hello //   \\ Happy! \\
+  }                           ///////////     \\\\\\\\\\\\
 
 if(num==undefined||num.length==0){
 return 0;
