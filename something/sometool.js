@@ -90,4 +90,31 @@ return disabledEval_b;
  }
 }
 
+window.calc=function(n1,n2){
+
+  if(!new.target){ // 如果你没有通过 new 运行我
+    return new calc(n1,n2); // ......我会给你添加 new
+  }
+
+this.read=function(){
+return [n1,n2]
+}
+this.add=function(){
+return n1+n2;
+}
+this.unadd=function(){
+return n1-n2;
+}
+this.multiply=function(){
+return n1*n2;
+}
+this.unmultiply=function(){
+return n1/n2;
+}
+this.pow=function(){
+return n1**n2;
+}
+
+}
+
 })()
