@@ -91,4 +91,87 @@ window.random=function(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
+/*
+////////
+ window.sum=function(){
+ let tsum=0,tsum2=[];    //temp_sum
+     for (let i = 0; i < arguments.length; i++) {
+ if(Array.isArray(arguments[i])) {
+ tsum2=arguments[i];
+ break;
+ }
+         if(!(isNaN(arguments[i]))) tsum2.push(arguments[i]) ;
+     }
+     for (let i = 0; i < tsum2.length; i++) {
+         if(!(isNaN(arguments[i]))) tsum += tsum2[i];
+     }
+
+ return tsum;
+ }
+ window.Calc=function(...num){
+
+   if(!new.target){              /////////// \\\\\\\\\\\\
+     return new Calc(num);      // Hello //   \\ Happy! \\
+   }                           ///////////     \\\\\\\\\\\\
+
+ if(num==undefined||num.length==0){
+ return 0;
+ }
+ for(let i=0;i<num.length;i++){
+ if(Array.isArray(num[i])) {
+ num=num[i];
+ break;
+ }
+ if(isNaN(num[i])) num[i]=0;
+ if(typeof num[i] !== "number") num[i]=Number(num[i]);
+ }
+
+ this.read=function(){
+ return num;
+ }
+ this.add=this.sum=function(){
+ let s=0;
+ for(let i=0;i<num.length;i++){
+ s+=num[i]
+ }
+ return s;
+ }
+ this.unadd=function(){
+ let s=0;
+ for(let i=0;i<num.length;i++){
+ s-=num[i]
+ }
+ return s;
+ }
+ this.multiply=function(){
+ let s=0;
+ for(let i=0;i<num.length;i++){
+ s*=num[i]
+ }
+ return s;
+ }
+ this.unmultiply=function(){
+ let s=0;
+ for(let i=0;i<num.length;i++){
+ s/=num[i]
+ }
+ return s;
+ }
+ this.pow=function(onlytwo){
+ if(onlytwo){
+ return num[0]**num[1];
+ }
+ let s=num[0];
+ for(let i=1;i<num.length;i++){
+ s=s**num[i]
+ }
+ return s;
+ }
+
+ }
+
+ ////////
+
+*/
+
 })()
