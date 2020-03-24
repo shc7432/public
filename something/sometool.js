@@ -93,7 +93,7 @@ window.random=function(min, max) {
 
 window.createErr=function(name,msg){
   let obj={}
-  let obj.obj={
+  obj.obj={
     name: name,
     msg: msg
   }
