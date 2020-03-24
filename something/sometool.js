@@ -99,16 +99,16 @@ window.createErr=function(name="Err",msg="Err"){
   obj.toString=function(){
     return this.name+": "+this.message;
   }
-  obj.string.function=`function toString(){
+  obj.string_function=`function toString(){
 [native code]
 }`
   Object.defineProperty(obj, "toString", {
-    value: obj.string.function,
+    value: obj.string_function,
     writable: false,
     enumerable: false,
     configurable: false
   });
-  Object.defineProperty(obj.string, "function", {
+  Object.defineProperty(obj, "string_function", {
     value: null,
     writable: false,
     enumerable: false,
