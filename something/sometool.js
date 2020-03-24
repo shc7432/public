@@ -94,14 +94,17 @@ window.random=function(min, max) {
 window.createErr=function(name="Err",msg="Err"){
   let obj={};
   obj.obj={};
-  Object.defineProperty(obj, "obj", {
+  obj.obj.name=name;
+  obj.obj.message=msg;
+  obj.obj.toString=function(){
+    return this.name+": "+this.message;
+  }
+  /*Object.defineProperty(obj, "obj", {
     value: (name+": "+msg),
     writable: true,
     enumerable: true,
     configurable: true,
-  });
-  obj.obj.name=name;
-  obj.obj.message=msg;
+  });*/
   return obj.obj;
 }
 
