@@ -91,7 +91,7 @@ window.random=function(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
-window.createErr=function(name="Err",msg=""){
+window.createErr=function(name="Err",msg="Err"){
   let obj={}
   obj.obj={
     name: name,
@@ -101,7 +101,9 @@ window.createErr=function(name="Err",msg=""){
     value: (name+": "+msg),
     writable: false,
     enumerable: true,
-    configurable: true
+    configurable: true,
+    name: name,
+    message: msg
   });
   return obj.obj;
 }
