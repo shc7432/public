@@ -92,20 +92,22 @@ window.random=function(min, max) {
 }
 
 window.createErr=function(name="Err",msg="Err"){
-  let obj={};
-  obj.obj={};
-  obj.obj.name=name;
-  obj.obj.message=msg;
-  obj.obj.toString=function(){
+  let obj={
+    name: name,
+    message: msg
+  };
+  obj.toString=function(){
     return this.name+": "+this.message;
   }
-  /*Object.defineProperty(obj, "obj", {
-    value: (name+": "+msg),
-    writable: true,
-    enumerable: true,
-    configurable: true,
-  });*/
-  return obj.obj;
+  Object.defineProperty(obj, "toString", {
+    value: function toString(){
+      [native code]
+    },
+    writable: false,
+    enumerable: false,
+    configurable: true
+  });
+  return obj;
 }
 
 })()
