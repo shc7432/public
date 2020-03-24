@@ -91,11 +91,11 @@ window.random=function(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
-window.createErr=function(name,msg){
+window.createErr=function(name="Err",msg=""){
   let obj={}
   obj.obj={
     name: name,
-    msg: msg
+    message: msg
   }
   Object.defineProperty(obj, "obj", {
     value: (name+": "+msg),
