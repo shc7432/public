@@ -92,19 +92,16 @@ window.random=function(min, max) {
 }
 
 window.createErr=function(name="Err",msg="Err"){
-  let obj={}
-  obj.obj={
-    name: name,
-    message: msg
-  }
+  let obj={};
+  obj.obj={};
   Object.defineProperty(obj, "obj", {
     value: (name+": "+msg),
-    writable: false,
+    writable: true,
     enumerable: true,
     configurable: true,
-    name: name,
-    message: msg
   });
+  obj.obj.name=name;
+  obj.obj.message=msg;
   return obj.obj;
 }
 
