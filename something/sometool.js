@@ -94,8 +94,6 @@ window.random=function(min, max) {
 (function(){
   // 创建一个新的 span 元素
   let newDiv = document.createElement("span"); 
-  newDiv.class="aNewDivThisDivIsUseToDialog";
-  newDiv.hidden=true;
   ///////// 
   // 给它一些内容
   //let newContent = document.createTextNode("Hi there and greetings!"); 
@@ -106,6 +104,8 @@ window.random=function(min, max) {
   //let currentDiv = document.getElementById("div1");
   ///////// 
   document.documentElement.appendChild(newDiv); 
+  newDiv.classList.add("aNewDivThisDivIsUseToDialog");
+  return newDiv;
 })()
 Object.prototype.dialog=function(){
 if(this.title===undefined||this.text===undefined||
