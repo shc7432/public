@@ -29,62 +29,53 @@ let a=JSON.stringify(this);
 return JSON.parse(a);
 }
 Object.defineProperty(Number.prototype, "pow", {
-  value: function(){},
   writable: false,
   enumerable: false,
   configurable: true
 });
 Object.defineProperty(String.prototype, "showByAlert", {
-  value: function(){},
   writable: false,
   enumerable: false,
   configurable: true
 });
 Object.defineProperty(String.prototype, "dmwrite", {
-  value: function(){},
   writable: false,
   enumerable: false,
   configurable: true
 });
 Object.defineProperty(Object.prototype, "clone", {
-  value: function(){},
   writable: false,
   enumerable: false,
   configurable: true
 });
 
-{
 window.disabledEval=function(strone){
-let eval_b=window.eval;
-if(strone){
-window.eval=undefined;
-Object.defineProperty(window, "eval", {
-  value: undefined,
-  writable: false,
-  enumerable: false,
-  configurable: false
-});
-return eval_b;
+  let eval_b=window.eval;
+  if(strone){
+    window.eval=undefined;
+    Object.defineProperty(window, "eval", {
+      value: undefined,
+      writable: false,
+      enumerable: false,
+      configurable: false
+    });
+    return eval_b;
+  }
+  window.eval=undefined;
+  return eval_b;
 }
-
-window.eval=undefined;
-
-return eval_b;
-
- }
 window.disabledDisabledEval=function(stone){
-let disabledEval_b=window.disabledEval;
-window.disabledEval=undefined;
-if(stone){
-Object.defineProperty(window, "disabledEval", {
-  value: undefined,
-  writable: false,
-  enumerable: false,
-  configurable: false
-});
-}
-return disabledEval_b;
- }
+  let disabledEval_b=window.disabledEval;
+  window.disabledEval=undefined;
+  if(stone){
+    Object.defineProperty(window, "disabledEval", {
+      value: undefined,
+      writable: false,
+      enumerable: false,
+      configurable: false
+    });
+  }
+  return disabledEval_b;
 }
 
 window.random=function(min, max) {
