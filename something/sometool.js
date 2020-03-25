@@ -112,7 +112,9 @@ if(this.title===undefined||this.text===undefined||
 window.jQuery===undefined||this.content===undefined||
 this.class===undefined) return false;
 let elem=document.querySelectorAll(".aNewDivThisDivIsUseToDialog");
+debugger;
 elem=elem[elem.length-1];
+debugger;
 elem.innerHTML+=
 `<div class="${this.class}" title="${this.title}">${this.text}</div>`
 };
