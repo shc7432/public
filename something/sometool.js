@@ -1,6 +1,6 @@
 /********
 DATE=2020-03-22
-LASTDATE=2020-03-24
+LASTDATE=2020-03-25
 ********/
 
 /****
@@ -93,7 +93,7 @@ window.random=function(min, max) {
 
 (function(){
 document.documentElement.innerHTML+="<div class="+
-"aNewDivThisDivIsUseToDialog"+
+'"aNewDivThisDivIsUseToDialog"'+
 "></div>"
 })()
 Object.prototype.dialog=function(){
