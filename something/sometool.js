@@ -92,20 +92,9 @@ window.random=function(min, max) {
 }
 
 (function(){
-  // 创建一个新的 span 元素
-  let newDiv = document.createElement("span"); 
-  ///////// 
-  // 给它一些内容
-  //let newContent = document.createTextNode("Hi there and greetings!"); 
-  // 添加文本节点 到这个新的 span 元素
-  //newDiv.appendChild(newContent); 
-  //
-  // 将这个新的元素和它的文本添加到 DOM 中
-  //let currentDiv = document.getElementById("div1");
-  ///////// 
-  document.documentElement.appendChild(newDiv); 
-  newDiv.classList.add("aNewDivThisDivIsUseToDialog");
-  return newDiv;
+document.documentElement.innerHTML+="<div class="+
+"aNewDivThisDivIsUseToDialog"+
+"></div>"
 })()
 Object.prototype.dialog=function(){
 if(this.title===undefined||this.text===undefined||
