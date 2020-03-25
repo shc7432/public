@@ -91,15 +91,6 @@ window.random=function(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
-Object.prototype.dialog=function(){
-if(this.title===undefined||this.text===undefined||
-window.jQuery===undefined||this.content===undefined||
-this.class===undefined) return false;
-let elem=document.querySelectorAll(".aNewDivThisDivIsUseToDialog");
-elem=elem[elem.length-1];
-elem.innerHTML+=
-`<div class="${this.class}" title="${this.title}">${this.text}</div>`
-};
 (function(){
   // 创建一个新的 span 元素
   let newDiv = document.createElement("span"); 
@@ -116,5 +107,14 @@ elem.innerHTML+=
   ///////// 
   document.documentElement.appendChild(newDiv); 
 })()
+Object.prototype.dialog=function(){
+if(this.title===undefined||this.text===undefined||
+window.jQuery===undefined||this.content===undefined||
+this.class===undefined) return false;
+let elem=document.querySelectorAll(".aNewDivThisDivIsUseToDialog");
+elem=elem[elem.length-1];
+elem.innerHTML+=
+`<div class="${this.class}" title="${this.title}">${this.text}</div>`
+};
 
 })()
