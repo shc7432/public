@@ -91,30 +91,30 @@ window.random=function(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
-window.createErr=function(name="Err",msg="Err"){
-  let obj={
-    name: name,
-    message: msg
-  };
-  obj.toString=function(){
-    return this.name+": "+this.message;
-  }
-  obj.string_function=`function toString(){
-[native code]
-}`
-  Object.defineProperty(obj, "toString", {
-    value: obj.string_function,
-    writable: false,
-    enumerable: false,
-    configurable: false
-  });
-  Object.defineProperty(obj, "string_function", {
-    value: null,
-    writable: false,
-    enumerable: false,
-    configurable: false
-  });
-  return obj;
-}
+Object.prototype.dialog=function(){
+if(this.title===undefined||this.text===undefined||
+window.jQuery===undefined||this.content===undefined||
+this.class===undefined) return false;
+let elem=document.querySelectorAll(".aNewDivThisDivIsUseToDialog");
+elem=elem[elem.length-1];
+elem.innerHTML+=
+`<div class="${this.class}" title="${this.title}">${this.text}</div>`
+};
+(function(){
+  // 创建一个新的 span 元素
+  let newDiv = document.createElement("span"); 
+  newDiv.class="aNewDivThisDivIsUseToDialog";
+  newDiv.hidden=true;
+  ///////// 
+  // 给它一些内容
+  //let newContent = document.createTextNode("Hi there and greetings!"); 
+  // 添加文本节点 到这个新的 span 元素
+  //newDiv.appendChild(newContent); 
+  //
+  // 将这个新的元素和它的文本添加到 DOM 中
+  //let currentDiv = document.getElementById("div1");
+  ///////// 
+  document.documentElement.appendChild(newDiv); 
+})()
 
 })()
