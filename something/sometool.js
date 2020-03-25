@@ -92,6 +92,7 @@ window.random=function(min, max) {
 }
 
 (function(){
+(function(){
 document.documentElement.innerHTML+="<div class="+
 '"aNewDivThisDivIsUseToDialog"'+
 "></div>"
@@ -107,5 +108,6 @@ debugger;
 elem.innerHTML+=
 `<div class="${this.class}" title="${this.title}">${this.text}</div>`
 };
+})()
 
 })()
