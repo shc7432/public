@@ -49,6 +49,7 @@ Object.defineProperty(Object.prototype, "clone", {
   configurable: true
 });
 
+/*
 window.disabledEval=function(strone){
   let eval_b=window.eval;
   if(strone){
@@ -76,7 +77,7 @@ window.disabledDisabledEval=function(stone){
     });
   }
   return disabledEval_b;
-}
+}*/
 
 (function(){
 try{
