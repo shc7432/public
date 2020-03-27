@@ -78,10 +78,6 @@ window.disabledDisabledEval=function(stone){
   return disabledEval_b;
 }
 
-window.random=function(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) ) + min;
-}
-
 (function(){
 try{
 document.documentElement.innerHTML+="<div class="+
