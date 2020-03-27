@@ -49,36 +49,6 @@ Object.defineProperty(Object.prototype, "clone", {
   configurable: true
 });
 
-/*
-window.disabledEval=function(strone){
-  let eval_b=window.eval;
-  if(strone){
-    window.eval=undefined;
-    Object.defineProperty(window, "eval", {
-      value: undefined,
-      writable: false,
-      enumerable: false,
-      configurable: false
-    });
-    return eval_b;
-  }
-  window.eval=undefined;
-  return eval_b;
-}
-window.disabledDisabledEval=function(stone){
-  let disabledEval_b=window.disabledEval;
-  window.disabledEval=undefined;
-  if(stone){
-    Object.defineProperty(window, "disabledEval", {
-      value: undefined,
-      writable: false,
-      enumerable: false,
-      configurable: false
-    });
-  }
-  return disabledEval_b;
-}*/
-
 (function(){
 try{
 document.documentElement.innerHTML+="<div class="+
@@ -86,8 +56,8 @@ document.documentElement.innerHTML+="<div class="+
 "></div>"
 Object.prototype.dialog=function(){
 if(this.title===undefined||this.text===undefined||
-window.jQuery===undefined||this.content===undefined||
-this.class===undefined) return false;
+window.jQuery===undefined||jQuery("html").dialog===undefined||
+this.content===undefined||this.class===undefined) return false;
 let elem=document.querySelectorAll(".aNewDivThisDivIsUseToDialog");
 elem=elem[elem.length-1];
 elem.innerHTML+=
