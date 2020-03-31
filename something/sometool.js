@@ -49,22 +49,40 @@ Object.defineProperty(Object.prototype, "clone", {
   configurable: true
 });
 
-(function(){
-try{
-document.documentElement.innerHTML+="<div class="+
-'"aNewDivThisDivIsUseToDialog"'+
-"></div>"
-Object.prototype.dialog=function(){
-if(this.title===undefined||this.text===undefined||
-window.jQuery===undefined||jQuery("html").dialog===undefined||
-this.content===undefined||this.class===undefined) return false;
-let elem=document.querySelectorAll(".aNewDivThisDivIsUseToDialog");
-elem=elem[elem.length-1];
-elem.innerHTML+=
-`<div class="${this.class}" title="${this.title}">${this.text}</div>`
-};
-
-}catch(err){alert(err)}
-})()
+window.copytext=function(text){
+if(typeof document.execCommand!=="function"){
+//alert("复制失败，请长按复制");
+return false;
+}
+var dom = document.createElement("textarea");
+dom.value = text;
+dom.setAttribute('style', 'display: block;width: 1px;height: 1px;');
+document.body.appendChild(dom);
+dom.select();
+var result = document.execCommand('copy');
+document.body.removeChild(dom);
+if (result) {
+//alert("复制成功");
+return true;
+}
+if(typeof document.createRange!=="function"){
+//alert("复制失败，请长按复制");
+return false;
+}
+var range = document.createRange();
+var div=document.createElement('div');
+div.innerHTML=text;
+div.setAttribute('style', 'height: 1px;fontSize: 1px;overflow: hidden;');
+document.body.appendChild(div);
+range.selectNode(div);
+const selection = window.getSelection();
+if (selection.rangeCount > 0){
+selection.removeAllRanges();
+}
+selection.addRange(range);
+document.execCommand('copy');
+//alert("复制成功")
+return true;
+}
 
 })()
