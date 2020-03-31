@@ -73,7 +73,14 @@ var range = document.createRange();
 var div=document.createElement('div');
 div.innerHTML=text;
 div.setAttribute('style', 'height: 1px;fontSize: 1px;overflow: hidden;');
+if(document.body){
 document.body.appendChild(div);
+} else if(document.documentElement){
+document.documentElement.appendChild(div);
+} else {
+//alert("复制失败，请长按复制");
+return false;
+}
 range.selectNode(div);
 const selection = window.getSelection();
 if (selection.rangeCount > 0){
