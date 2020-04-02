@@ -57,10 +57,23 @@ return false;
 var dom = document.createElement("textarea");
 dom.value = text;
 dom.setAttribute('style', 'display: block;width: 1px;height: 1px;');
+if(document.body){
 document.body.appendChild(dom);
+} else if(document.documentElement){
+document.documentElement.appendChild(dom);
+} else {
+//alert("复制失败，请长按复制");
+return false;
+}
 dom.select();
-var result = document.execCommand('copy');
+if(document.body){
 document.body.removeChild(dom);
+} else if(document.documentElement){
+document.documentElement.removeChild(dom);
+} else {
+//alert("复制失败，请长按复制");
+return false;
+}
 if (result) {
 //alert("复制成功");
 return true;
