@@ -66,6 +66,7 @@ document.documentElement.appendChild(dom);
 return false;
 }
 dom.select();
+ var result = document.execCommand('copy');
 if(document.body){
 document.body.removeChild(dom);
 } else if(document.documentElement){
