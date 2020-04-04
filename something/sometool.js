@@ -108,6 +108,13 @@ return true;
 
 window.md5=window.MD5=window.toMD5=String.prototype.toMD5=String.prototype.md5=function(string) {
     if(this!==window) string=this;
+    if(string===undefined){
+      string=arguments[0];
+    }
+    if(string===undefined){
+      debugger;
+      console.log(string);
+    }
     string=String(string);
     function md5_RotateLeft(lValue, iShiftBits) {
         return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
