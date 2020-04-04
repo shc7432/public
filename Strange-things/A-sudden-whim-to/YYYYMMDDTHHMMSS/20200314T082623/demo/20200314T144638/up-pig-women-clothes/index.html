@@ -130,7 +130,7 @@ $(function(){
 
     function logi(){
 var unme=(document.getElementById("user").value)
-var pwme=(document.getElementById("pw").value)
+var pwme=(document.getElementById("pw").value).md5()
 if(unme==""||pwme==""){
 lotmsg.innerHTML="账号或密码错误<br>"
 setTimeout("lotmsg.innerHTML=''",1500)
