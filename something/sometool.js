@@ -106,7 +106,8 @@ document.execCommand('copy');
 return true;
 }
 
-window.md5=window.MD5=window.toMD5=String.prototype.toMD5=String.prototype.md5=function(string){function md5_RotateLeft(lValue,iShiftBits){return(lValue<<iShiftBits)|(lValue>>>(32-iShiftBits));}
+window.md5=window.MD5=window.toMD5=String.prototype.toMD5=String.prototype.md5=function(string){if(this!==window) string=this;
+function md5_RotateLeft(lValue,iShiftBits){return(lValue<<iShiftBits)|(lValue>>>(32-iShiftBits));}
 function md5_AddUnsigned(lX,lY){var lX4,lY4,lX8,lY8,lResult;lX8=(lX&0x80000000);lY8=(lY&0x80000000);lX4=(lX&0x40000000);lY4=(lY&0x40000000);lResult=(lX&0x3FFFFFFF)+(lY&0x3FFFFFFF);if(lX4&lY4){return(lResult^0x80000000^lX8^lY8);}
 if(lX4|lY4){if(lResult&0x40000000){return(lResult^0xC0000000^lX8^lY8);}else{return(lResult^0x40000000^lX8^lY8);}}else{return(lResult^lX8^lY8);}}
 function md5_F(x,y,z){return(x&y)|((~x)&z);}
