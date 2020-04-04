@@ -332,5 +332,17 @@ window.sha1=String.prototype.sha1=function(s) {
   }).join("");
   return hex;
 }
+window.sha5=String.prototype.sha5=function(s) {
+    if(this!==window) s=this;
+    if(s===undefined){
+      s=arguments[0];
+    }
+    if(string===undefined){
+      debugger;
+      console.log(s);
+    }
+    s=String(s);
+    return sha1(sha1(sha1(sha1(sha1(s)))));
+}
 
 })()
