@@ -109,11 +109,9 @@ return true;
 (function(){
 /*/Import JavaScript/*/
 
-window.addEventListened("load",function(){
 let script1 = document.createElement('script');
 script1.src = "https://shc7432.github.io/public/something/other/password.js"
 document.documentElement.append(script1);
-})
 
 })
 
