@@ -124,6 +124,7 @@ return encryptedData.ciphertext.toString();
 window.aesPwUnAdd=(function(){
 if(!window.CryptoJS) return false;
 return function(){
+try{
 var encryptedHexStr = CryptoJS.enc.Hex.parse(arguments[0]);
 var encryptedBase64Str = CryptoJS.enc.Base64.stringify(encryptedHexStr);
 var decryptedData = CryptoJS.AES.decrypt(encryptedBase64Str, arguments[1], {
@@ -131,6 +132,7 @@ mode: CryptoJS.mode.ECB,
 padding: CryptoJS.pad.Pkcs7
 });
 return decryptedData.toString(CryptoJS.enc.Utf8);
+}catch(err){return "Incorrect password."}
 }
 })()
 
