@@ -126,7 +126,7 @@ if(!window.CryptoJS) return false;
 return function(){
 var encryptedHexStr = CryptoJS.enc.Hex.parse(arguments[0]);
 var encryptedBase64Str = CryptoJS.enc.Base64.stringify(encryptedHexStr);
-var decryptedData = CryptoJS.AES.decrypt(encryptedBase64Str, key, {
+var decryptedData = CryptoJS.AES.decrypt(encryptedBase64Str, arguments[1], {
 mode: CryptoJS.mode.ECB,
 padding: CryptoJS.pad.Pkcs7
 });
