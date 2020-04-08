@@ -146,5 +146,22 @@ window.addEventListener('popstate', function () {
     window.location.reload(1);
   }
 });
+window.addEventListener('error', function (msg,url,l) {
+  if (!localStorage.errdata) {
+    localStorage.errdata=JSON.stringify({
+      count: 0,
+      sendData: function(){
+        location.href="mailto:?subject=sendErrorData&body="+
+        JSON.stringify(JSON.parse(localStorage.errdata).data)
+      },
+      data=[]
+    })
+  }
+  let a=JSON.parse(localStorage.errdata);
+  a.data.push(`Message: ${msg}
+URL: ${url}
+Line: ${l}`);
+  localStorage.errdata=a;
+});
 
 })()
