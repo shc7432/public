@@ -155,4 +155,35 @@ window.addEventListener('popstate', function () {
   }
 });
 
+(function(){
+var MiniSite=new Object();
+MiniSite.Browser={   
+    ie:/msie/i.test(window.navigator.userAgent),   
+    moz:/gecko/i.test(window.navigator.userAgent),   
+    opera:/opera/i.test(window.navigator.userAgent), 
+    safari:/safari/i.test(window.navigator.userAgent)   
+};
+window.loadJS=function(sUrl,fCallback){   
+        var _script=document.createElement('script');   
+        _script.setAttribute('charset','gbk');   
+        _script.setAttribute('type','text/javascript');   
+        _script.setAttribute('src',sUrl);   
+        document.getElementsByTagName('head')[0].appendChild(_script);   
+        if(MiniSite.Browser.ie){   
+            _script.onreadystatechange=function(){   
+                if(this.readyState=='loaded'||this.readyStaate=='complete'){ 
+                    if(fCallback!=undefined) fCallback(); 
+                }   
+            };   
+        }else if(MiniSite.Browser.moz){   
+            _script.onload=function(){   
+                if(fCallback!=undefined){
+                        fCallback(); 
+                }
+            };   
+        } else if(fCallback!=undefined) fCallback(); 
+    }   
+};
+})()
+
 })()
