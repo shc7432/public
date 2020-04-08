@@ -145,5 +145,7 @@ Object.prototype.loadJSFromThis=function(){
     if(typeof this.callback != "function" ) script.onload=undefined;
     return script;
 }
+"https://pv.sohu.com/cityjson".loadjs()
+window.getIP=window.getip=function(){return returnCitySN.cip}
 
 })()
