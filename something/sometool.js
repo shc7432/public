@@ -182,8 +182,7 @@ window.loadJS=function(sUrl,fCallback){
                 }
             };   
         } else if(fCallback!=undefined) fCallback(); 
-    }   
-};
+ }   
 })()
 
 })()
