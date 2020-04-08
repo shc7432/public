@@ -28,6 +28,9 @@ Object.prototype.clone=function(){
 let a=JSON.stringify(this);
 return JSON.parse(a);
 }
+NodeList.prototype.forEach = function (callback) {
+  Array.prototype.forEach.call(this, callback);
+}
 Object.defineProperty(Number.prototype, "pow", {
   writable: false,
   enumerable: false,
@@ -44,6 +47,11 @@ Object.defineProperty(String.prototype, "dmwrite", {
   configurable: true
 });
 Object.defineProperty(Object.prototype, "clone", {
+  writable: false,
+  enumerable: false,
+  configurable: true
+});
+Object.defineProperty(NodeList.prototype, "forEach", {
   writable: false,
   enumerable: false,
   configurable: true
