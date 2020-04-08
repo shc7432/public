@@ -136,4 +136,10 @@ return decryptedData.toString(CryptoJS.enc.Utf8);
 }
 })()
 
+window.onpageshow = function(event) {
+　　if (event.persisted) {
+　　　　window.location.reload(1) 
+　　}
+};
+
 })()
