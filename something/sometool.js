@@ -114,47 +114,6 @@ document.execCommand('copy');
 return true;
 }
 
-window.aesPwAdd=(function(){
-if(!window.CryptoJS) return false;
-return function(){
-var plaintText = arguments[0];
-var keyStr = arguments[1];
-var key = CryptoJS.enc.Utf8.parse(keyStr);
-var encryptedData = CryptoJS.AES.encrypt(plaintText, key, {
-mode: CryptoJS.mode.ECB,
-padding: CryptoJS.pad.Pkcs7
-});
-var encryptedBase64Str = encryptedData.toString();
-console.log(encryptedBase64Str);
-return encryptedData.ciphertext.toString();
-}
-})()
-window.aesPwUnAdd=(function(){
-if(!window.CryptoJS) return false;
-return function(){
-try{
-var encryptedHexStr = CryptoJS.enc.Hex.parse(arguments[0]);
-var encryptedBase64Str = CryptoJS.enc.Base64.stringify(encryptedHexStr);
-var decryptedData = CryptoJS.AES.decrypt(encryptedBase64Str, arguments[1], {
-mode: CryptoJS.mode.ECB,
-padding: CryptoJS.pad.Pkcs7
-});
-return decryptedData.toString(CryptoJS.enc.Utf8);
-}catch(err){return "Incorrect password."}
-}
-})()
-
-window.addEventListened("onpageshow" , function(event) {
-　　if (event.persisted) {
-　　　　window.location.reload(1) 
-　　}
-});
-window.addEventListener('popstate', function () {
-  if (!freshPage) {
-    window.location.reload(1);
-  }
-});
-
 window.loadjs=window.loadJS=(function(){
     var head = document.getElementsByTagName('head')[0]; 
     var script= document.createElement("script"); 
