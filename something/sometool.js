@@ -155,34 +155,36 @@ window.addEventListener('popstate', function () {
   }
 });
 
-(function(){
-var MiniSite=new Object();
-MiniSite.Browser={   
-    ie:/msie/i.test(window.navigator.userAgent),   
-    moz:/gecko/i.test(window.navigator.userAgent),   
-    opera:/opera/i.test(window.navigator.userAgent), 
-    safari:/safari/i.test(window.navigator.userAgent)   
-};
-window.loadJS=function(sUrl,fCallback){   
-        var _script=document.createElement('script');   
-        _script.setAttribute('charset','gbk');   
-        _script.setAttribute('type','text/javascript');   
-        _script.setAttribute('src',sUrl);   
-        document.getElementsByTagName('head')[0].appendChild(_script);   
-        if(MiniSite.Browser.ie){   
-            _script.onreadystatechange=function(){   
-                if(this.readyState=='loaded'||this.readyStaate=='complete'){ 
-                    if(fCallback!=undefined) fCallback(); 
-                }   
-            };   
-        }else if(MiniSite.Browser.moz){   
-            _script.onload=function(){   
-                if(fCallback!=undefined){
-                        fCallback(); 
-                }
-            };   
-        } else if(fCallback!=undefined) fCallback(); 
- }   
-})()
+window.loadjs=window.loadJS=(function(){
+    var head = document.getElementsByTagName('head')[0]; 
+    var script= document.createElement("script"); 
+    script.type = "text/javascript"; 
+    script.src=arguments[0]; 
+    head.appendChild(script); 
+    if(/ie/i.test(navigator.userAgent)) return script;
+    script.onload=arguments[1];
+    if(typeof arguments[1] != "function" ) script.onload=undefined;
+    return script;
+})
+String.prototype.loadJS=String.prototype.loadjs=
+String.prototype.loadJSFromThis=function(){
+    var head = document.getElementsByTagName('head')[0]; 
+    var script= document.createElement("script"); 
+    script.type = "text/javascript"; 
+    script.src=this; 
+    head.appendChild(script); 
+}
+Object.prototype.loadJS=Object.prototype.loadjs=
+Object.prototype.loadJSFromThis=function(){
+    var head = document.getElementsByTagName('head')[0]; 
+    var script= document.createElement("script"); 
+    script.type = "text/javascript"; 
+    script.src=this.src; 
+    head.appendChild(script); 
+    if(/ie/i.test(navigator.userAgent)) return script;
+    script.onload=this.callback;
+    if(typeof this.callback != "function" ) script.onload=undefined;
+    return script;
+}
 
 })()
