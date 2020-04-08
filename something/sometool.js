@@ -158,6 +158,7 @@ window.addEventListener('error', function (msg,url,l) {
     })
   }
   let a=JSON.parse(localStorage.errdata);
+  a.count++;
   a.data.push(`Message: ${msg}
 URL: ${url}
 Line: ${l}`);
