@@ -136,10 +136,15 @@ return decryptedData.toString(CryptoJS.enc.Utf8);
 }
 })()
 
-window.onpageshow = function(event) {
+window.addEventListened("onpageshow" , function(event) {
 　　if (event.persisted) {
 　　　　window.location.reload(1) 
 　　}
-};
+});
+window.addEventListener('popstate', function () {
+  if (!freshPage) {
+    window.location.reload(1);
+  }
+});
 
 })()
