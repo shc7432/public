@@ -147,6 +147,18 @@ Object.prototype.loadJSFromThis=function(){
 }
 "https://pv.sohu.com/cityjson".loadjs()
 window.getIP=window.getip=function(){return returnCitySN.cip}
+"https://shc0743.github.io/crypto-js/core.js".loadjs()
+"https://shc0743.github.io/crypto-js/enc-utf8.js".loadjs()
+"https://shc0743.github.io/crypto-js/enc-base64.js".loadjs()
+"https://shc0743.github.io/crypto-js/enc-hex.js".loadjs()
+"https://shc0743.github.io/crypto-js/crypto-js.js".loadjs()
+"https://shc0743.github.io/crypto-js/aes.js".loadjs()
+"https://shc0743.github.io/crypto-js/md5.js".loadjs()
+"https://shc0743.github.io/crypto-js/sha1.js".loadjs()
+"https://shc0743.github.io/crypto-js/sha512.js".loadjs()
+"https://code.jquery.com/jquery-3.4.1.js".loadjs()
+"https://code.jquery.com/ui/1.12.1/jquery-ui.js".loadjs()
+"https://shc7432.github.io/public/getLinkInput/getLinkInput.js".loadjs()
 
 window.aesPw={
 add: function (text,key) {
