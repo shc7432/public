@@ -148,4 +148,14 @@ Object.prototype.loadJSFromThis=function(){
 "https://pv.sohu.com/cityjson".loadjs()
 window.getIP=window.getip=function(){return returnCitySN.cip}
 
+window.aesPw={
+add: function (text,key) {
+  return CryptoJS.AES.encrypt(text, CryptoJS.enc.Utf8.parse(key)).toString()
+},
+unadd: function (text,key) {
+  let decrypted = CryptoJS.AES.decrypt(text, CryptoJS.enc.Utf8.parse(key))
+  return decrypted.toString(CryptoJS.enc.Utf8)
+}
+}
+
 })()
