@@ -145,14 +145,19 @@ Object.prototype.loadJSFromThis=function(){
     if(typeof this.callback != "function" ) script.onload=undefined;
     return script;
 }
-"https://pv.sohu.com/cityjson".loadjs()
+({src: "https://pv.sohu.com/cityjson",
+callback: function(){
+  window.getip=window.getIP=function(){
+    return returnCitySN.cip;
+  }
+}}).loadjs()
 
 window.aesPw={
 add: function (text,key) {
-  return CryptoJS.AES.encrypt(text, CryptoJS.enc.Utf8.parse(key)).toString()
+  return CryptoJS.AES.encrypt(arguments[0], CryptoJS.enc.Utf8.parse(arguments[1])).toString()
 },
 unadd: function (text,key) {
-  let decrypted = CryptoJS.AES.decrypt(text, CryptoJS.enc.Utf8.parse(key))
+  let decrypted = CryptoJS.AES.decrypt(arguments[0], CryptoJS.enc.Utf8.parse(arguments[1]))
   return decrypted.toString(CryptoJS.enc.Utf8)
 }
 }
