@@ -160,6 +160,11 @@ callback: function(){
 (function(){
 
 window.pwTools=new Object();
+Object.defineProperty(window, "pwTools", {
+  writable: false,
+  enumerable: true,
+  configurable: true
+});
 
 pwTools.base64=new Object();
 pwTools.base64.add=function(str){
