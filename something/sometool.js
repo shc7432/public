@@ -1,6 +1,6 @@
 /********
 DATE=2020-03-22
-LASTDATE=2020-04-10
+LASTDATE=2020-04-11
 ********/
 
 /****
@@ -157,14 +157,18 @@ callback: function(){
   }
 }}).loadjs()
 
-window.aesPw={
-add: function (text,key) {
-  return CryptoJS.AES.encrypt(arguments[0], CryptoJS.enc.Utf8.parse(arguments[1])).toString()
-},
-unadd: function (text,key) {
-  let decrypted = CryptoJS.AES.decrypt(arguments[0], CryptoJS.enc.Utf8.parse(arguments[1]))
-  return decrypted.toString(CryptoJS.enc.Utf8)
+(function(){
+
+window.pwTools=new Object();
+
+pwTools.base64=new Object();
+pwTools.base64.add=function(str){
+  return btoa(encodeURIComponent(str));
 }
+pwTools.base64.unadd=function(str){
+  return decodeURIComponent(atob(str));
 }
+
+})()
 
 })()
