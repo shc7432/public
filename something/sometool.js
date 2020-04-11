@@ -168,6 +168,11 @@ pwTools.base64.add=function(str){
 pwTools.base64.unadd=function(str){
   return decodeURIComponent(atob(str));
 }
+Object.defineProperty(pwTools, "base64", {
+  writable: false,
+  enumerable: true,
+  configurable: true
+});
 
 })()
 
