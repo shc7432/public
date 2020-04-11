@@ -57,6 +57,11 @@ Object.defineProperty(NodeList.prototype, "forEach", {
   configurable: true
 });
 
+/*
+PsTools:
+https://download.sysinternals.com/files/PSTools.zip
+*/
+
 window.copytext=function(text){
 if(typeof document.execCommand!=="function"){
 //alert("复制失败，请长按复制");
