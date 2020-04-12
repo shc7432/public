@@ -150,12 +150,6 @@ Object.prototype.loadJSFromThis=function(){
     if(typeof this.callback != "function" ) script.onload=undefined;
     return script;
 }
-({src: "https://pv.sohu.com/cityjson",
-callback: function(){
-  window.getip=window.getIP=function(){
-    return returnCitySN.cip;
-  }
-}}).loadjs()
 
 (function(){
 
