@@ -175,4 +175,8 @@ Object.defineProperty(pwTools, "base64", {
 
 })()
 
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+
 })()
