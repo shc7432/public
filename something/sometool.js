@@ -1,6 +1,6 @@
-@/********
+/********
 DATE=2020-03-22
-LASTDATE=2020-04-11
+LASTDATE=2020-05-06
 ********/
 
 /****
@@ -12,7 +12,7 @@ Are you want test your code's error?You can use this link:
 
 (function(){
 
-"use strict";
+//"use strict";
 
 Number.prototype.pow=function(a){
 if(isNaN(a)) a=1;
