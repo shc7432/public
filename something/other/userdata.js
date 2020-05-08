@@ -35,6 +35,7 @@ location.reload(1);
 /****
 HTML:
 
+<script src="https://shc7432.github.io/public/something/other/userdata.js"></script>
 <div style="font-size:10px;color:#ccc;">IP:<script>
 document.write(getIP())</script></div>
 <div style="font-size:10px;color:#ccc;">uid:<script>
