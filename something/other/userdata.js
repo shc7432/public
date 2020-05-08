@@ -31,3 +31,17 @@ uds=JSON.stringify(ud);
 localStorage.userData=uds;
 location.reload(1);
 }
+
+/****
+HTML:
+
+<div style="font-size:10px;color:#ccc;">IP:<script>
+document.write(getIP())</script></div>
+<div style="font-size:10px;color:#ccc;">uid:<script>
+document.write(userData.uid)</script></div>
+<div style="font-size:10px;color:#ccc;">ID:<script>
+document.write(userData.id)</script></div>
+<div style="font-size:10px;color:#ccc;">RandomID:<script>
+document.write(userData.rid)</script></div>
+
+****/
