@@ -31,7 +31,15 @@ window.createMessage=window.showMessage=function(text,obj){
   elem.style.left=(obj.x||obj.left||0);
   elem.style.top=(obj.y||obj.top||0);
   elem.innerHTML=(text||obj.text||obj.content||obj.innerHTML||"")
-  
+  if(!obj.autoOpen) elem.hidden=1;
+  return {
+    open: function(){
+      elem.hidden=0;
+    },
+    close: function(){
+      elem.hidden=1;
+    },
+  }
 }
 
 })()
