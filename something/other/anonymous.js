@@ -1,0 +1,18 @@
+(function(){
+getUrlValue = function (name) {
+        var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) {
+            try {
+                return decodeURIComponent(r[2]);
+            } catch (e) {
+                return null;
+            }
+        }
+        return null;
+    }
+if(getUrlValue("anonymous")){
+location.href="https://s743s.github.io/?download/apps/anonymous?"+
+location.href.replace(/anonymous/g,"test")
+}
+})()
