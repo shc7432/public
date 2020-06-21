@@ -1,3 +1,4 @@
+(function(){
 function getRandom(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
@@ -22,6 +23,7 @@ let ud=new Object();
 ud.uid=getRandom(10000000,99999999);
 ud.id=String(CryptoJS.MD5(ud.uid));
 ud.rid="";
+ud.users=[];
 for(let i=0;i<36;i++){
 let r=getRandom(0,35).toString(36);
 ud.rid+=r;
@@ -46,3 +48,5 @@ document.write(userData.id)</script></div>
 document.write(userData.rid)</script></div>
 
 ****/
+
+})()
