@@ -48,8 +48,9 @@ document.write(userData.id)</script></div>
 document.write(userData.rid)</script></div>
 <div style="font-size:10px;color:#ccc;">username:<script>
 document.write(userData.loginuser.username)</script></div>
-<div style="font-size:10px;color:#ccc;"><a>Sign in</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>Sign up</a></div>
+<div style="font-size:10px;color:#ccc;">
+<a href="javascript:userData.signin()">Sign in</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:userdata.signup()">Sign up</a></div>
 
 ****/
 
