@@ -46,6 +46,10 @@ document.write(userData.uid)</script></div>
 document.write(userData.id)</script></div>
 <div style="font-size:10px;color:#ccc;">RandomID:<script>
 document.write(userData.rid)</script></div>
+<div style="font-size:10px;color:#ccc;">username:<script>
+document.write(userData.loginuser.username)</script></div>
+<div style="font-size:10px;color:#ccc;"><a>Sign in</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a>Sign up</a></div>
 
 ****/
 
