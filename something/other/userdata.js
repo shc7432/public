@@ -2,6 +2,34 @@
 function getRandom(min, max) {
     return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
+function setCookie(cname, cvalue, exdays ,s) {
+    var d = new Date();
+    if(!s){
+      d.setTime(d.getTime() + (exdays * 60 * 1000));
+    } else {
+      d.setTime(d.getTime() + (exdays * 1000));
+    }
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    return getCookie(cname)
+}
+function getCookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i = 0; i < ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+         }
+        if (c.indexOf(name)  == 0) {
+            return c.substring(name.length, c.length);
+         }
+    }
+    return null;
+}
+function removeCookie(cname){
+setCookie(cname,"",-1,false)
+}
 
 if(localStorage.userData){
 let ud=JSON.parse(localStorage.userData);
@@ -9,13 +37,18 @@ let udtime=ud.time;
 udtime=new Date(udtime);
 udtc=(((new Date()-udtime)/1000)/3600);
 if(udtc>23){
-if(1){
 delete localStorage.userData;
 location.reload(1);
 } else {
-location.reload(1);
+ud.loginuser={
+username: getCookie("loginusername")
 }
-} else {
+ud.signin=function(){
+
+}
+ud.signup=function(){
+
+}
 window.userData=ud;
 }
 } else {
