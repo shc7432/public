@@ -44,10 +44,14 @@ ud.loginuser={
 username: getCookie("loginusername")
 }
 ud.signin=function(){
-
+var link=encodeURIComponent(location.href);
+location.href="https://shc7432.github.io/download/user-center/user"+
+"data/login.php?type=signin&returnto="+link;
 }
 ud.signup=function(){
-
+var link=encodeURIComponent(location.href);
+location.href="https://shc7432.github.io/download/user-center/user"+
+"data/login.php?type=signup&returnto="+link;
 }
 window.userData=ud;
 }
@@ -71,7 +75,11 @@ location.reload(1);
 HTML:
 
 <script src="https://shc7432.github.io/public/something/other/userdata.js"></script>
-<div style="font-size:10px;color:#ccc;">IP:<script>
+
+****/
+
+document.querySelectorAll(".userdata")[0].innerHTML=(
+`<div style="font-size:10px;color:#ccc;">IP:<script>
 document.write(getIP())</script></div>
 <div style="font-size:10px;color:#ccc;">uid:<script>
 document.write(userData.uid)</script></div>
@@ -83,8 +91,6 @@ document.write(userData.rid)</script></div>
 document.write(userData.loginuser.username)</script></div>
 <div style="font-size:10px;color:#ccc;">
 <a href="javascript:userData.signin()">Sign in</a>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:userdata.signup()">Sign up</a></div>
-
-****/
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:userdata.signup()">Sign up</a></div>`)
 
 })()
