@@ -73,12 +73,13 @@ location.reload(1);
 
 /****
 HTML:
-
 <script src="https://shc7432.github.io/public/something/other/userdata.js"></script>
-
+<div class=userdata></div>
 ****/
 
-document.querySelectorAll(".userdata")[0].innerHTML=(
+var userdataelem=document.querySelectorAll(".userdata")[0];
+userdataelem.style.border="1px solid #ccc";
+userdataelem.innerHTML=(
 `<div style="font-size:10px;color:#ccc;">IP:<script>
 document.write(getIP())</script></div>
 <div style="font-size:10px;color:#ccc;">uid:<script>
