@@ -45,12 +45,12 @@ username: getCookie("loginusername")
 }
 ud.signin=function(){
 var link=encodeURIComponent(location.href);
-location.href="https://shc7432.github.io/download/user-center/user"+
+location.href="https://shc7432.github.io/account/user"+
 "data/login.php?type=signin&returnto="+link;
 }
 ud.signup=function(){
 var link=encodeURIComponent(location.href);
-location.href="https://shc7432.github.io/download/user-center/user"+
+location.href="https://shc7432.github.io/account/user"+
 "data/login.php?type=signup&returnto="+link;
 }
 window.userData=ud;
