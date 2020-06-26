@@ -76,8 +76,8 @@ window.htmlToImg=function(){
     context.scale(2, 2);
     var arg1=arguments[1];
     html2canvas(arguments[0], { canvas: canvas2 }).then(function(canvas) {
-    var src=canvas.toDataURL();
-    if(typeof arg1 == "function") arg1();
+    var src=canvas.toDataURL("image/png");
+    if(typeof arg1 == "function") arg1(src);
     });
     
 }
