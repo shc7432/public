@@ -60,7 +60,7 @@ window.loadjs=window.loadJS=(function(){
 })
 loadjs("https://html2canvas.hertzen.com/dist/html2canvas.js")
 window.htmlToImg=function(){
-    if(typeof arguments[0] == "object") {var _canvas=arguments[0]} else retutn (false);
+    if(typeof arguments[0] == "object") {var _canvas=arguments[0]} else return (false);
     var canvas2 = document.createElement("canvas");
     var w = parseInt(window.getComputedStyle(_canvas).width);
     var h = parseInt(window.getComputedStyle(_canvas).height);
@@ -75,7 +75,7 @@ window.htmlToImg=function(){
     var context = canvas2.getContext("2d");
     context.scale(2, 2);
     var arg1=arguments[1];
-    html2canvas(arguments[0], { canvas: canvas2 }).then(function(canvas) {
+    html2canvas(arguments[0], { backgroundColor: "test" }).then(function(canvas) {
     var src=canvas.toDataURL("image/png");
     if(typeof arg1 == "function") arg1(src);
     });
