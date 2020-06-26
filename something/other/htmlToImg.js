@@ -60,7 +60,7 @@ window.loadjs=window.loadJS=(function(){
 })
 loadjs("https://html2canvas.hertzen.com/dist/html2canvas.js")
 window.htmlToImg=function(){
-    if(typeof arguments[0] == "object") {var _canvas=arguments[0]} else retutn false;
+    if(typeof arguments[0] == "object") {var _canvas=arguments[0]} else retutn (false);
     var canvas2 = document.createElement("canvas");
     var w = parseInt(window.getComputedStyle(_canvas).width);
     var h = parseInt(window.getComputedStyle(_canvas).height);
