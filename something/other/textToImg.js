@@ -7,10 +7,12 @@
 * @param {function}  fontcolor         文字颜色  "#000"
 * @param {boolean}   imgBase64Data     图像数据
 */
-textToImg= function (text,fontsize,fontcolor){
+textToImg= function (text,set){
     var canvas = document.createElement('canvas');
+    var s=(typeof(set)=="object"||{});
     //小于32字加1  小于60字加2  小于80字加4    小于100字加6
     $buHeight = 0;
+    fontsize=(s.fontSize||s.fontsize||30);
     if(fontsize <= 32){ $buHeight = 1; }
     else if(fontsize > 32 && fontsize <= 60 ){ $buHeight = 2;}
     else if(fontsize > 60 && fontsize <= 80 ){ $buHeight = 4;}
@@ -22,9 +24,9 @@ textToImg= function (text,fontsize,fontcolor){
     // 擦除(0,0)位置大小为200x200的矩形，擦除的意思是把该区域变为透明
     context.clearRect(0, 0, canvas.width, canvas.height);
     context.fillStyle = fontcolor;
-    context.font=fontsize+"px Arial";
+    context.font=fontsize+"px "+(s.fontFamily||s.fontfamily||"Arial");
     //top（顶部对齐） hanging（悬挂） middle（中间对齐） bottom（底部对齐） alphabetic是默认值
-    context.textBaseline = 'middle';
+    context.textBaseline = (s.textBaseline||textbaseline||'middle');
     context.fillText(text,0,fontsize/2)
     //如果在这里直接设置宽度和高度会造成内容丢失 , 暂时未找到原因 , 可以用以下方案临时解决
     //canvas.width = context.measureText(text).width;
@@ -39,8 +41,8 @@ textToImg= function (text,fontsize,fontcolor){
     //方案三：改变大小后，重新设置一次文字
     canvas.width = context.measureText(text).width;
     context.fillStyle = fontcolor;
-    context.font=fontsize+"px Arial";
-    context.textBaseline = 'middle';
+    context.font=fontsize+"px "+(s.fontFamily||s.fontfamily||"Arial");
+    context.textBaseline = (s.textBaseline||textbaseline||'middle');
     context.fillText(text,0,fontsize/2)
  
     var dataUrl = canvas.toDataURL('image/png');//注意这里背景透明的话，需要使用png
