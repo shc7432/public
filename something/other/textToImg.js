@@ -6,8 +6,8 @@
 * @param {string}    fontsize          文字大小  20
 * @param {function}  fontcolor         文字颜色  "#000"
 * @param {boolean}   imgBase64Data     图像数据
-*
-textBecomeImg= function (text,fontsize,fontcolor){
+*/
+textToImg= function (text,fontsize,fontcolor){
     var canvas = document.createElement('canvas');
     //小于32字加1  小于60字加2  小于80字加4    小于100字加6
     $buHeight = 0;
@@ -46,7 +46,7 @@ textBecomeImg= function (text,fontsize,fontcolor){
     var dataUrl = canvas.toDataURL('image/png');//注意这里背景透明的话，需要使用png
     return dataUrl;
 }
-*/
+/*/
 window.loadjs=window.loadJS=(function(){
     var head = document.getElementsByTagName('head')[0]; 
     var script= document.createElement("script"); 
@@ -81,3 +81,4 @@ window.htmlToImg=function(){
     });
     
 }
+/*/
