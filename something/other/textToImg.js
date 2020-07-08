@@ -12,7 +12,6 @@ textToImg= function (text,fontsize,fontcolor){
     var s=(typeof(set)=="object"||{});
     //小于32字加1  小于60字加2  小于80字加4    小于100字加6
     $buHeight = 0;
-    var s={};
     if(fontsize <= 32){ $buHeight = 1; }
     else if(fontsize > 32 && fontsize <= 60 ){ $buHeight = 2;}
     else if(fontsize > 60 && fontsize <= 80 ){ $buHeight = 4;}
