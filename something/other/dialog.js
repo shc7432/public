@@ -56,8 +56,8 @@ if(!(set.hidex||set.hidexicon||set.notshowx||
 set.hideclosebutton||set.hideclosebtn||
 set.hideclose)){
 elem.innerHTML+="<span style='position:absolute;"+
-"right:0px' onclick='this.parentElement.hidden=1'>"+
-"X</span>"
+"right:0px' onclick='this.parentElement.dialog."+
+"close()'>X</span>"
 }})()
 elem.innerHTML=elem.innerHTML+
 "<div style='border:0.8px solid #000;'></div>"+eli;
@@ -70,6 +70,7 @@ elem.hidden=1;bgDialog.hidden=1;
 }
 rtn.close=function(){elem.hidden=1;bgDialog.hidden=1}
 rtn.open=function(){elem.hidden=0;bgDialog.hidden=0}
+elem.dialog=rtn;
 return rtn;
 };
 window.dialog=window.Dialog=d;
