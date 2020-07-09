@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+<meta charset="utf-8" />
+<title>代码编辑器</title>   
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://shc7432.github.io/public/something/sometool.js"></script>
+<script src="https://shc7432.github.io/public/something/other/userdata.js"></script>
+<script src="https://shc7432.github.io/public/something/other/htmlToImg.js"></script>
+<script src="https://shc7432.github.io/public/something/other/dialog.js"></script>
+<script src="https://shc7432.github.io/public/something/other/anonymous.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+  <script src="https://shc7432.github.io/public/getLinkInput/getLinkInput.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://shc0743.github.io/crypto-js/core.js"></script>
+<script src="https://shc0743.github.io/crypto-js/enc-base64.js"></script>
+<script src="https://shc0743.github.io/crypto-js/enc-hex.js"></script>
+<script src="https://shc0743.github.io/crypto-js/enc-utf8.js"></script>
+<script src="https://shc0743.github.io/crypto-js/enc-utf16.js"></script>
+<script src="https://shc0743.github.io/crypto-js/crypto-js.js"></script>
+<script src="https://shc0743.github.io/crypto-js/aes.js"></script>
+<script src="https://shc0743.github.io/crypto-js/md5.js"></script>
+<script src="https://shc0743.github.io/crypto-js/sha1.js"></script>
+<script src="https://shc0743.github.io/crypto-js/sha512.js"></script>
+<script src="https://pv.sohu.com/cityjson"></script>
+<script>
+  window.getip=window.getIP=function(){
+    return returnCitySN.cip;
+  }
+function getRandom(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) ) + min;
+}
+</script>
+</head>
+<body>
+<h1 style="text-align:center">代码编辑器[HTML/JavaScript]
+<div style="font-size:6px;color:green">自动保存于<span id=savetime></span></div></h1>
+<div style="font-size:10px;text-align:right"><span id=sea>HTML</span> 
+<span id=seb>JavaScript</span></div>
+<div>代码:<br><textarea style="width:90%;height:100px;background-color:#fff" 
+placeholder="输入代码" id=cod></textarea><br>执行结果<div id=res></div></div>
+
+<script>
+(function(){
+if(localStorage.runcodecode) res.value=localStorage.runcodecode;
+savetime.innerHTML=new Date().toString().substring(16, 24);
+var codetype="";
+sea.onclick=function(){
+sea.style.backgroundColor="#abcdef";
+seb.style.backgroundColor="#ffffff";
+codetype="html";
+}
+seb.onclick=function(){
+sea.style.backgroundColor="#ffffff";
+seb.style.backgroundColor="#abcdef";
+codetype="js";
+}
+cod.onkeydown=function(e){
+if(cod.value.length>1000000){res.innerHTML="您输入的代码过长!";return}
+localStorage.runcodecode=this.value;
+savetime.innerHTML=new Date().toString().substring(16, 24);
+if(codetype=="html"){
+res.innerHTML=this.value;
+ } else if(codetype=="js"){
+res.innerHTML=eval(this.value);
+ }
+return true;
+}
+})()
+</script>
+</body>
+</html>
