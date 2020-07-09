@@ -47,14 +47,20 @@ document.documentElement.append(el)
 }
 //set title
 if(!(set.notSetTitle||set.notitle)){
-elem.innerHTML=elem.title+(function(){
+let eli=elem.innerHTML;
+elem.innerHTML=elem.title;
+(function(){
 if(!(set.hidex||set.hidexicon||set.notshowx||
 set.hideclosebutton||set.hideclosebtn||
 set.hideclose)){
-return "<span style='font-family:Arial,Verdana,"+
-"Sans-serif'>X</span>"
-} else return "";})()+"<div style='border:0.5px"+
-" solid #000;'></div>"+elem.innerHTML;
+var a=document.createElement("span");
+a.appendChild(document.createTextNode("X"));
+a.style.position="absolute";a.style.right="0px";
+a.style.fontFamily="Arial,Sans-serif";
+elem.appendChild(a);
+}})()
+elem.innerHTML=elem.innerHTML+
+"<div style='border:0.5px solid #000;'></div>"+eli;
 }
 //set others
 
