@@ -43,7 +43,7 @@ function getRandom(min, max) {
 placeholder="输入代码" id=cod></textarea><br>执行结果<div id=res></div></div>
 
 <div id=setel title=设置>这里什么都木有呢...<div style="text-align:right">
-<button onclick="this.parentElement.parentElement.hidden=1">关闭</button></div></div>
+<button onclick="setdialog.close">关闭</button></div></div>
 
 <script>
 (function(){
@@ -52,7 +52,7 @@ res.value=localStorage.runcodecode;
 savetime.innerHTML=new Date().toString().substring(16, 24);
 localStorage.runcodecode=cod.value;
 var codetype="";
-var set=dialog(setel,{autoOpen:0})
+setdialog=dialog(setel,{autoOpen:0,modal:1})
 sea.onclick=function(){
 sea.style.backgroundColor="#abcdef";
 seb.style.backgroundColor="#ffffff";
@@ -77,7 +77,7 @@ res.innerHTML=eval(this.value);
 }catch(e){res.innerHTML=e}
  }
 
-if(this.value=="//settings") set.open();
+if(this.value=="//settings") setdialog.open();
 
 return true;
 }
