@@ -34,8 +34,14 @@ set.bgcolor||"#fff");
 elem.style.width=(set.width||screen.width-200+"px");
 elem.style.height=(set.height||"auto");
 elem.style.zIndex=(set.zIndex||set.zindex||"5");
-//set model
-
+//set modal
+if(set.modal){
+let el=document.createElement("span");
+el.style.width=el.style.height="100%";
+el.style.position="absolute";
+el.style.top=el.style.left="0px";
+document.documentElement.append(el)
+}
 //set others
 
 };
