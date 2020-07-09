@@ -39,7 +39,7 @@ function getRandom(min, max) {
 <div style="font-size:6px;color:green">自动保存于<span id=savetime></span></div></h1>
 <div style="font-size:10px;text-align:right"><span id=sea>HTML</span> 
 <span id=seb>JavaScript</span></div>
-<div>代码:<br><textarea style="width:90%;height:100px;background-color:#fff" 
+<div>代码:<br><textarea disabled style="width:90%;height:100px;background-color:#fff" 
 placeholder="输入代码" id=cod></textarea><br>执行结果<div id=res></div></div>
 
 <script>
@@ -51,11 +51,13 @@ sea.onclick=function(){
 sea.style.backgroundColor="#abcdef";
 seb.style.backgroundColor="#ffffff";
 codetype="html";
+cod.disabled=0;
 }
 seb.onclick=function(){
 sea.style.backgroundColor="#ffffff";
 seb.style.backgroundColor="#abcdef";
 codetype="js";
+cod.disabled=0;
 }
 cod.onkeydown=function(e){
 if(cod.value.length>1000000){res.innerHTML="您输入的代码过长!";return}
