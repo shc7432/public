@@ -46,6 +46,7 @@ placeholder="输入代码" id=cod></textarea><br>执行结果<div id=res></div><
 (function(){
 if(localStorage.runcodecode) res.value=localStorage.runcodecode;
 savetime.innerHTML=new Date().toString().substring(16, 24);
+localStorage.runcodecode=cod.value;
 var codetype="";
 sea.onclick=function(){
 sea.style.backgroundColor="#abcdef";
@@ -66,7 +67,9 @@ savetime.innerHTML=new Date().toString().substring(16, 24);
 if(codetype=="html"){
 res.innerHTML=this.value;
  } else if(codetype=="js"){
+try{
 res.innerHTML=eval(this.value);
+}catch(e){res.innerHTML=e}
  }
 return true;
 }
