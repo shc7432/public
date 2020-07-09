@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="">
+<html lang="zh">
 <head>
 <meta charset="utf-8" />
 <title>代码编辑器</title>   
@@ -42,12 +42,17 @@ function getRandom(min, max) {
 <div>代码:<br><textarea disabled style="width:90%;height:100px;background-color:#fff" 
 placeholder="输入代码" id=cod></textarea><br>执行结果<div id=res></div></div>
 
+<div id=setel title=设置>这里什么都木有呢...<div style="text-align:right">
+<button onclick="this.parentElement.parentElement.hidden=1">关闭</button></div></div>
+
 <script>
 (function(){
-if(localStorage.runcodecode) res.value=localStorage.runcodecode;
+if(localStorage.runcodecode==null) localStorage.runcodecode="";
+res.value=localStorage.runcodecode;
 savetime.innerHTML=new Date().toString().substring(16, 24);
 localStorage.runcodecode=cod.value;
 var codetype="";
+var set=dialog(setel,{autoOpen:0})
 sea.onclick=function(){
 sea.style.backgroundColor="#abcdef";
 seb.style.backgroundColor="#ffffff";
@@ -71,6 +76,9 @@ try{
 res.innerHTML=eval(this.value);
 }catch(e){res.innerHTML=e}
  }
+
+if(this.value=="//settings") set.open();
+
 return true;
 }
 })()
