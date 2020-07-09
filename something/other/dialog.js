@@ -5,14 +5,14 @@
 /*
 Code:
 ========
-.login{/**样式的名字 对应class=xxx**/
-width:200px;/**宽度**/
-height:100px;/**高度**/
-position:absolute;/**绝对定位**/
-left:50%;/**左边50%**/
-top:50%;/**顶部50%**/
-margin-top:-50px;/**上移-50%**/
-margin-left:-100px;/**左移-50%**/
+.login{/**样式的名字 对应class=xxx**
+width:200px;/**宽度**
+height:100px;/**高度**
+position:absolute;/**绝对定位**
+left:50%;/**左边50%**
+top:50%;/**顶部50%**
+margin-top:-50px;/**上移-50%**
+margin-left:-100px;/**左移-50%**
 }
 ========
 */
