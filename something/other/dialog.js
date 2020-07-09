@@ -29,8 +29,7 @@ elem.innerHTML=this.oSet;
 elem.style.position="absolute";
 elem.style.left="50%";
 elem.style.top="50%";
-elem.style.marginLeft="-50px";
-elem.style.marginTop="-100px";
+elem.style.transform="translate(-50%,-50%)";
 elem.style.backgroundColor=(set.backgroundColor||
 set.bgcolor||"#fff");
 elem.style.border="1px solid";
