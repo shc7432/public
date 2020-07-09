@@ -29,8 +29,8 @@ elem.innerHTML=this.oSet;
 elem.style.position="absolute";
 elem.style.left="50%";
 elem.style.top="50%";
-elem.style.marginLeft="-50%";
-elem.style.marginTop="-50%";
+elem.style.marginLeft="-50px";
+elem.style.marginTop="-100px";
 elem.style.backgroundColor=(set.backgroundColor||
 set.bgcolor||"#fff");
 elem.style.width=(set.width||screen.width-200+"px");
@@ -42,12 +42,13 @@ let el=document.createElement("span");
 el.style.width=el.style.height="100%";
 el.style.position="absolute";
 el.style.top=el.style.left="0px";
-el.hidden=1;
+el.hidden=0;
 document.documentElement.append(el)
+var bgDialog=el;
 }
 //set title
 if(!(set.notSetTitle||set.notitle)){
-let eli=elem.innerHTML;
+let eli=rtn.oSet;
 elem.innerHTML=elem.title;
 (function(){
 if(!(set.hidex||set.hidexicon||set.notshowx||
@@ -66,8 +67,8 @@ elem.innerHTML=elem.innerHTML+
 
 //set return value and return
 if(!(set.autoOpen||set.autoopen)) elem.hidden=1;
-rtn.close=function(){ elem.hidden=1; }
-rtn.open=function(){ elem.hidden=0; }
+rtn.close=function(){elem.hidden=1;bgDialog.hidden=1}
+rtn.open=function(){elem.hidden=0;bgDialog.hidden=0}
 return rtn;
 };
 window.dialog=window.Dialog=d;
