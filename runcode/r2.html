@@ -59,7 +59,7 @@ seb.style.backgroundColor="#abcdef";
 codetype="js";
 cod.disabled=0;
 }
-cod.onkeydown=function(e){
+cod.onkeyup=function(e){
 if(cod.value.length>1000000){res.innerHTML="您输入的代码过长!";return}
 localStorage.runcodecode=this.value;
 savetime.innerHTML=new Date().toString().substring(16, 24);
