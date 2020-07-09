@@ -65,9 +65,8 @@ elem.innerHTML=elem.innerHTML+
 //set others
 
 //set return value and return
-if(!(set.autoOpen||set.autoopen)){
-elem.hidden=1;bgDialog.hidden=1;
-}
+if(!(set.autoOpen||set.autoopen)){elem.hidden=1;
+if(typeof(bgDialog)=="object") bgDialog.hidden=1;}
 rtn.close=function(){elem.hidden=1;bgDialog.hidden=1}
 rtn.open=function(){elem.hidden=0;bgDialog.hidden=0}
 elem.dialog=rtn;
