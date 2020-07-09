@@ -44,7 +44,6 @@ el.style.position="absolute";
 el.style.top=el.style.left="0px";
 el.style.backgroundColor="rgba(170,170,170,0.3)";
 el.style.zIndex=parseInt(elem.style.zIndex)-1;
-el.hidden=0;
 document.documentElement.append(el)
 var bgDialog=el;
 }
@@ -66,7 +65,9 @@ elem.innerHTML=elem.innerHTML+
 //set others
 
 //set return value and return
-if(!(set.autoOpen||set.autoopen)) elem.hidden=1;
+if(!(set.autoOpen||set.autoopen)){
+elem.hidden=1;bgDialog.hidden=1;
+}
 rtn.close=function(){elem.hidden=1;bgDialog.hidden=1}
 rtn.open=function(){elem.hidden=0;bgDialog.hidden=0}
 return rtn;
