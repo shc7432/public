@@ -42,6 +42,10 @@ el.style.position="absolute";
 el.style.top=el.style.left="0px";
 document.documentElement.append(el)
 }
+//set title
+if(!(set.notSetTitle||set.notitle)){
+
+}
 //set others
 
 };
