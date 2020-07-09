@@ -17,6 +17,8 @@ margin-left:-100px;/**左移-50%**
 ========
 */
 function d(elem,set){
+if(typeof elem != "object") return false;
+if(typeof set != "object") set = new Object();
 //set return value
 var rtn={};
 rtn.oSet=elem.innerHTML;
