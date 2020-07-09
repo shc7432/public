@@ -40,14 +40,27 @@ let el=document.createElement("span");
 el.style.width=el.style.height="100%";
 el.style.position="absolute";
 el.style.top=el.style.left="0px";
+el.hidden=1;
 document.documentElement.append(el)
 }
 //set title
 if(!(set.notSetTitle||set.notitle)){
-
+elem.innerHTML=elem.title+(function(){
+if(!(set.hidex||set.hidexicon||set.notshowx||
+set.hideclosebutton||set.hideclosebtn||
+set.hideclose)){
+return "<span style='font-family:Arial,Verdana,"+
+"Sans-serif'>X</span>"
+} else return "";})()+"<div style='border:0.5px"+
+" solid #000;'></div>"+elem.innerHTML;
 }
 //set others
 
+//set return value and return
+if(!(set.autoOpen||set.autoopen)) elem.hidden=1;
+rtn.close=function(){ elem.hidden=1; }
+rtn.open=function(){ elem.hidden=0; }
+return rtn;
 };
 window.dialog=window.Dialog=d;
 return d;
