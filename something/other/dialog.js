@@ -33,6 +33,7 @@ elem.style.marginLeft="-50px";
 elem.style.marginTop="-100px";
 elem.style.backgroundColor=(set.backgroundColor||
 set.bgcolor||"#fff");
+elem.style.border="1px solid";
 elem.style.width=(set.width||screen.width-200+"px");
 elem.style.height=(set.height||"auto");
 elem.style.zIndex=(set.zIndex||set.zindex||"5");
@@ -42,6 +43,8 @@ let el=document.createElement("span");
 el.style.width=el.style.height="100%";
 el.style.position="absolute";
 el.style.top=el.style.left="0px";
+el.style.backgroundColor="rgba(170,170,170,0.3)";
+el.style.zIndex=parseInt(elem.style.zIndex)-1;
 el.hidden=0;
 document.documentElement.append(el)
 var bgDialog=el;
@@ -54,14 +57,12 @@ elem.innerHTML=elem.title;
 if(!(set.hidex||set.hidexicon||set.notshowx||
 set.hideclosebutton||set.hideclosebtn||
 set.hideclose)){
-var a=document.createElement("span");
-a.appendChild(document.createTextNode("X"));
-a.style.position="absolute";a.style.right="0px";
-a.style.fontFamily="Arial,Sans-serif";
-elem.appendChild(a);
+elem.innerHTML+="<span style='position:absolute;"+
+"right:0px' onclick='this.parentElement.hidden=1'>"+
+"X</span>"
 }})()
 elem.innerHTML=elem.innerHTML+
-"<div style='border:0.5px solid #000;'></div>"+eli;
+"<div style='border:0.8px solid #000;'></div>"+eli;
 }
 //set others
 
