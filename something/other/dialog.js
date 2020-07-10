@@ -21,6 +21,7 @@ if(typeof elem != "object") return false;
 if(typeof set != "object") set = new Object();
 //set return value
 var rtn={};
+var bgDialog={};
 rtn.oSet=elem.innerHTML;
 rtn.destroy=function(){
 elem.innerHTML=this.oSet;
@@ -45,7 +46,7 @@ el.style.top=el.style.left="0px";
 el.style.backgroundColor="rgba(170,170,170,0.3)";
 el.style.zIndex=parseInt(elem.style.zIndex)-1;
 document.documentElement.append(el)
-var bgDialog=el;
+bgDialog=el;
 }
 //set title
 if(!(set.notSetTitle||set.notitle)){
@@ -66,7 +67,7 @@ elem.innerHTML=elem.innerHTML+
 
 //set return value and return
 if(!(set.autoOpen||set.autoopen)){elem.hidden=1;
-if(typeof(bgDialog)=="object") bgDialog.hidden=1;}
+bgDialog.hidden=1;}
 rtn.close=function(){elem.hidden=1;bgDialog.hidden=1}
 rtn.open=function(){elem.hidden=0;bgDialog.hidden=0}
 elem.dialog=rtn;
