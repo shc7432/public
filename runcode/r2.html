@@ -52,7 +52,8 @@ res.value=localStorage.runcodecode;
 savetime.innerHTML=new Date().toString().substring(16, 24);
 localStorage.runcodecode=cod.value;
 var codetype="";
-setdialog=dialog(setel,{autoOpen:0,modal:1})
+addEventListened("load",function(){setdialog=
+dialog(setel,{autoOpen:0,modal:1})},{once:true});
 sea.onclick=function(){
 sea.style.backgroundColor="#abcdef";
 seb.style.backgroundColor="#ffffff";
