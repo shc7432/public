@@ -16,16 +16,24 @@ margin-left:-100px;/**左移-50%**
 }
 ========
 */
-function d(elem,set){
-if(typeof elem != "object") return false;
+function d(set){
+var elem=this;
+if(this.isDialog){
+if(set=="destroy"){
+this.innerHTML=this.oSet;
+}
+} else {
 if(typeof set != "object") set = new Object();
-//set return value
-var rtn={};
+}
+//set return values(now it is not defined)
+//var rtn={};
 var bgDialog={};
 rtn.oSet=elem.innerHTML;
+/*
 rtn.destroy=function(){
 elem.innerHTML=this.oSet;
 }
+*/
 //set styles
 elem.style.position="absolute";
 elem.style.left="50%";
@@ -38,7 +46,7 @@ elem.style.width=(set.width||screen.width-200+"px");
 elem.style.height=(set.height||"auto");
 elem.style.zIndex=(set.zIndex||set.zindex||"5");
 //set modal
-if(set.modal){
+if(!this.isDialog&&set.modal){
 let el=document.createElement("span");
 el.style.width=el.style.height="100%";
 el.style.position="absolute";
@@ -49,13 +57,13 @@ document.documentElement.append(el)
 bgDialog=el;
 }
 //set title
-if(!(set.notSetTitle||set.notitle)){
+if(!(this.isDialog||set.notSetTitle||set.notitle)){
 let eli=rtn.oSet;
 elem.innerHTML=elem.title;
 (function(){
 if(!(set.hidex||set.hidexicon||set.notshowx||
 set.hideclosebutton||set.hideclosebtn||
-set.hideclose)){
+set.hideclose||this.isDialog)){
 elem.innerHTML+="<span style='position:absolute;"+
 "right:0px' onclick='this.parentElement.dialog."+
 "close()'>X</span>"
@@ -66,13 +74,10 @@ elem.innerHTML=elem.innerHTML+
 //set others
 
 //set return value and return
-if(!(set.autoOpen||set.autoopen)){elem.hidden=1;
-bgDialog.hidden=1;}
-rtn.close=function(){elem.hidden=1;bgDialog.hidden=1}
-rtn.open=function(){elem.hidden=0;bgDialog.hidden=0}
-elem.dialog=rtn;
-return rtn;
-};
-window.dialog=window.Dialog=d;
+if(!(this.isDialog||set.autoOpen||set.autoopen)){
+elem.hidden=1;bgDialog.hidden=1;}
+return true;
+}
+HTMLElement.prototype.dialog=d;
 return d;
 })()
