@@ -24,13 +24,13 @@ this.innerHTML=this.oSet;
 }
 if(set=="open"){
 this.hidden=0;
-let el=document.querySelector("OnlyUsedForDialog"+
+let el=document.querySelector(".OnlyUsedForDialog"+
 "Function"+this.onlydata);
 if(el) el.hidden=0;
 }
 if(set=="close"){
 this.hidden=1;
-let el=document.querySelector("OnlyUsedForDialog"+
+let el=document.querySelector(".OnlyUsedForDialog"+
 "Function"+this.onlydata);
 if(el) el.hidden=1;
 }
@@ -39,7 +39,7 @@ if(typeof set != "object") set = new Object();
 this.onlydata=new Date().getTime();
 }
 //set return values(now it is not defined)
-//var rtn={};
+var rtn={};
 var bgDialog={};
 rtn.oSet=elem.innerHTML;
 /*
@@ -66,7 +66,8 @@ el.style.position="absolute";
 el.style.top=el.style.left="0px";
 el.style.backgroundColor="rgba(170,170,170,0.3)";
 el.style.zIndex=parseInt(elem.style.zIndex)-1;
-el.class="OnlyUsedForDialogFunction"+this.onlydata;
+el.setAttribute("class","OnlyUsedForDialogFunction"+
+this.onlydata);
 document.documentElement.append(el)
 bgDialog=el;
 }
