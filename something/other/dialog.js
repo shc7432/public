@@ -80,8 +80,8 @@ if(!(set.hidex||set.hidexicon||set.notshowx||
 set.hideclosebutton||set.hideclosebtn||
 set.hideclose||this.isDialog)){
 elem.innerHTML+="<span style='position:absolute;"+
-"right:0px' onclick='this.parentElement.dialog."+
-"close()'>X</span>"
+"right:0px' onclick='this.parentElement.dialog"+
+"(\"close\")'>X</span>"
 }})()
 elem.innerHTML=elem.innerHTML+
 "<div style='border:0.8px solid #000;'></div>"+eli;
