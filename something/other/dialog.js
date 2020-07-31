@@ -40,6 +40,8 @@ elem.style.top="50%";
 elem.style.transform="translate(-50%,-50%)";
 elem.style.backgroundColor=(set.backgroundColor||
 set.bgcolor||"#fff");
+elem.style.fontFamily=(set.fontFamily||
+set.fontfamily||"Arial,Verdana,Sans-serif");
 elem.style.border="1px solid";
 elem.style.width=(set.width||"50%");
 elem.style.height=(set.height||"auto");
