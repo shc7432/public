@@ -34,7 +34,7 @@ elem.innerHTML=this.oSet;
 }
 */
 //set styles
-elem.style.position="absolute";
+elem.style.position="fixed";
 elem.style.left="50%";
 elem.style.top="50%";
 elem.style.transform="translate(-50%,-50%)";
@@ -50,7 +50,7 @@ elem.style.zIndex=(set.zIndex||set.zindex||"5");
 if((!this.isDialog)&&set.modal){
 let el=document.createElement("span");
 el.style.width=el.style.height="100%";
-el.style.position="absolute";
+el.style.position="fixed";
 el.style.top=el.style.left="0px";
 el.style.backgroundColor="rgba(170,170,170,0.3)";
 el.style.zIndex=parseInt(elem.style.zIndex)-1;
