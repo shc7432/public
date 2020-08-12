@@ -41,7 +41,7 @@ elem.style.transform="translate(-50%,-50%)";
 elem.style.backgroundColor=(set.backgroundColor||
 set.bgcolor||"#fff");
 elem.style.fontFamily=(set.fontFamily||
-set.fontfamily||"Arial,Verdana,Sans-serif");
+set.fontfamily||"");
 elem.style.border="1px solid";
 elem.style.width=(set.width||"50%");
 elem.style.height=(set.height||"auto");
@@ -68,14 +68,15 @@ if(!(set.hidex||set.hidexicon||set.notshowx||
 set.hideclosebutton||set.hideclosebtn||
 set.hideclose||this.isDialog)){
 elem.innerHTML+="<span style='position:absolute;"+
-"right:0px' onclick='this.parentElement.dialog"+
-"(\"close\")'>X</span>"
+"right:1px;font-family:Arial,Verdana,Sans-serif'"+
+" onclick='this.parentElement.dialog"+
+"(\"close\")'>x</span>"
 }})()
 elem.innerHTML=elem.innerHTML+
 "<div style='border:0.8px solid #000;'></div>"+eli;
 }
 //set others
-
+//
 //set return value and return
 if(!(this.isDialog||set.autoOpen||set.autoopen)){
 elem.hidden=1;bgDialog.hidden=1;}
