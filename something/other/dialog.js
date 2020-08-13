@@ -73,7 +73,7 @@ elem.innerHTML+="<span style='position:absolute;"+
 "(\"close\")'>x</span>"
 }})()
 elem.innerHTML=elem.innerHTML+
-"<div style='border-top:qpx solid #000;'></div>"+eli;
+"<div style='border-top:1px solid #000;'></div>"+eli;
 }
 //set others
 //
