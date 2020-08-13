@@ -68,12 +68,12 @@ if(!(set.hidex||set.hidexicon||set.notshowx||
 set.hideclosebutton||set.hideclosebtn||
 set.hideclose||this.isDialog)){
 elem.innerHTML+="<span style='position:absolute;"+
-"right:1px;font-family:Arial,Verdana,Sans-serif'"+
-" onclick='this.parentElement.dialog"+
+"right:1px;"+/*font-family:Arial,Verdana,Sans-serif*/
+"' onclick='this.parentElement.dialog"+
 "(\"close\")'>x</span>"
 }})()
 elem.innerHTML=elem.innerHTML+
-"<div style='border:0.8px solid #000;'></div>"+eli;
+"<div style='border-top:qpx solid #000;'></div>"+eli;
 }
 //set others
 //
