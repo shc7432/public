@@ -16,9 +16,15 @@ function loadjs(src) {
   script.async = false;
   document.head.appendChild(script);
 }
-var s=newobject;
-s.release=s.noConflict=function(){
-
+var s=new Object();
+Object.defineProperty(s,"noConflict",{
+get() {
+  return function(){
+    return delete window.sTools ? this : false ;
+  }
 }
+set(val) {}
+})
+
 w.sTools=w.gadgetsInDomainShc7432=s;
 })(new Object(),window,document,1,0)
