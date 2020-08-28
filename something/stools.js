@@ -17,5 +17,8 @@ function loadjs(src) {
   document.head.appendChild(script);
 }
 var s=newobject;
+s.release=s.noConflict=function(){
+
+}
 w.sTools=w.gadgetsInDomainShc7432=s;
 })(new Object(),window,document,1,0)
