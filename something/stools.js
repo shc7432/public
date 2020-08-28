@@ -16,6 +16,6 @@ function loadjs(src) {
   script.async = false;
   document.head.appendChild(script);
 }
-w.sTools=new Object();
-w.gadgetsInDomainShc7432=new Object();
+var s=newobject;
+w.sTools=w.gadgetsInDomainShc7432=s;
 })(new Object(),window,document,1,0)
