@@ -2,7 +2,9 @@
 sTools javascript
 ========
 CreateDate: 2020-08-28
-LastUploadDate: 2020-08-28
+LastUpdataDate: 2020-08-28
+========
+#END#
 ========
 ****/
 (function(newobject,w,d,run,norun){
@@ -18,7 +20,10 @@ function loadjs(src) {
 }
 var s=function(IMPORT_FUNCTION){
 const RUN_FUNCTION=IMPORT_FUNCTION?function(){
+//Defined variable
 
+//Run function
+return IMPORT_FUNCTION();
 }:false;
 if(new.target){
 return RUN_FUNCTION?RUN_FUNCTION():s.prototype;
