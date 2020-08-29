@@ -39,6 +39,7 @@ get() {
 }
 set(val) {}
 })
+s.prototype.loadjs=loadjs;
 
 w.sTools=w.gadgetsInDomainShc7432=s;
 })(new Object(),window,document,1,0)
