@@ -16,8 +16,17 @@ function loadjs(src) {
   script.async = false;
   document.head.appendChild(script);
 }
-var s=new Object();
-Object.defineProperty(s,"noConflict",{
+var s=function(IMPORT_FUNCTION){
+const RUN_FUNCTION=IMPORT_FUNCTION?function(){
+
+}:false;
+if(new.target){
+return RUN_FUNCTION?RUN_FUNCTION():s.prototype;
+}
+if(!IMPORT_FUNCTION) return s.prototype;
+return RUN_FUNCTION()
+};
+Object.defineProperty(s.prototype,"noConflict",{
 get() {
   return function(){
     return delete window.sTools ? this : false ;
