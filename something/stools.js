@@ -16,7 +16,7 @@ function loadjs(a,b) {
   let script = document.createElement('script');
   script.src = typeof(a)=="string" ? a : typeof(a)==
   "object" ? (a.src||a.href||"PLACEHOLDER") : typeof(
-  b)=='object' ? (a.src||a.href||"PLACEHOLDER") : 
+  b)=='object' ? (b.src||b.href||"PLACEHOLDER") : 
   "PLACEHOLDER";
   script.async = typeof(a)==
   "object" ? (a.async||false) : typeof(b)=='object' ?
@@ -46,6 +46,6 @@ set(val) {}
 })
 s.prototype.loadjs=loadjs;
 //load JavaScript
-loadjs
+loadjs();
 w.sTools=w.gadgetsInDomainShc7432=s;
 })(new Object(),window,document,1,0)
