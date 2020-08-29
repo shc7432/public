@@ -12,16 +12,21 @@ LastUpdataDate: 2020-08-28
 if(!(typeof(newobject)=="object"&w==window&d==
 document&run&(!norun))) return false;
 //End #Verify parameter#
-function loadjs(src) {
+function loadjs(a,b) {
   let script = document.createElement('script');
-  script.src = src;
-  script.async = false;
+  script.src = typeof(a)=="string" ? a : typeof(a)==
+  "object" ? (a.src||a.href||"PLACEHOLDER") : typeof(
+  b)=='object' ? (a.src||a.href||"PLACEHOLDER") : 
+  "PLACEHOLDER";
+  script.async = typeof(a)==
+  "object" ? (a.async||false) : typeof(b)=='object' ?
+  (b.async||false) : false;
   document.head.appendChild(script);
 }
 var s=function(IMPORT_FUNCTION){
 const RUN_FUNCTION=IMPORT_FUNCTION?function(){
 //Defined variable
-
+//Not yet
 //Run function
 return IMPORT_FUNCTION();
 }:false;
@@ -40,6 +45,7 @@ get() {
 set(val) {}
 })
 s.prototype.loadjs=loadjs;
-
+//load JavaScript
+loadjs
 w.sTools=w.gadgetsInDomainShc7432=s;
 })(new Object(),window,document,1,0)
