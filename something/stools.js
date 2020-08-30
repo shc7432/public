@@ -60,7 +60,9 @@ s.noConflict=function(){
 s.loadjs=loadjs;
 //load JavaScript
 const JS_DOMAIN="https://shc7432.github.io";
-loadjs();
+const THE_SOMETHING=JS_DOMAIN+"/public/something/";
+loadjs(THE_SOMETHING+"sometool.js");
+loadjs(THE_SOMETHING+"other/dialog.js");
 //set toString
 (function set_functions_toString(obj){
 function F(){return ("function(){\n"+
