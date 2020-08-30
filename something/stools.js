@@ -63,16 +63,18 @@ const JS_DOMAIN="https://shc7432.github.io";
 loadjs();
 //set toString
 (function set_functions_toString(obj){
+function F(){return ("function(){\n"+
+"  [native code]\n}")};
 for(let i in obj){
   let sp = obj;
   if(typeof sp[i]=='function'){
-    sp[i].toString=function(){return (
-    "function(){\n  [native code]\n}")};
+    sp[i].toString=F;
   } else if(typeof sp[i]=='object') {
     set_functions_toString(sp[i]);
   } else continue;
 };
+if(typeof obj=='function') obj.toString=F;
 })(s);
 //ok&set window variable
 w.sTools=w.gadgetsInDomainShc7432=s;
-})(new Object(),window,document,1,0)
+})(new Object(),window,document,1,0);
