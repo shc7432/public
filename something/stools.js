@@ -36,7 +36,7 @@ function loadjs(a,b,c,d) {
   //ONERROR
   script.onerror= typeof(a)=='object' ? ((a.onerror||
   false) ? a.onerror : undefined) : typeof(b)==
-  'object' ? ((b.onerror||false) ? b.onerror) : 
+  'object' ? ((b.onerror||false) ? b.onerror : 
   undefined) : typeof(d)=='function' ? d : undefined;
   document.head.appendChild(script);
   return script;
@@ -54,17 +54,25 @@ return RUN_FUNCTION?RUN_FUNCTION():s.prototype;
 if(!IMPORT_FUNCTION) return s.prototype;
 return RUN_FUNCTION()
 };
-Object.defineProperty(s.prototype,"noConflict",{
-get() {
-  return function(){
-    return delete window.sTools ? this : false ;
-  }
-},
-set(val) {}
-})
+s.prototype.noConflict=function(){
+  return delete window.sTools ? this : false ;
+};
 s.prototype.loadjs=loadjs;
 //load JavaScript
 const JS_DOMAIN="https://shc7432.github.io";
 loadjs();
+//set toString
+(function set_functions_toString(obj){
+for(let i in obj){
+  let sp = obj;
+  if(typeof sp[i]=='function'){
+    sp[i].prototype.toString=function(){return (
+    "function(){\n  [native code]\n}")};
+  } else if(typeof sp[i]=='object') {
+    set_functions_toString(sp[i]);
+  } else continue;
+};
+})(s.prototype);
+//ok&set window variable
 w.sTools=w.gadgetsInDomainShc7432=s;
 })(new Object(),window,document,1,0)
