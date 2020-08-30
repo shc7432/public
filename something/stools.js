@@ -54,10 +54,10 @@ return RUN_FUNCTION?RUN_FUNCTION():s.prototype;
 if(!IMPORT_FUNCTION) return s.prototype;
 return RUN_FUNCTION()
 };
-s.prototype.noConflict=function(){
+s.noConflict=function(){
   return delete window.sTools ? this : false ;
 };
-s.prototype.loadjs=loadjs;
+s.loadjs=loadjs;
 //load JavaScript
 const JS_DOMAIN="https://shc7432.github.io";
 loadjs();
