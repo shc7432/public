@@ -66,13 +66,13 @@ loadjs();
 for(let i in obj){
   let sp = obj;
   if(typeof sp[i]=='function'){
-    sp[i].prototype.toString=function(){return (
+    sp[i].toString=function(){return (
     "function(){\n  [native code]\n}")};
   } else if(typeof sp[i]=='object') {
     set_functions_toString(sp[i]);
   } else continue;
 };
-})(s.prototype);
+})(s);
 //ok&set window variable
 w.sTools=w.gadgetsInDomainShc7432=s;
 })(new Object(),window,document,1,0)
