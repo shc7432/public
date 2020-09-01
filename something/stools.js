@@ -54,15 +54,23 @@ return RUN_FUNCTION?RUN_FUNCTION():s.prototype;
 if(!IMPORT_FUNCTION) return s.prototype;
 return RUN_FUNCTION()
 };
+//Config parameter
 s.noConflict=function(){
   return delete window.sTools ? this : false ;
 };
+s.unstall=function(){
+  return delete window.sTools && delete window.
+gadgetsInDomainShc7432;}
 s.loadjs=loadjs;
 //load JavaScript
-const JS_DOMAIN="https://shc7432.github.io";
-const THE_SOMETHING=JS_DOMAIN+"/public/something/";
+{const JS_DOMAIN="https://shc7432.github.io",
+THE_SOMETHING=JS_DOMAIN+"/public/something/",
+THE_TOOLS=JS_DOMAIN+"/cdn/js/stools/~/";
 loadjs(THE_SOMETHING+"sometool.js");
 loadjs(THE_SOMETHING+"other/dialog.js");
+loadjs(THE_TOOLS+"copytext.js");
+loadjs(THE_TOOLS+"termsofservice.js");
+}
 //set toString
 (function set_functions_toString(obj){
 function F(){return ("function(){\n"+
