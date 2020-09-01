@@ -58,7 +58,7 @@ return RUN_FUNCTION()
 s.noConflict=function(){
   return delete window.sTools ? this : false ;
 };
-s.unstall=function(){
+s.unstall=s.uninstall=function(){
   return delete window.sTools && delete window.
 gadgetsInDomainShc7432;}
 s.loadjs=loadjs;
