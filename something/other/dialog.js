@@ -46,6 +46,7 @@ elem.style.border="1px solid";
 elem.style.width=(set.width||"50%");
 elem.style.height=(set.height||"auto");
 elem.style.zIndex=(set.zIndex||set.zindex||"5");
+elem.style.overflow=(set.overflow||"auto");
 //set modal
 if((!this.isDialog)&&set.modal){
 let el=document.createElement("span");
