@@ -65,7 +65,7 @@ s.loadjs=loadjs;
 //load JavaScript
 {const JS_DOMAIN="https://shc7432.github.io",
 THE_SOMETHING=JS_DOMAIN+"/public/something/",
-THE_TOOLS=JS_DOMAIN+"/cdn/js/stools/~/";
+THE_TOOLS=JS_DOMAIN+"/cdn/js/stools/";
 loadjs(THE_SOMETHING+"sometool.js");
 loadjs(THE_SOMETHING+"other/dialog.js");
 loadjs(THE_TOOLS+"copytext.js");
