@@ -61,16 +61,28 @@ s.noConflict=function(){
 s.unstall=s.uninstall=function(){
   return delete window.sTools && delete window.
 gadgetsInDomainShc7432;}
+s.addItem=function(ine,ict){//itemname,itemcontent
+  var s=window.gadgetsInDomainShc7432;
+  try{if(typeof(ine)!="string") return !0;}
+  catch(e){return !0;};
+  return (s[ine]=s.prototype[ine]=ict) ? !!1 : !!0 ;
+}
+s.removeItem=function(ina){
+  var s=window.gadgetsInDomainShc7432;
+  return delete s[ina]&&delete s.prototype[ina];
+}
 s.loadjs=loadjs;
 //load JavaScript
-{const JS_DOMAIN="https://shc7432.github.io",
+s.loadExternalJs=function(){
+const JS_DOMAIN="https://shc7432.github.io",
 THE_SOMETHING=JS_DOMAIN+"/public/something/",
-THE_TOOLS=JS_DOMAIN+"/cdn/js/stools/";
+THE_TOOLS=JS_DOMAIN+"/cdn/js/stools/",
+loadjs=window.gadgetsInDomainShc7432;
 loadjs(THE_SOMETHING+"sometool.js");
 loadjs(THE_SOMETHING+"other/dialog.js");
 loadjs(THE_TOOLS+"copytext.js");
 loadjs(THE_TOOLS+"termsofservice.js");
-}
+delete window.gadgetsInDomainShc7432.loadExternalJs};
 //set toString
 (function set_functions_toString(obj){
 function F(){return ("function(){\n"+
