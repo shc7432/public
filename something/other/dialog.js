@@ -63,17 +63,16 @@ bgDialog=el;
 //set title
 if(!(this.isDialog||set.notSetTitle||set.notitle)){
 let eli=rtn.oSet;
-elem.innerHTML=elem.title;
-(function(){
+elem.innerHTML=`<span style='position:absolute;
+top:0;'>${elem.title}`;(function(){
 if(!(set.hidex||set.hidexicon||set.notshowx||
 set.hideclosebutton||set.hideclosebtn||
 set.hideclose||this.isDialog)){
 elem.innerHTML+="<span style='position:absolute;"+
 "right:1px;"+/*font-family:Arial,Verdana,Sans-serif*/
 "' onclick='this.parentElement.dialog"+
-"(\"close\")'>x</span>"
-}})()
-elem.innerHTML=elem.innerHTML+
+"(\"close\")'>x</span>"}})()
+elem.innerHTML=elem.innerHTML+'</span>'+
 "<div style='border-top:1px solid #000;'></div>"+eli;
 }
 //set others
