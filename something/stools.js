@@ -81,8 +81,9 @@ loadjs=window.gadgetsInDomainShc7432;
 loadjs(THE_SOMETHING+"sometool.js");
 loadjs(THE_SOMETHING+"other/dialog.js");
 loadjs(THE_TOOLS+"copytext.js");
-loadjs(THE_TOOLS+"termsofservice.js");
 delete window.gadgetsInDomainShc7432.loadExternalJs};
+loadjs("https://shc7432.github.io/cdn/js/stools/"+
+"termsofservice.js");
 //set toString
 (function set_functions_toString(obj){
 function F(){return ("function(){\n"+
