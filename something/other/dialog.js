@@ -63,8 +63,7 @@ bgDialog=el;
 //set title
 if(!(this.isDialog||set.notSetTitle||set.notitle)){
 let eli=rtn.oSet;
-elem.innerHTML=`<span style='position:absolute;
-top:0;'>${elem.title}`;(function(){
+elem.innerHTML=`<span>${elem.title}`;(function(){
 if(!(set.hidex||set.hidexicon||set.notshowx||
 set.hideclosebutton||set.hideclosebtn||
 set.hideclose||this.isDialog)){
