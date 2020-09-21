@@ -1,7 +1,8 @@
 /****
 233
 ****/
-(function(){
+(function(TRUE){
+if(TRUE!==true) return false;
 function d(set){
 var elem=this;
 if(this.isDialog){
@@ -12,13 +13,15 @@ if(set=="open"){
 this.hidden=0;
 let el=document.querySelector(".OnlyUsedForDialog"+
 "Function"+this.onlydata);
-if(el) el.hidden=0;
+if(el) el.hidden=0;if(this.lockOrUnlockScroll) this.
+lockOrUnlockScroll(0);
 }
 if(set=="close"){
 this.hidden=1;
 let el=document.querySelector(".OnlyUsedForDialog"+
 "Function"+this.onlydata);
-if(el) el.hidden=1;
+if(el) el.hidden=1;if(this.lockOrUnlockScroll) this.
+lockOrUnlockScroll(1);
 }
 } else {
 if(typeof set != "object") set = new Object();
@@ -60,6 +63,23 @@ this.onlydata);
 document.documentElement.append(el)
 bgDialog=el;
 }
+//set noscroll
+if((!this.isDialog)&&set.modal&&set.noScroll){
+html.styleoverflow=html.style.overflow;
+body.styleoverflow=body.style.overflow;
+bgDialog.addEventListener('touchstart',function(e){
+e.stopPropagation();
+e.preventDefault();
+},false);this.lockOrUnlockScroll=function(t){
+if(t){html.style.overflow="hidden";
+html.style.height="100%";
+body.style.overflow="hidden";
+body.style.height="100%";} else {
+html.style.overflow=html.styleoverflow;
+html.style.height="auto";
+body.style.overflow=body.styleoverflow;
+body.style.height="auto";}};
+}
 //set title
 if(!(this.isDialog||set.notSetTitle||set.notitle)){
 let eli=rtn.oSet;
@@ -85,4 +105,4 @@ return true;
 }
 HTMLElement.prototype.dialog=d;
 return d;
-})()
+})(true)
