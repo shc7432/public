@@ -58,20 +58,20 @@ return RUN_FUNCTION()
 s.noConflict=function(){
   return delete window.sTools ? this : false ;
 };
-s.unstall=s.uninstall=function(){
+s.unins000=s.uninstall=function(){
   return delete window.sTools && delete window.
-gadgetsInDomainShc7432;}
+gadgetsInDomainShc7432;};
 s.addItem=function(ine,ict){//itemname,itemcontent
   var s=window.gadgetsInDomainShc7432;
   try{if(typeof(ine)!="string") return !0;}
   catch(e){return !0;};
   return (s[ine]=s.prototype[ine]=ict) ? !!1 : !!0 ;
-}
+};
 s.removeItem=function(ina){
   var s=window.gadgetsInDomainShc7432;
   return delete s[ina]&&delete s.prototype[ina];
-}
-s.loadjs=loadjs;
+};
+s.addItem('loadjs',loadjs);
 //load JavaScript
 s.loadExternalJs=function(){
 const JS_DOMAIN="https://shc7432.github.io",
