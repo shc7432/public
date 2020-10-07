@@ -2,7 +2,7 @@
 sTools javascript
 ========
 CreateDate: 2020-08-28
-LastUpdataDate: 2020-08-28
+LastUpdataDate: 2020-10-07
 ========
 #END#
 ========
@@ -73,13 +73,14 @@ s.removeItem=function(ina){
 };
 s.addItem('loadjs',loadjs);
 //load JavaScript
+loadjs("https://shc7432.github.io/public/something/"+
+"other/dialog.js");
 s.loadExternalJs=function(){
 const JS_DOMAIN="https://shc7432.github.io",
 THE_SOMETHING=JS_DOMAIN+"/public/something/",
 THE_TOOLS=JS_DOMAIN+"/cdn/js/stools/",
 loadjs=window.gadgetsInDomainShc7432;
 loadjs(THE_SOMETHING+"sometool.js");
-loadjs(THE_SOMETHING+"other/dialog.js");
 loadjs(THE_TOOLS+"copytext.js");
 delete window.gadgetsInDomainShc7432.loadExternalJs};
 loadjs("https://shc7432.github.io/cdn/js/stools/"+
