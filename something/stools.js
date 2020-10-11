@@ -74,17 +74,18 @@ s.removeItem=function(ina){
 s.addItem('loadjs',loadjs);
 //load JavaScript
 loadjs("https://shc7432.github.io/public/something/"+
-"other/dialog.js");
-s.loadExternalJs=function(){
+"other/dialog.js");/*
+s.loadExternalJs=function(){*/
 const JS_DOMAIN="https://shc7432.github.io",
 THE_SOMETHING=JS_DOMAIN+"/public/something/",
-THE_TOOLS=JS_DOMAIN+"/cdn/js/stools/",
-loadjs=window.gadgetsInDomainShc7432;
+THE_TOOLS=JS_DOMAIN+"/cdn/js/stools/";
 loadjs(THE_SOMETHING+"sometool.js");
-loadjs(THE_TOOLS+"copytext.js");
+loadjs('https://shc0743.github.io/test/files/'+
+'compression.js');
+loadjs(THE_TOOLS+"copytext.js");/*
 delete window.gadgetsInDomainShc7432.loadExternalJs};
 loadjs("https://shc7432.github.io/cdn/js/stools/"+
-"termsofservice.js");
+"termsofservice.js");*/
 //set toString
 (function set_functions_toString(obj){
 function F(){return ("function(){\n"+
