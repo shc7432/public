@@ -5,7 +5,7 @@ let w=window.open();w.document.open();
 w.document.write('<meta name=viewport content="width=device-width">'+'<textarea id=v'+
 ' style="z-index:1;position:fixed;left:0;top:0;width:100%;height:100%">'+
 '</textarea><span style="position:fixed;top:0;right:0;background-color:#fff;z-index:2;border:1px solid #ccc">'+
-'<!--a onclick="window.opener.document.documentElement.innerHTML=v.value">Save</a> | -->'+
+'<a onclick="let w=window.open();w.document.open();w.document.documentElement.innerHTML=v.value">Preview</a> | '+
 '<a onclick="window.close()">Close | x</a></span>');w.document.getElementById('v').value=
 document.documentElement.innerHTML.replace(new RegExp('</textarea>','igm'),'</text area>');
 return true};var a=document.createElement('div');
