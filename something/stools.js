@@ -65,7 +65,7 @@ s.addItem=function(ine,ict){//itemname,itemcontent
   var s=window.gadgetsInDomainShc7432;
   try{if(typeof(ine)!="string") return !0;}
   catch(e){return !0;};
-  return (s[ine]=s.prototype[ine]=ict) ? !!1 : !!0 ;
+  return (s[ine]=/*s.prototype[ine]=*/ict) ? !!1 : !!0 ;
 };
 s.removeItem=function(ina){
   var s=window.gadgetsInDomainShc7432;
