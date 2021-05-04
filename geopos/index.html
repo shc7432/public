@@ -20,7 +20,10 @@
 
 <script>
 (function(){
-if(getUrlValj
+    var to = getUrlValue("redirect");
+    if(to){
+        auth_box.hidden = false;
+    }
 })()
 </script>
 
