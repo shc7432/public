@@ -77,6 +77,8 @@
             localStorage.geo_pos_info = JSON.stringify(obj);
         }
         auth_list = JSON.parse(localStorage.geo_pos_info);
+        auth_acceptlen = auth_list.accept.length;
+        auth_denylen = auth_list.deny.length;
         if(to) return false;
     })();
     if (!to) return false;
