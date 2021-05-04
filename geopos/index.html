@@ -6,6 +6,37 @@
 <title>Geography Position API</title>   
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://shc7432.github.io/public/getLinkInput/getLinkInput.js"></script>
+<style>
+    button{
+        cursor: pointer;
+    }
+    .dlg.dlgmodal{
+        position: fixed;
+        left: 0;
+        top: 0;
+        z-index: 51;
+        width: 100%;
+        height: 100%;
+        background: rgba(128,128,128,0.5);
+    }
+    .dlg.dlgmodal .dlgchild{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 52;
+        background: #ffffff;
+        border: 1px solid #000;
+        transform: translate(-50%,-50%);
+    }
+    .dlg .dlgchild .dlgtitle{
+        border-bottom: 1px solid #000;
+        cursor: default;
+        user-select: none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -o-user-select: none;
+    }
+</style>
 
 </head>
 <body>
@@ -14,16 +45,95 @@
 
 </div>
 
-<div id=auth_box hidden>
-
+<div id=auth_box class="dlg dlgmodal" hidden>
+    <div class=dlgchild>
+        <div class=dlgtitle>Geography Position Get Authorize</div>
+        <h1>Geography Position Get Authorize</h1>
+        <p><b id=auth_site>Web Site</b> is requesting your authorization.</p>
+        <h3>Do you agree?</h3>
+        <div>
+            <label><input id=auth_remember type="checkbox" />Remember my select</label><br>
+            <button id=auth_btn_1>I Accept</button>
+            <button id=auth_btn_2>I Don't Accept</button>
+        </div>
+        <form id=auth_form method=GET hidden>
+            <input type=hidden name=lon /><!--经度-->
+            <input type=hidden name=lat /><!--纬度-->
+            <input type=hidden name=deny />
+        </form>
+    </div>
 </div>
 
 <script>
 (function(){
-    var to = getUrlValue("redirect");
-    if(to){
-        auth_box.hidden = false;
+    var to = getUrlValue("redirect"),to2;
+    var auth_list,auth_acceptlen,auth_denylen;
+    (function(){
+        if(!localStorage.geo_pos_info) {
+            let obj = {
+                accept: [],
+                deny: []
+            };
+            localStorage.geo_pos_info = JSON.stringify(obj);
+        }
+        auth_list = JSON.parse(localStorage.geo_pos_info);
+        if(to) return false;
+    })();
+    if (!to) return false;
+    to2 = to;
+    if (to.indexOf("http://") == 0) to2 = to.replace("http://", '');
+    if (to.indexOf("https://") == 0) to2 = to.replace("https://", '');
+    var site_name = to2.substr(0,to2.indexOf("/"));
+    auth_btn_1.onclick = (e) => {
+        if (e && auth_remember.checked) {
+            auth_list.accept.push(site_name);
+            localStorage.geo_pos_info = JSON.stringify(auth_list);
+        }
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        }
+        else {
+            lon.remove();
+            lat.remove();
+            deny.value="not-support"; 
+            auth_form.submit();
+        }
+    };
+    auth_btn_2.onclick = (e) => {
+        if (e && auth_remember.checked) {
+            auth_list.deny.push(site_name);
+            localStorage.geo_pos_info = JSON.stringify(auth_list);
+        }
+        lon.remove();
+        lat.remove();
+        deny.value = 'user';
+        auth_form.submit();
+    };
+    for(let i=0;i<auth_acceptlen;++i)
+        if(auth_list.accept[i]==site_name) return auth_btn_1.onclick();
+    for(let i=0;i<auth_denylen;++i)
+        if(auth_list.deny[i]==site_name) return auth_btn_2.onclick();
+    auth_site.innerHTML = site_name;
+    auth_form.action = to;
+    var 
+    lon = auth_form.querySelector("[name=lon]"),
+    lat = auth_form.querySelector("[name=lat]"),
+    deny = auth_form.querySelector("[name=deny]");
+    function showPosition(position) {
+        // x.innerHTML = "Latitude: " + position.coords.latitude +
+        //     "<br />Longitude: " + position.coords.longitude;
+        deny.remove();
+        lon.value=position.coords.longitude;
+        lat.value=position.coords.latitude;
+        auth_form.submit();
     }
+    function showError(error) {
+        lon.remove();
+        lat.remove();
+        deny.value=error.code;
+        auth_form.submit();
+    }
+    auth_box.hidden = false;
 })()
 </script>
 
