@@ -56,6 +56,8 @@
             <button id=auth_btn_1>I Accept</button>
             <button id=auth_btn_2>I Don't Accept</button>
         </div>
+        <button style="width:100%;height:100%;position:absolute;left:0;top:0;" 
+        type=button id=conti hidden onclick="showPosition()">Continue</button>
         <form id=auth_form method=GET hidden>
             <input type=hidden name=lon /><!--经度-->
             <input type=hidden name=lat /><!--纬度-->
@@ -112,7 +114,7 @@
         auth_form.submit();
     };
     for(let i=0;i<auth_acceptlen;++i)
-        if(auth_list.accept[i]==site_name) return auth_btn_1.onclick();
+        if(auth_list.accept[i]==site_name) return conti.hidden=false;
     for(let i=0;i<auth_denylen;++i)
         if(auth_list.deny[i]==site_name) return auth_btn_2.onclick();
     auth_site.innerHTML = site_name;
