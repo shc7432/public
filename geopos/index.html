@@ -114,7 +114,8 @@
         auth_form.submit();
     };
     for(let i=0;i<auth_acceptlen;++i)
-        if(auth_list.accept[i]==site_name) return conti.hidden=false;
+        if(auth_list.accept[i]==site_name) return 
+        (conti.hidden = auth_box.hidden = false);
     for(let i=0;i<auth_denylen;++i)
         if(auth_list.deny[i]==site_name) return auth_btn_2.onclick();
     auth_site.innerHTML = site_name;
