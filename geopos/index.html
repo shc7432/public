@@ -45,6 +45,9 @@
 
 </div>
 
+<button style="width:100%;height:100%;position:absolute;left:0;top:0;" 
+    type=button id=conti hidden onclick="showPosition()">Continue</button>
+
 <div id=auth_box class="dlg dlgmodal" hidden>
     <div class=dlgchild>
         <div class=dlgtitle>Geography Position Get Authorize</div>
@@ -56,8 +59,6 @@
             <button id=auth_btn_1>I Accept</button>
             <button id=auth_btn_2>I Don't Accept</button>
         </div>
-        <button style="width:100%;height:100%;position:absolute;left:0;top:0;" 
-        type=button id=conti hidden onclick="showPosition()">Continue</button>
         <form id=auth_form method=GET hidden>
             <input type=hidden name=lon /><!--经度-->
             <input type=hidden name=lat /><!--纬度-->
