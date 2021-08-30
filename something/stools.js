@@ -62,7 +62,6 @@ s.unins000=s.uninstall=function(){
   return delete window.sTools && delete window.
 gadgetsInDomainShc7432;};
 s.addItem=function(ine,ict){//itemname,itemcontent
-  var s=window.gadgetsInDomainShc7432;
   try{if(typeof(ine)!="string") return !0;}
   catch(e){return !0;};
   return (s[ine]=/*s.prototype[ine]=*/ict) ? !!1 : !!0 ;
