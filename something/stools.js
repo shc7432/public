@@ -43,6 +43,7 @@ LastUpdataDate: 2021-08-30
         @d error handler
         */
         let script = document.createElement('script');
+        script.type = "javascript";
 
         if (typeof (a) == "string") script.src = a;
         if (typeof (a) == "object") {
@@ -90,7 +91,7 @@ LastUpdataDate: 2021-08-30
     s.addItem = function (itemname, itemcontent) {
         try { if (typeof (itemname) != "string") return false; }
         catch (e) { return false; }
-        return (s[itemname] = itemcontent) ? true : false;
+        return (s[itemname] = s.prototype[itemname] = itemcontent) ? true : false;
     };
     s.removeItem = function (itemname) {
         var s = window.gadgetsInDomainShc7432;
