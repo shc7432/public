@@ -116,7 +116,7 @@ LastUpdataDate: 2021-09-05
     //     if (typeof obj == 'function') obj.toString = F;
     // })(s);
     //ok&set window variable
-    w.sTools = w.gadgetsInDomainShc7432 = s;
+    window.sTools = window.gadgetsInDomainShc7432 = s;
 })(window, document, false, [
     'https://shc7432.github.io/public/something/sometool.js',
     'https://shc7432.github.io/public/something/dialog.js',
