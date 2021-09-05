@@ -243,8 +243,8 @@ window.addEventListener("load", function () {
                     });
 
                     //  DlgFunctions
-                    // var DlgFunctions = {};
-                    // DlgFunctions.dlg = {};
+                    var DlgFunctions = {};
+                    DlgFunctions.dlg = {};
 
                     function BlurRightBtnMenu() {
                         b.hidden = 1;
