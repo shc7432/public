@@ -397,6 +397,15 @@ window.addEventListener("load", function () {
                                     nFlags = !nFlags;
                                 };
                             } while (0);
+                            // ESC关闭
+                            if(!def.noCloseOnEsc){
+                                DlgElement.closeOnEscHandle = function(event){
+                                    if(event.keyCode == 27){ // ESC
+                                        CreateDialogEx.remove(DlgElement);
+                                    }
+                                }
+                                DlgElement.addEventListener('keydown',DlgElement.closeOnEscHandle);
+                            }
                             //返回
                             return DlgElement;
                         } catch (e) { return e; }
@@ -429,6 +438,7 @@ window.addEventListener("load", function () {
                             delete a.onclick;
                         } while (0);
                         document.documentElement.removeEventListener("mouseup", BlurRightBtnMenu);
+                        DlgElement.removeEventListener('keydown',DlgElement.closeOnEscHandle);
                         return DlgElement.setAttribute("class", DlgElement.getAttribute("class").replace("dialog", "").replace("null", "").replace("dlgmodal", ""));
                     };
                     //End Main 
