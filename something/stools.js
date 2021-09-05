@@ -121,5 +121,6 @@ LastUpdataDate: 2021-09-05
     'https://shc7432.github.io/public/something/sometool.js',
     'https://shc7432.github.io/public/something/dialog.js',
     'https://shc7432.github.io/cdn/js/stools/copytext.js',
+    'https://shc7432.github.io/cdn/js/stools/add-ons.js',
     'https://shc0743.github.io/test/files/compression.js',
 ]);
