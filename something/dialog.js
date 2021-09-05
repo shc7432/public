@@ -404,7 +404,7 @@ window.addEventListener("load", function () {
                                         CreateDialogEx.remove(DlgElement);
                                     }
                                 }
-                                DlgElement.addEventListener('keydown',DlgElement.closeOnEscHandle);
+                                document.documentElement.addEventListener('keydown',DlgElement.closeOnEscHandle);
                             }
                             //返回
                             return DlgElement;
@@ -438,7 +438,7 @@ window.addEventListener("load", function () {
                             delete a.onclick;
                         } while (0);
                         document.documentElement.removeEventListener("mouseup", BlurRightBtnMenu);
-                        DlgElement.removeEventListener('keydown',DlgElement.closeOnEscHandle);
+                        document.documentElement.removeEventListener('keydown',DlgElement.closeOnEscHandle);
                         return DlgElement.setAttribute("class", DlgElement.getAttribute("class").replace("dialog", "").replace("null", "").replace("dlgmodal", ""));
                     };
                     //End Main 
