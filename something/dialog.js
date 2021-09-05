@@ -243,8 +243,13 @@ window.addEventListener("load", function () {
                     });
 
                     //  DlgFunctions
-                    var DlgFunctions = {};
-                    DlgFunctions.dlg = {};
+                    // var DlgFunctions = {};
+                    // DlgFunctions.dlg = {};
+
+                    function BlurRightBtnMenu() {
+                        b.hidden = 1;
+                        document.documentElement.removeEventListener("mouseup", BlurRightBtnMenu);
+                    }
 
                     //Main
                     function CreateDialogEx(def) {
@@ -347,10 +352,6 @@ window.addEventListener("load", function () {
                                 let b = DlgElement.querySelector(".rbmenu");
                                 if (a == null || b == null) break;
                                 b.hidden = 1;
-                                function BlurRightBtnMenu() {
-                                    b.hidden = 1;
-                                    document.documentElement.removeEventListener("mouseup", BlurRightBtnMenu);
-                                }
                                 a.oncontextmenu = function (e) {
                                     if (!(this.contextmenu)) return e.preventDefault();
                                     b.hidden = 0;
@@ -427,6 +428,7 @@ window.addEventListener("load", function () {
                             if (a == null) break;
                             delete a.onclick;
                         } while (0);
+                        document.documentElement.removeEventListener("mouseup", BlurRightBtnMenu);
                         return DlgElement.setAttribute("class", DlgElement.getAttribute("class").replace("dialog", "").replace("null", "").replace("dlgmodal", ""));
                     };
                     //End Main 
