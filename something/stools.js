@@ -2,21 +2,14 @@
 sTools javascript
 ========
 CreateDate: 2020-08-28
-LastUpdataDate: 2021-08-30
+LastUpdataDate: 2021-09-05
 ========
 #END#
 ========
 ****/
-(function (newobject, w, d, run, norun) {
-
-    //Verify parameter
-    if (!(
-        typeof (newobject) == "object" &
-        w == window & 
-        d == document & 
-        run &
-        (!norun))) return false;
-    //End #Verify parameter#
+(function (window, document, disabled, extjs_list) {
+    
+    if (disabled) return false;
 
     /**
      * loadjs(a,b,c,d)
@@ -85,8 +78,7 @@ LastUpdataDate: 2021-08-30
         return delete window.sTools ? this : false;
     };
     s.unins000 = s.uninstall = function () {
-        return delete window.sTools && delete window.
-            gadgetsInDomainShc7432;
+        return delete window.sTools && delete window.gadgetsInDomainShc7432;
     };
     s.addItem = function (itemname, itemcontent) {
         try { if (typeof (itemname) != "string") return false; }
@@ -99,34 +91,35 @@ LastUpdataDate: 2021-08-30
     };
     s.addItem('loadjs', loadjs);
     //load JavaScript
-    s.loadExternalJs=function(){
-        const JS_DOMAIN = "https://shc7432.github.io",
-            THE_SOMETHING = JS_DOMAIN + "/public/something/",
-            THE_TOOLS = JS_DOMAIN + "/cdn/js/stools/";
-        loadjs(THE_SOMETHING + "sometool.js");
-        loadjs('https://shc0743.github.io/test/files/compression.js');
-        loadjs(THE_TOOLS + "copytext.js");
-        loadjs("https://shc7432.github.io/public/something/dialog.js");
-        loadjs("https://shc7432.github.io/public/something/other/dialog.js");
-        delete window.gadgetsInDomainShc7432.loadExternalJs;
-    };
-    // loadjs("https://shc7432.github.io/cdn/js/stools/termsofservice.js");
+    s.addItem('loadDependJs', function () {
+        let l = extjs_list.length;
+        for (let i = 0; i < l; ++i) {
+            loadjs(extjs_list[i]);
+        }
+        delete s.removeItem('loadDependJs');
+    });
+    // DO NOT 
     //set toString
-    (function set_functions_toString(obj) {
-        function F() {
-            return ("function(){\n" +
-                "  [native code]\n}")
-        };
-        for (let i in obj) {
-            let sp = obj;
-            if (typeof sp[i] == 'function') {
-                sp[i].toString = F;
-            } else if (typeof sp[i] == 'object') {
-                set_functions_toString(sp[i]);
-            } else continue;
-        };
-        if (typeof obj == 'function') obj.toString = F;
-    })(s);
+    // (function set_functions_toString(obj) {
+    //     function F() {
+    //         return ("function(){\n" +
+    //             "  [native code]\n}")
+    //     };
+    //     for (let i in obj) {
+    //         let sp = obj;
+    //         if (typeof sp[i] == 'function') {
+    //             sp[i].toString = F;
+    //         } else if (typeof sp[i] == 'object') {
+    //             set_functions_toString(sp[i]);
+    //         } else continue;
+    //     };
+    //     if (typeof obj == 'function') obj.toString = F;
+    // })(s);
     //ok&set window variable
     w.sTools = w.gadgetsInDomainShc7432 = s;
-})(new Object(), window, document, 1, 0);
+})(window, document, false, [
+    'https://shc7432.github.io/public/something/sometool.js',
+    'https://shc7432.github.io/public/something/dialog.js',
+    'https://shc7432.github.io/cdn/js/stools/copytext.js',
+    'https://shc0743.github.io/test/files/compression.js',
+]);
