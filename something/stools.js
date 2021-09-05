@@ -36,7 +36,7 @@ LastUpdataDate: 2021-09-05
         @d error handler
         */
         let script = document.createElement('script');
-        script.type = "javascript";
+        script.type = "text/javascript";
 
         if (typeof (a) == "string") script.src = a;
         if (typeof (a) == "object") {
