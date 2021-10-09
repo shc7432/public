@@ -69,7 +69,7 @@ window.addEventListener("load", function () {
             cursor: not-allowed !important;
         }
         .dialog{
-            position: absolute;
+            position: fixed;
             left: 50%;
             top : 50%;
             z-index: 57;
@@ -398,9 +398,9 @@ window.addEventListener("load", function () {
                                 };
                             } while (0);
                             // ESC关闭
-                            if(!def.noCloseOnEsc){
-                                DlgElement.closeOnEscHandle = function(event){
-                                    if(event.keyCode == 27){ // ESC
+                            if (!def.noCloseOnEsc) {
+                                DlgElement.closeOnEscHandle = function(event) {
+                                    if (event.keyCode == 27) { // ESC
                                         CreateDialogEx.remove(DlgElement);
                                     }
                                 }
