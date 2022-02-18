@@ -410,7 +410,8 @@ window.addEventListener("load", function () {
                 }
                 CreateDialogEx.remove = function (DlgElement) {
                     DlgElement.isDialog = false; DlgElement.hidden = 1;
-                    if (DlgElement.afterremove) {
+                    if (typeof(DlgElement.onbeforeclose) == 'function') DlgElement.onbeforeclose();
+                    if (DlgElement.afterremove) { // oh shit
                         DlgElement.remove();
                     }
                     do {
@@ -437,7 +438,12 @@ window.addEventListener("load", function () {
                     } while (0);
                     document.documentElement.removeEventListener("mouseup", BlurRightBtnMenu);
                     document.documentElement.removeEventListener('keydown',DlgElement.closeOnEscHandle);
-                    return DlgElement.setAttribute("class", DlgElement.getAttribute("class").replace("dialog", "").replace("null", "").replace("dlgmodal", ""));
+                    if (typeof(DlgElement.onclose) == 'function') DlgElement.onclose();
+                    return DlgElement.setAttribute("class", 
+                               DlgElement.getAttribute("class")
+                                         .replace("dialog", "")
+                                         .replace("null", "")
+                                         .replace("dlgmodal", ""));
                 };
                 //End Main 
 
