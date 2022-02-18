@@ -348,13 +348,14 @@ window.addEventListener("load", function () {
                             let a = DlgElement.querySelector(".dialogtitle") || DlgElement.querySelector("dialogtitle");
                             let b = DlgElement.querySelector(".rbmenu");
                             if (a == null || b == null) break;
-                            b.hidden = 1;
+                            b.hidden = true;
                             a.oncontextmenu = function (e) {
                                 e.preventDefault();
-                                b.hidden = 0;
+                                b.hidden = false;
                                 b.style.left = e.clientX + "px";
                                 b.style.top = e.clientY + "px";
-                                document.documentElement.addEventListener("mouseup", BlurRightBtnMenu);
+                                document.documentElement.addEventListener("mouseup",
+                                    /*BlurRightBtnMenu*/function(){b.hidden=true});
                             };
                             b.onmouseup = function (e) {
                                 e.stopPropagation();
