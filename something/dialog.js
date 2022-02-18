@@ -273,24 +273,22 @@ window.addEventListener("load", function () {
                         if (DlgElement.getAttribute("class") == null) DlgElement.setAttribute("class", "");
                         DlgElement.setAttribute("class", (DlgElement.getAttribute("class") + " dialog").replace(/\s+/ig, " "));
                         DlgElement.modal = modal;
-                        {
-                            DlgFunctions.dlg.mouse_move_resize = function (e) {
-                                var
-                                    x = e.screenX - DlgElement.style.left.replace("px", ""),
-                                    y = e.screenY - DlgElement.style.top.replace("px", ""),
-                                    cx = DlgElement.clientWidth,
-                                    cy = DlgElement.clientHeight;
-                                if (x < 10 && y < 10) {
-                                    DlgElement.style.cursor = "nw-resize";
-                                } else if (x < 10 && cy - y < 10) {
-                                    DlgElement.style.cursor = "sw-resize";
-                                } else if (cx - x < 10 && y < 10) {
-                                    DlgElement.style.cursor = "ne-resize";
-                                } else if (cx - x < 10 && cy - y < 10) {
-                                    DlgElement.style.cursor = "se-resize";
-                                } else {
-                                    DlgElement.style.cursor = "auto";
-                                }
+                        DlgFunctions.dlg.mouse_move_resize = function (e) {
+                            var
+                                x = e.screenX - DlgElement.style.left.replace("px", ""),
+                                y = e.screenY - DlgElement.style.top.replace("px", ""),
+                                cx = DlgElement.clientWidth,
+                                cy = DlgElement.clientHeight;
+                            if (x < 10 && y < 10) {
+                                DlgElement.style.cursor = "nw-resize";
+                            } else if (x < 10 && cy - y < 10) {
+                                DlgElement.style.cursor = "sw-resize";
+                            } else if (cx - x < 10 && y < 10) {
+                                DlgElement.style.cursor = "ne-resize";
+                            } else if (cx - x < 10 && cy - y < 10) {
+                                DlgElement.style.cursor = "se-resize";
+                            } else {
+                                DlgElement.style.cursor = "auto";
                             }
                         }
                         CenterElement(DlgElement);
@@ -352,7 +350,7 @@ window.addEventListener("load", function () {
                             if (a == null || b == null) break;
                             b.hidden = 1;
                             a.oncontextmenu = function (e) {
-                                if (!(this.contextmenu)) return e.preventDefault();
+                                e.preventDefault();
                                 b.hidden = 0;
                                 b.style.left = e.clientX + "px";
                                 b.style.top = e.clientY + "px";
