@@ -39,10 +39,28 @@
                 </table>
             </div>
         </div>
-
+        
         <div class="app-related-content">
             <details open>
                 <summary>设置</summary>
+
+                <div style="margin: 10px 0;">
+                    <fieldset>
+                        <legend>数据</legend>
+                        <p style="margin-top: 0">
+                            <span>当前用量:</span>
+                            <span id="data_estimate_usage">N/A</span>
+                            <br>
+                            <span>总用量:</span>
+                            <span id="data_estimate_quota">N/A</span>
+                        </p>
+                        <dialog>
+                            <button id="confirmClearData">确定</button>
+                            <button onclick="this.parentElement.close()">取消</button>
+                        </dialog>
+                        <a href="javascript:" onclick="this.previousElementSibling.showModal()">清除所有记录</a>
+                    </fieldset>
+                </div>
 
                 <div style="margin: 10px 0;">
                     <fieldset>
@@ -56,7 +74,7 @@
                 </div>
             </details>
 
-            <div>Version: 0.0.1</div>
+            <div>Version: 0.0.2</div>
         </div>
     </div>
 

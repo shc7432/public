@@ -8,7 +8,7 @@ export const version = 2;
 import { openDB } from './lib/idb/idb.esm.js';
 
 
-const el_dbExpired = globalThis.document?.createElement('dialog');
+const el_dbExpired = globalThis.document && globalThis.document.createElement('dialog');
 if (globalThis.document) {
     el_dbExpired.innerHTML = `
 <div style="font-weight: bold; font-size: large;">The database has expired.</div>
