@@ -105,4 +105,9 @@ a:hover {
     margin: 10px 0;
 }
 
+#data_export_result, #data_import {
+    box-sizing: border-box;
+    width: 100%;
+}
+
 

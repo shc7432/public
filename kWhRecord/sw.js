@@ -28,7 +28,19 @@ globalThis.addEventListener('fetch', function (e) {
         const cacheResult = await caches.match(e.request);
         if (cacheResult) return cacheResult;
         try {
-            const resp = await fetch(e.request);
+            const req = new Request(e.request.url, {
+                method: e.request.method,
+                headers: e.request.headers,
+                body: e.request.body,
+                mode: (e.request.mode === 'navigate') ? undefined : e.request.mode,
+                credentials: e.request.credentials,
+                cache: 'no-cache',
+                redirect: e.request.redirect,
+                referrer: e.request.referrer,
+                referrerPolicy: e.request.referrerPolicy,
+                integrity: e.request.integrity,
+            });
+            const resp = await fetch(req);
             if (/GET/i.test(e.request.method) && resp.status === 200 && (
                 e.request.url.startsWith(globalThis.location.origin)
             )) try {
@@ -36,8 +48,10 @@ globalThis.addEventListener('fetch', function (e) {
                 cache.put(e.request, resp.clone());
             } catch { };
             return resp;
-        } catch {}
-        return new Response(new Blob([]), { status: 999, statusText: 'Service Worker Internal Error' });
+        } catch (error) {
+            console.error('Failed to request', e.request.url, ':', error);
+        }
+        return new Response(new Blob([]), { status: 599, statusText: 'Service Worker Internal Error' });
     }());
 });
 

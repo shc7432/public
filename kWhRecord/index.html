@@ -62,6 +62,22 @@
                     </fieldset>
                 </div>
 
+                <div style="margin: 10px 0;" hidden data-is-todo="// TODO">
+                    <fieldset>
+                        <legend>导入/导出</legend>
+                        <fieldset>
+                            <legend>导出数据</legend>
+                            <div><textarea id="data_export_result" readonly rows="10" placeholder="点击下面的按钮以开始。"></textarea></div>
+                            <button id="exportData">导出</button>&nbsp;<button id="copyExported">复制上面的数据</button>
+                        </fieldset>
+                        <fieldset>
+                            <legend>导入数据</legend>
+                            <div><textarea id="data_import" rows="10" placeholder="请输入数据。[spacer=Tab]"></textarea></div>
+                            <button id="importData">导入</button>&nbsp;<button id="clearImportArea">清除</button>
+                        </fieldset>
+                    </fieldset>
+                </div>
+
                 <div style="margin: 10px 0;">
                     <fieldset>
                         <legend>更新</legend>
@@ -74,7 +90,7 @@
                 </div>
             </details>
 
-            <div>Version: 0.0.2</div>
+            <div><br><b>Version:&nbsp;</b><span>0.0.3</span></div>
         </div>
     </div>
 

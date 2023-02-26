@@ -45,7 +45,7 @@ const data_computeId = function (obj) {
     const time = obj.time.split(':');
     const dd = new Date(0);
     dd.setFullYear(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2]));
-    dd.setHours(parseInt(time[0]), parseInt(time[1]), parseInt(time[2]), 0);
+    dd.setHours(parseInt(time[0]), parseInt(time[1]), parseInt(time[2] || '0' /* for some browsers who doesn't support [step] attr */), 0);
     return dd.getTime();
 };
 const data_addRow = function (obj) {
@@ -134,7 +134,7 @@ $('#records').on('click', function (ev) {
             const ipt = document.createElement('input');
             ipt.type = target.dataset.keyPath;
             ipt.value = String(target.parentElement._$$data[target.dataset.keyPath]);
-                target.dataset.keyPath === 'time' && (ipt.step = 1);
+            target.dataset.keyPath === 'time' && (ipt.step = 1);
             const r = async () => {
                 const newData = structuredClone(target.parentElement._$$data);
                 try {
