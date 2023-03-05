@@ -1,0 +1,28 @@
+{
+    "autoupdate": "自动更新",
+    "cfgau": "配置自动更新",
+    "auopt_list": {
+        "0": "不要自动检查更新",
+        "1": "自动检查更新，如果有更新，请在此处显示",
+        "2": "自动检查更新，如果有更新，请通知我 (推荐)",
+        "3": "自动检查并在下一次重新加载时应用更新 (默认)",
+        "4": "自动检查并应用更新",
+        "5": "总是使用最新版本，即使没有更新 (不推荐)",
+        "6": "禁用 Service Worker (不推荐)"
+    },
+    "checkupdate": "更新检查",
+    "updlastctime": "上次检查时间",
+    "noUpdate": "没有待处理的更新。",
+    "updateAll": "全部更新",
+    "ignoreAll": "全部忽略",
+    "clearAll": "全部清除",
+    "needReloadToApply": "需要重新加载页面才能应用更改。",
+    "reloadNow": "立即重新加载",
+    "checkNow": "立即检查",
+    "checkingUpdates": "正在检查更新",
+    "cfgctime": "检查周期 (秒):",
+    "u:update": "更新", "u:ignore": "忽略此版本", "u:close": "关闭", "u:see": "查看",
+    "showRn": "显示 Release Notes",
+    "newerVersionDetected": "检测到新版本",
+    "failedToCheckUpdates": "无法检查更新"
+}
