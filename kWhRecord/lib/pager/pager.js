@@ -59,10 +59,17 @@ export class HTMLMyPagerElement extends HTMLElement {
         defineNumberAttr(this, 'count', { min: 0 });
         defineNumberAttr(this, 'pageSize', { min: 1 }, 'page-size');
         defineNumberAttr(this, 'value', { validator: value => value <= this.pages && value > 0 });
-        this.count = this.pageSize = this.value = 1;
 
         this.#registerEventListeners();
 
+    }
+
+    #inited = false;
+    connectedCallback() {
+        if (!this.#inited) {
+            this.#inited = true;
+            this.count = this.pageSize = this.value = 1;
+        }
     }
 
     #registerEventListeners() {

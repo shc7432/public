@@ -23,5 +23,6 @@
     "cfgctime": "检查周期 (秒):",
     "u:update": "更新", "u:ignore": "忽略此版本", "u:close": "关闭", "u:see": "查看",
     "showRn": "显示 Release Notes",
-    "newerVersionDetected": "检测到新版本"
+    "newerVersionDetected": "检测到新版本",
+    "failedToCheckUpdates": "无法检查更新"
 }

@@ -23,5 +23,6 @@
     "cfgctime": "Checking Period (second(s)):",
     "u:update": "Update", "u:ignore": "Ignore this version", "u:close": "Close", "u:see": "Details",
     "showRn": "Show Release Notes",
-    "newerVersionDetected": "A newer version has been detected."
+    "newerVersionDetected": "A newer version has been detected.",
+    "failedToCheckUpdates": "Failed to check for updates"
 }

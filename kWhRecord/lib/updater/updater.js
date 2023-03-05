@@ -12,6 +12,10 @@ export async function clearCache(cacheName) {
 
 export const availableUpdateOptions = [0, 1, 2, 3, 4, { id: 5, disabled: true }, 6];
 export const defaultUpdateOption = 3;
+export const updateCheckingDelayLimits = {
+    min: 3600 * 1000,       // 1 hour
+    max: 86400 * 7 * 1000,  // 7 days
+};
 
 
 let translation_table = {};
@@ -81,7 +85,7 @@ a:hover {
     border-radius: 5px;
     padding: 5px; font-size: large;
 }
-#noUpdates, #checkingUpdates {
+.update-widget.text-tip {
     height: 3em;
     display: grid;
     place-items: center;
@@ -141,8 +145,9 @@ a:hover {
     <div>
         <div style="margin-bottom: 10px;">[<a href="javascript:" id="checkNow">${tr('checkNow')}</a>]</div>
         <div style="font-family: monospace; font-size: small; color: gray">${tr('updlastctime')}: <span id="lastCheck"></span></div>
-        <p class="update-widget" id=noUpdates>${tr('noUpdate')}</p>
-        <p class="update-widget" id=checkingUpdates>${tr('checkingUpdates')}</p>
+        <p class="update-widget text-tip" id=noUpdates>${tr('noUpdate')}</p>
+        <p class="update-widget text-tip" id=checkingUpdates>${tr('checkingUpdates')}</p>
+        <p class="update-widget text-tip" id=failedToCheckUpdates>${tr('failedToCheckUpdates')}</p>
         <div class="update-widget" id=updates style="margin-top:12px">
             <div id=updates_count></div>
             <div class=updates-container > .update-card></div>
@@ -219,7 +224,11 @@ export class UpdateManager {
         const cfgau = shadowRoot.getElementById('cfgau');
         const cfgaut = shadowRoot.getElementById('cfgaut');
         const auopt_list = tr('auopt_list');
-        const aucfg = await this.getConfig('configuration');
+        let aucfg = await this.getConfig('configuration');
+        if (aucfg == undefined) {
+            await this.setConfig('configuration', defaultUpdateOption);
+            aucfg = defaultUpdateOption;
+        }
         for (const i of availableUpdateOptions) {
             const el = document.createElement('option');
             const value = typeof i === 'object' ? i.id : i;
@@ -229,10 +238,7 @@ export class UpdateManager {
             if ((typeof i === 'object') && (i.disabled)) el.disabled = true;
             cfgau.append(el);
         }
-        if (aucfg == undefined) {
-            const def = cfgau.querySelector(`[value="${cfgaut.innerText = defaultUpdateOption}"]`);
-            def && (def.selected = true);
-        } else cfgaut.innerText = aucfg;
+        cfgaut.innerText = aucfg;
         cfgau.onchange = async () => {
             cfgaut.innerText = cfgau.value;
             await this.setConfig('configuration', +cfgau.value);
@@ -283,7 +289,7 @@ export class UpdateManager {
         shadowRoot.getElementById('lastCheck').innerText = new Date(await this.getConfig('Last Check Time') || 0).toLocaleString();
         this.#updateCheckStatus('noUpdates');
 
-        const period = Math.min(Math.max(await this.getConfig('check period') * 1000, 3600*1000), 604800);
+        const period = Math.min(Math.max(await this.getConfig('check period') * 1000, updateCheckingDelayLimits.min), updateCheckingDelayLimits.max);
         if ((!isNaN(period))) setInterval(() => this.checkIf(), period);
 
 
@@ -374,7 +380,10 @@ export class UpdateManager {
             this.#isFirstFound = false;
             return ret;
         }
-        catch (error) { console.warn('[updater]', 'Failed to check for updates:', error); }
+        catch (error) {
+            console.warn('[updater]', 'Failed to check for updates:', error);
+            this.#updateCheckStatus('failedToCheckUpdates');
+        }
         this.#isChecking = false;
     }
 
@@ -409,8 +418,12 @@ export class UpdateManager {
         ver.innerText = version;
         el.append(ver);
         const ignored = await this.getConfig('ignored versions');
+        let isIgnored = false;
         if (ignored) {
-            if (ignored.includes(version)) ver.classList.add('ignored');
+            if (ignored.includes(version)) {
+                isIgnored = true;
+                ver.classList.add('ignored');
+            }
         }
         const cont = document.createElement('div');
         cont.className = 'update-card-content';
@@ -437,7 +450,7 @@ export class UpdateManager {
             text: tr('u:update'), click: () => {
                 this.#doUpdate(version);
         }},{
-            text: tr('u:ignore'), click: async function (thisArg) {
+            id: 'ignore', text: tr('u:ignore'), click: async function (thisArg) {
                 const ignored = await thisArg.getConfig('ignored versions') || [];
                 if (!ignored.includes(version)) ignored.push(version);
                 await thisArg.setConfig('ignored versions', ignored);
@@ -447,12 +460,16 @@ export class UpdateManager {
             text: tr('u:close'), click: () => {
                 el.remove();
         }},];
-        for (const i of btn) {
+        for (let i = 0; i < btn.length; ++i) {
+            const obj = btn[i];
             const a = document.createElement('a');
             a.href = 'javascript:';
-            a.onclick = i.click.bind(a, this);
-            a.innerText = i.text;
-            btns.append(a, ' ');
+            a.onclick = obj.click.bind(a, this);
+            a.innerText = obj.text;
+            btns.append(a);
+            if (i + 1 !== btn.length) btns.append(' | ');
+
+            if (isIgnored && obj.id === 'ignore') a.replaceWith(document.createTextNode('--'));
         }
         el.append(btns);
         updatesc.append(el);
