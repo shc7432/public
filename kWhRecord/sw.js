@@ -22,11 +22,20 @@ globalThis.addEventListener('activate', function (e) {
 globalThis.addEventListener('fetch', function (e) {
     e.respondWith(async function () {
         const url = String(e.request.url);
+        let allowCache = true;
         for (const i in globalThis.sw_replaces) {
-            if (url.endsWith(i)) return await globalThis.sw_replaces[i](e.request);
+            if (url.endsWith(i)) {
+                const result = await globalThis.sw_replaces[i](e.request);
+                if (result === globalThis.sw_env.NO_CACHE) {
+                    allowCache = false;
+                }
+                else return result;
+            }
         }
-        const cacheResult = await caches.match(e.request);
-        if (cacheResult) return cacheResult;
+        if (allowCache) {
+            const cacheResult = await caches.match(e.request);
+            if (cacheResult) return cacheResult;
+        }
         try {
             const req = new Request(e.request.url, {
                 method: e.request.method,
@@ -41,12 +50,15 @@ globalThis.addEventListener('fetch', function (e) {
                 integrity: e.request.integrity,
             });
             const resp = await fetch(req);
-            if (/GET/i.test(e.request.method) && resp.status === 200 && (
-                e.request.url.startsWith(globalThis.location.origin)
-            )) try {
+            if (
+                allowCache &&
+                /GET/i.test(e.request.method) &&
+                resp.status === 200 &&
+                (e.request.url.startsWith(globalThis.location.origin))
+            ) try {
                 const cache = await caches.open(cacheName);
-                cache.put(e.request, resp.clone());
-            } catch { };
+                await cache.put(e.request, resp.clone());
+            } catch (error) { console.warn('Failed to cache', e.request, ':', error); };
             return resp;
         } catch (error) {
             console.error('Failed to request', e.request.url, ':', error);

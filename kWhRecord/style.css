@@ -3,6 +3,9 @@
 body {
     margin: 0; padding: 0;
 }
+*:has(dialog:modal) {
+    overflow: hidden;
+}
 
 *:disabled, *[disabled] {
     cursor: not-allowed;
@@ -28,10 +31,11 @@ a:hover {
 
 #app .loading-mask {
     display: none;
+    flex: 1;
 }
-#app.is-loading .app-related-content * {
+/* #app.is-loading .app-related-content * {
     pointer-events: none;
-}
+} */
 #app.is-loading .loading-mask {
     display: block;
 }
@@ -87,10 +91,10 @@ a:hover {
     width: calc(100% / var(--table-column-count));
     word-break: break-all;
 }
-#records .user-input {
-    padding: 0;
+.app-records-container .user-input {
+    padding: 0 !important;
 }
-#records .user-input input {
+.app-records-container .user-input input {
     box-sizing: border-box;
     width: 100%;
     padding: var(--padding);
@@ -108,6 +112,8 @@ a:hover {
 #data_export_result, #data_import {
     box-sizing: border-box;
     width: 100%;
+    resize: vertical;
 }
+
 
 

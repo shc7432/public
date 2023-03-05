@@ -1,12 +1,10 @@
 // main.js
 
 
-if ('serviceWorker' in globalThis.navigator) {
-    navigator.serviceWorker.register('./sw.js');
-};
 import './sw_env.js';
 
 import { delay, wrapQueryElement, showTip } from './util.js';
+import { clearCache, UpdateManager } from './lib/updater/updater.js';
 
 
 const app = document.getElementById('app');
@@ -14,21 +12,192 @@ if (!app) throw new Error('#app not found');
 const $ = wrapQueryElement(app);
 
 
+const pager_pageSize = 50;
+
+
 //#region open db
+$('.loading-mask').innerHTML = '正在加载版本';
+let currentVersion = null;
+{
+    const cachedVersion = await caches.match('./version');
+    if (cachedVersion) {
+        $('#versionText').innerText = currentVersion = await cachedVersion.text();
+    }
+    else fetch('version', { cache: 'no-cache' }).then(v => {
+        if (!v.ok) throw new Error(`${v.status} ${v.statusText}`);
+        return v.text();
+    })
+    .then(v => $('#versionText').innerText = currentVersion = v)
+    .catch(e => $('#versionText').innerText = `Failed: ${e}`);
+}
+
+
 $('.loading-mask').innerHTML = '正在处理数据库';
-await import('./userdata.js');
+const { db_name } = await import('./userdata.js');
+
+$('#deleteDB_databaseName').innerText = db_name;
+
+//#endregion
+
+
+//#region update manager
+$('.loading-mask').innerHTML = '正在检查更新';
+const updateManager = new UpdateManager({
+    async getConfig() {
+        return (await userdata.get('config', 'update config')) || {};
+    },
+    async setConfig(cfg) {
+        return await userdata.put('config', cfg, 'update config');
+    },
+    getCurrentVersion() {
+        return currentVersion;
+    },
+    versionPath: './version',
+    releaseNotesPath: './release-notes/[[version]].NOCACHE.txt',
+    async doUpdate(targetVersion, doNotApply) {
+        if (!doNotApply) $('#updateAllResources').previousElementSibling.showModal();
+        await delay();
+        try {
+            await clearCache(globalThis.sw_env.cacheName);
+            if (!doNotApply) setTimeout(() => location.reload(), 1000);
+        } catch (error) {
+            if (!doNotApply) $('#updateAllResources').previousElementSibling.close();
+            showTip(`更新失败: ${error}`);
+        }
+    },
+});
+updateManager.attach($('#updateManagerContainer'));
+
+let isServiceWorkerEnabled = updateManager.isServiceWorkerEnabled;
+if (isServiceWorkerEnabled instanceof Promise) isServiceWorkerEnabled = await isServiceWorkerEnabled;
+
+if (Reflect.has(globalThis, 'swAlive')) {
+    if (!isServiceWorkerEnabled) {
+        navigator.serviceWorker.getRegistration('./').then(sw => {
+            sw.unregister().then(result => {
+                if (result) location.reload();
+            });
+        });
+    }
+} else if (isServiceWorkerEnabled) {
+    if (navigator.serviceWorker) {
+        navigator.serviceWorker.register('./sw.js');
+    }
+}
 
 //#endregion
 
 
 //#region register event handlers
+$('.loading-mask').innerHTML = '正在加载分页组件';
+await import('./lib/pager/pager.js');
+
+
 $('.loading-mask').innerHTML = '正在注册事件处理程序';
+
 $('#updateAllResources').on('click', async function () {
     if (this.dataset.na) return;
     this.previousElementSibling.showModal();
     await delay();
-    caches.delete(globalThis.sw_env.cacheName);
-    setTimeout(() => location.reload(), 1000);
+    try {
+        await clearCache(globalThis.sw_env.cacheName);
+        setTimeout(() => location.reload(), 1000);
+    } catch (error) {
+        this.previousElementSibling.close();
+        showTip(`更新失败: ${error}`);
+    }
+});
+$('#deleteDB').on('click', async function () {
+    userdata.close();
+    indexedDB.deleteDatabase(db_name).onsuccess = () => {
+        if (confirm('数据库已删除。\n您想现在刷新页面吗？'))
+            location.reload();
+        else $('#deleteDB').parentElement.close();
+    }
+});
+{
+    let lastAppPagerCursor = -1;
+    $('#appRecordsPager').on('change', function () {
+        if ($('#appRecordsPager').value === lastAppPagerCursor) return;
+        lastAppPagerCursor = $('#appRecordsPager').value;
+        data_Load((lastAppPagerCursor - 1) * pager_pageSize);
+    });
+}
+let export_cache = null, export_cache_url = null, export_cache_dfname = null;
+$('#clearExportArea').on('click', () => {
+    URL.revokeObjectURL(export_cache_url);
+    $('#data_export_result').value = '', export_cache = export_cache_url = export_cache_dfname = null;
+});
+$('#clearImportArea').on('click', () => { $('#data_import').value = '' });
+$('#dlExported').on('click', () => {
+    if (!export_cache_url) return showTip('请先进行导出。');
+    const a = document.createElement('a');
+    a.href = export_cache_url;
+    (export_cache_dfname) && (a.download = export_cache_dfname);
+    a.target = '_blank';
+    a.innerHTML = 'Click to Download';
+    document.body.append(a);
+    a.click();
+    a.remove();
+});
+
+$('.loading-mask').innerHTML = '正在注册事件处理程序 >> 正在载入: 导入/导出 处理程序';
+const { formatters, parsers, formatters_poster } = await import('./dataImportAndExport.js');
+$('#exportData').on('click', async function () {
+    const formatter = formatters[$('#data_export_format').value];
+    if (!formatter) return showTip('Error: 找不到formatter');
+
+    let ret = new Array();
+    const data_max = 100_0000;
+
+    let tx = userdata.transaction('records');
+    let cursor = await tx.store.openCursor(undefined, 'prev'), n = 0;
+
+    while (cursor && (n++ < data_max)) {
+        // console.log(cursor.key, cursor.value);
+        ret.push(formatter(cursor.value));
+        cursor = await cursor.continue();
+    }
+
+    const poster = formatters_poster[$('#data_export_format').value];
+    if (poster) {
+        ret = poster(ret, value => export_cache_dfname = value);
+    }
+
+    export_cache = new Blob(ret, { type: 'application/octet-stream' });
+    if (export_cache.size < 16384) {
+        // 可以安全地显示为文本
+        const text = await export_cache.text();
+
+        $('#data_export_result').value = text;
+
+    } else {
+        $('#data_export_result').value = '内容过大，请点击下载';
+    }
+    export_cache_url = URL.createObjectURL(export_cache);
+});
+$('#importData').on('click', async function () {
+    const parser = parsers[$('#data_import_format').value];
+    if (!parser) return showTip('Error: 找不到parser');
+    
+    let datastr;
+    if ($('#data_import_f').files.length) {
+        const file = $('#data_import_f').files[0];
+        datastr = await file.text();
+    }
+    else datastr = data_import.value;
+    
+    $('#importData').disabled = $('#clearImportArea').disabled = true;
+
+    const data = datastr.split('\n');
+    for (const i of data) {
+        await userdata.put('records', parser(i.replaceAll('\r', ''), data_computeId));
+    }
+
+
+    $('#importData').disabled = $('#clearImportArea').disabled = false;
+    $('#appRecordsPager').value = 1;
+    data_Load();
 });
 
 //#endregion
@@ -36,24 +205,34 @@ $('#updateAllResources').on('click', async function () {
 
 //#region open db
 $('.loading-mask').innerHTML = '正在处理数据';
-const data_delete = function (id) {
+const data_updatePager = async function () {
+    let count = await userdata.count('records');
+    // const pages = Math.max(1, Math.floor(count / pager_pageSize));
+    $('#appRecordsPager').count = count,
+    $('#appRecordsPager').pageSize = pager_pageSize;
+    
+};
+const data_delete = async function (id) {
     if (typeof id === 'object') id = id.id;
-    return userdata.delete('records', id);
+    await userdata.delete('records', id);
+    await data_updatePager();
+    data_Load(($('#appRecordsPager').value - 1) * pager_pageSize);
 };
 const data_computeId = function (obj) {
-    const date = obj.date.split('-');
-    const time = obj.time.split(':');
+    const date = (obj.date || '1-1-1').split('-');
+    const time = (obj.time || '0:0:0').split(':');
     const dd = new Date(0);
     dd.setFullYear(parseInt(date[0]), parseInt(date[1]) - 1, parseInt(date[2]));
     dd.setHours(parseInt(time[0]), parseInt(time[1]), parseInt(time[2] || '0' /* for some browsers who doesn't support [step] attr */), 0);
     return dd.getTime();
 };
-const data_addRow = function (obj) {
+const data_addRow = async function (obj, shouldPrepend = false) {
     const tr1 = document.createElement('tr'), td = [],
         a1 = document.createElement('a');
     for (let i = 0; i < 4; ++i) td.push(document.createElement('td'));
     tr1._$$data = obj;
     tr1.className = 'is-record user-data';
+    tr1.dataset.dataId = obj.id;
     td[0].dataset.keyPath = 'value';
     td[1].dataset.keyPath = 'date';
     td[2].dataset.keyPath = 'time';
@@ -64,9 +243,12 @@ const data_addRow = function (obj) {
     a1.dataset.action = 'delete';
     td[3].append(a1);
     tr1.append.apply(tr1, td);
-    if ($('#records tbody').firstElementChild)
-        $('#records tbody').firstElementChild.after(tr1);
-    else $('#records tbody').append(tr1);
+    const node1 = $('#records tbody').querySelector(`[data-data-id="${obj.id}"]`);
+    if (node1) node1.replaceWith(tr1);
+    else $('#records tbody')[shouldPrepend ? 'prepend' : 'append'](tr1);
+
+    if ($('#records tbody').childElementCount > pager_pageSize) $('#records tbody').lastElementChild.remove();
+    await data_updatePager();
 };
 const fillZero = function (x, len = 1) {
     if (typeof x !== 'string') x = String(x);
@@ -74,7 +256,7 @@ const fillZero = function (x, len = 1) {
     return x;
 };
 const data_Add = async function () {
-    const ipt = $('#records .user-input input');
+    const ipt = $('.app-records-header .user-input input');
     if (!ipt.value) return;
     const now = new Date();
     now.setMilliseconds(0); // normalize
@@ -87,7 +269,9 @@ const data_Add = async function () {
     };
     await userdata.put('records', obj);
     ipt.value = '';
-    data_addRow(obj);
+    if ($('#appRecordsPager').value !== 1)
+        $('#appRecordsPager').value = 1;
+    else await data_addRow(obj, true);
 };
 
 {
@@ -96,11 +280,13 @@ const data_Add = async function () {
     const ipt = document.createElement('input');
     ipt.onkeydown = (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); data_Add() } }
     ipt.onblur = () => { data_Add() };
+    ipt.type = 'text';
+    ipt.ariaLabel = '创建新记录';
     td.className = 'user-input';
     td.append(ipt);
     tr1.append(td);
     for (const i of ('\u2060'.repeat(3)))tr1.append(document.createElement('td'));
-    $('#records tbody').prepend(tr1);
+    $('.app-records-header tbody').prepend(tr1);
 }
 
 $('.loading-mask').innerHTML = '正在处理数据 >> 正在注册事件处理程序';
@@ -142,6 +328,7 @@ $('#records').on('click', function (ev) {
                     newData[target.dataset.keyPath] = ipt.value;
                     newData.id = data_computeId(newData);
                     await userdata.put('records', newData);
+                    target.parentElement._$$data = structuredClone(newData);
                     await data_Load();
                 }
                 catch (error) {
@@ -169,6 +356,7 @@ $('#records').on('click', function (ev) {
                     await data_delete(newData.id);
                     newData[target.dataset.keyPath] = ipt.value;
                     await userdata.put('records', newData);
+                    target.parentElement._$$data = structuredClone(newData);
                     ipt.replaceWith(document.createTextNode(ipt.value));
                 }
                 catch (error) {
@@ -203,20 +391,33 @@ $('#records').on('keydown', function (ev) {
 });
 
 $('.loading-mask').innerHTML = '正在处理数据 >> 正在加载数据';
-const data_Load = async function () {
-    let frow = null;
-    while ((frow = $('#records tbody').firstElementChild.nextElementSibling)) {
-        frow.remove();
-    }
+let data_isLoading = false;
+$('#appRecordsPager').on('beforechange', ev => {
+    if (data_isLoading) ev.preventDefault();
+});
+const data_Load = async function (begin = 0) {
+    data_isLoading = true;
+    $('#records tbody').innerHTML = '';
 
-    let cursor = await userdata.transaction('records').store.openCursor();
+    try {
+        let tx = userdata.transaction('records');
+        let cursor = await tx.store.openCursor(undefined, 'prev'), n = 0;
+        try {
+            begin && (await cursor.advance(begin));
+        } catch { n = pager_pageSize }
+    
+        while (cursor && (n++ < pager_pageSize)) {
+            // console.log(cursor.key, cursor.value);
+            data_addRow(cursor.value);
+            try { cursor = await cursor.continue(); }
+            catch { break; }
+        }
+    } catch (error) { console.error('Unexpected error in data_Load:', error); }
 
-    while (cursor) {
-        // console.log(cursor.key, cursor.value);
-        data_addRow(cursor.value);
-        cursor = await cursor.continue();
-    }
+    data_isLoading = false;
+    await data_updatePager();
 };
+$('#appRecordsPager').value = 1;
 await data_Load();
 //#endregion
 
@@ -246,5 +447,4 @@ $('#confirmClearData').on('click', async function () {
 $('.loading-mask').innerHTML = '正在完成';
 await delay((Math.floor(Math.random() * 1000)));
 $().classList.remove('is-loading');
-
 
