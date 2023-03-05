@@ -328,8 +328,8 @@ $('#records').on('click', function (ev) {
                     newData[target.dataset.keyPath] = ipt.value;
                     newData.id = data_computeId(newData);
                     await userdata.put('records', newData);
-                    target.parentElement._$$data = structuredClone(newData);
-                    await data_Load();
+                    // target.parentElement._$$data = structuredClone(newData);
+                    await data_Load(($('#appRecordsPager').value - 1) * pager_pageSize);
                 }
                 catch (error) {
                     console.error(error);
@@ -356,8 +356,9 @@ $('#records').on('click', function (ev) {
                     await data_delete(newData.id);
                     newData[target.dataset.keyPath] = ipt.value;
                     await userdata.put('records', newData);
-                    target.parentElement._$$data = structuredClone(newData);
-                    ipt.replaceWith(document.createTextNode(ipt.value));
+                    // target.parentElement._$$data = structuredClone(newData);
+                    // ipt.replaceWith(document.createTextNode(ipt.value));
+                    await data_Load(($('#appRecordsPager').value - 1) * pager_pageSize);
                 }
                 catch (error) {
                     console.error(error);
