@@ -33,12 +33,13 @@
             <p style="font-family: monospace;">Description:<br>   This tool can create a repo in your github account.<br>   Might helpful for Chinese users (because of the network environment in China).</p>
             <div id="validatePAK">
                 <fieldset style="display: flex;">
-                    <legend>Please input your Personal Access Token</legend>
+                    <legend>Please input your Personal Access Token (PAT)</legend>
                     <input type="" id="pak" style="flex: 1"> <button type="button" id="pastePAK">Paste</button>
                 </fieldset>
                 <div><label style="display: block;"><input type="checkbox" id="storePAK"> Store the PAK for next use</label></div>
+                <div>Doesn't have a PAT? <a style="color: blue;text-decoration: none;" href="https://github.com/settings/tokens/" target="_blank">Create one</a>!</div>
                 <div id="errorText" style="color: red; font-family: monospace;"></div>
-                <button type="button" id="submitPAK">Continue</button>
+                <button type="button" id="submitPAK" autofocus>Continue</button>
             </div>
             <div id="app" hidden>
                 <div style="font-family: Consolas, monospace; margin-bottom: 1em;">Logged on as <i id="usernameField"></i></div>
