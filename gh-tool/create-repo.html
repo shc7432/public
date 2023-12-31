@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create a Repo</title>
+    <style>button{cursor: pointer;}*:disabled,*[disabled]{cursor: not-allowed !important}</style>
+    <style>
+    #mainWrapper input, #mainWrapper button, #mainWrapper select { padding: 0.5em; }
+    #main label.fl { display: flex; align-items: center; }
+    #main label+label { margin-top: 0.5em; }
+    #main label.fl > input, #main label.fl > select { flex: 1; margin-left: 0.5em; }
+    #main .with-text::after {
+        content: var(--text);
+        margin-left: 0.5em;
+    }
+    #main .with-text {
+        --text: 'No';
+        cursor: pointer;
+    }
+    #main .with-text:has(input:checked) {
+        --text: 'Yes';
+    }
+    #main .with-text input[type=checkbox] { opacity: 0; width: 1px; display: inline-block; }
+    #main .with-text input[type=checkbox]:focus { opacity: 1; width: unset; display: inline-block; scale: 1.5; }
+
+    </style>
+</head>
+<body>
+    <dialog id="mainWrapper">
+        <form id=main>
+            <h1 style="margin-top: 0;">Create a repository</h1>
+            <p style="font-family: monospace;">Description:<br>   This tool can create a repo in your github account.<br>   Might helpful for Chinese users (because of the network environment in China).</p>
+            <div id="validatePAK">
+                <fieldset style="display: flex;">
+                    <legend>Please input your Personal Access Token</legend>
+                    <input type="" id="pak" style="flex: 1"> <button type="button" id="pastePAK">Paste</button>
+                </fieldset>
+                <div><label style="display: block;"><input type="checkbox" id="storePAK"> Store the PAK for next use</label></div>
+                <div id="errorText" style="color: red; font-family: monospace;"></div>
+                <button type="button" id="submitPAK">Continue</button>
+            </div>
+            <div id="app" hidden>
+                <div style="font-family: Consolas, monospace; margin-bottom: 1em;">Logged on as <i id="usernameField"></i></div>
+                <label class="fl">Owner: <select id="accounts"></select></label>
+                <label class="fl">Repo name<sup style="color: red">*</sup>: <input required type="text" name="name"></label>
+                <label class="fl">Description: <input type="text" name="description"></label>
+                <label class="fl">Private: <div class="with-text"><input type="checkbox" name="private" id="repoPriv"></div></label>
+                <fieldset style="margin: 0.5em 0;">
+                    <legend>Repo features</legend>
+                    <label class="fl">Issues: <div class="with-text"><input type="checkbox" name="has_issues" checked></div></label>
+                    <label class="fl">Projects: <div class="with-text"><input type="checkbox" name="has_projects" checked></div></label>
+                    <label class="fl">Wiki: <div class="with-text"><input type="checkbox" name="has_wiki" checked></div></label>
+                    <label class="fl">Downloads: <div class="with-text"><input type="checkbox" name="has_downloads" checked></div></label>
+                    <label class="fl">Is Template: <div class="with-text"><input type="checkbox" name="is_template"></div></label>
+                </fieldset>
+                <label class="fl">Initialize (create README): <div class="with-text"><input type="checkbox" name="auto_init"></div></label>
+                <label class="fl">Add .gitignore: <select id="gitignore"><option>Loading...</option></select></label>
+                <label class="fl">Add a license: <select id="addLicense"><option>Loading...</option></select></label>
+                
+                <button type="submit" style="margin-top: 1em;" disabled>Create</button>
+            </div>
+        </form>
+
+        <dialog id="ackDlg" style="font-family: Consolas, monospace;"><form method="dialog">
+            <div style="font-weight: bold; color: red;">If continue, the following request will be sent.</div>
+            <pre style="height: 10em; overflow: auto;"></pre>
+            <div style="display: flex; flex-direction: column;">
+                <button type="button" id="submitRequest">I want to do that</button><button type="submit" style="margin-top: 0.5em;">Don't do that</button>
+            </div>
+        </form></dialog>
+
+        <dialog id="processingDlg" style="font-family: Consolas, monospace;" oncancel="event.preventDefault(); return false" onclose="if(this.shouldOpen)this.showModal()">Processing...</dialog>
+
+        <dialog id="successDlg" style="font-family: Consolas, monospace;" onclose="location.reload()"><form method="dialog">
+            <div style="font-weight: bold; color: green;">The operation was completed successfully.</div>
+            <pre style="height: 10em; overflow: auto;"></pre>
+            <a style="display: flex; flex-direction: column; margin: 1em 0; color: blue;text-decoration: none;" href="#nop" id="newrepo_url" target="_blank">Open the new repo</a>
+            <div style="display: flex; flex-direction: column;"><button type="submit">Close</button></div>
+        </form></dialog>
+        <dialog id="failureDlg" style="font-family: Consolas, monospace;"><form method="dialog">
+            <div style="font-weight: bold; color: red;">The operation was NOT completed successfully.</div>
+            <pre style="height: 10em; overflow: auto;"></pre>
+            <div style="display: flex; flex-direction: column;"><button type="submit">Close</button></div>
+        </form></dialog>
+    </dialog>
+
+    <dialog id="load_error"><form method="dialog">
+        <div style="font-weight: bold; color: red;">Cannot load user data.</div>
+        <pre id="load_error_desc"></pre>
+        <button type="button" id="load_error_retry">Retry</button>
+        <button type="submit">Cancel</button>
+    </form></dialog>
+
+    <script>
+mainWrapper.showModal();
+pastePAK.onclick = () => navigator.clipboard.readText().then(text=>pak.value=text).catch(error=>errorText.innerText = ('Failed to paste: '+error+'\nPlease press Ctrl-V to paste.'));
+((k)=>{k&&((pak.value=k),(storePAK.checked=true))})(localStorage.getItem('gh-tool--stored-pak'));
+globalThis.pakValue = '';
+const req = function (api, data, pak = null) {
+    if (!data) data = {};
+    if (!data.headers) data.headers = {};
+    data.headers.Authorization = 'Bearer ' + (pak || pakValue);
+    data.headers['X-GitHub-Api-Version'] = '2022-11-28';
+    return fetch(api, data);
+}
+submitPAK.onclick = function () {
+    this.disabled = true;
+    if (!storePAK.checked) {
+        localStorage.removeItem('gh-tool--stored-pak');
+    }
+    req('https://api.github.com/user', {}, pak.value).then(v => {
+        if (!v.ok) throw new Error('HTTP Error ' + v.status);
+        return v.json()
+    }).then(d => {
+        globalThis.pakValue = pak.value;
+        if (storePAK.checked) {
+            localStorage.setItem('gh-tool--stored-pak', pakValue)
+        }
+        globalThis.username = d.login;
+        usernameField.innerText = username;
+        validatePAK.hidden = true
+        app.hidden = false
+
+        return d
+    }).then((d) => {
+        const LoadUserInfoWithErrorHandling = function load() {
+            loadUserInfo(d).catch(error => {
+                load_error_desc.innerText = `Username: ${username}\nError Details:\n${error}`;
+                load_error.showModal();
+                load_error_retry.addEventListener('click', () => {
+                    load_error.close();
+                    load();
+                }, { once: true });
+            });
+        };
+        LoadUserInfoWithErrorHandling();
+    }).catch(error => {
+        errorText.innerText = error;
+        this.disabled = false;
+    });
+};
+
+async function loadUserInfo(d) {
+    const org = await (await req(d.organizations_url)).json();
+    globalThis.users = Array.prototype.concat.apply([d], org);
+
+    for (const i of users) {
+        const el = document.createElement('option');
+        el.value = el.innerText = i.login;
+        accounts.append(el);
+    }
+
+    const gitignore_data = await (await req('https://api.github.com/repos/github/gitignore/contents/')).json();
+    gitignore.innerHTML = '<option value="null">Don\'t add</option>';
+    for (const i of gitignore_data) {
+        if (!i.name?.endsWith?.('.gitignore')) continue;
+        const name = i.name.replace('.gitignore', '');
+        const el = document.createElement('option');
+        el.value = el.innerText = name;
+        gitignore.append(el);
+    }
+
+    const all_licenses = licenses_data.innerHTML.split('\n');
+    addLicense.innerHTML = '<option value="null">Don\'t add</option>';
+    for (const i of all_licenses) {
+        const arr = i.split('\t');
+        const el = document.createElement('option');
+        el.value = arr[1]; el.innerText = arr[0];
+        addLicense.append(el);
+    }
+
+    app.querySelector('button[type="submit"]').disabled = false;
+}
+
+function constructRequest() {
+    const request_url = accounts.value === username ? 
+        (`https://api.github.com/user/repos`) :
+        (`https://api.github.com/orgs/${accounts.value}/repos`);
+    const body = { 
+        visibility: repoPriv.checked ? 'private' : 'public',
+        gitignore_template: gitignore.value === 'null' ? undefined : gitignore.value,
+        license_template: addLicense.value === 'null' ? undefined : addLicense.value,
+    };
+    for (const i of (app.querySelectorAll('input[name]'))) {
+        if (i.type === 'text') {
+            body[i.name] = i.value;
+        }
+        if (i.type === 'checkbox') {
+            body[i.name] = i.checked ? true : false;
+        }
+    }
+    ackDlg.querySelector('pre').innerText = `POST ${request_url}\nbody: ${JSON.stringify(body, null, 4)}`;
+
+    submitRequest.onclick = function sendRequest() {
+        processingDlg.shouldOpen = true;
+        processingDlg.showModal();
+        req(request_url, {
+            headers: {
+                Accept: 'application/vnd.github+json',
+            },
+            method: 'POST',
+            body: JSON.stringify(body),
+        }).then(async v => {
+            return { ok: v.ok, json: await v.json() };
+        }).then(v => {
+            if (!v.ok) throw JSON.stringify(v.json, null, 4);
+            return v//v.json();
+        }).then(data => {
+            successDlg.querySelector('pre').innerText = JSON.stringify(data.json, null, 4);
+            newrepo_url.href = data.json.html_url;
+            successDlg.showModal();
+        }).catch(error => {
+            failureDlg.querySelector('pre').innerText = error;
+            failureDlg.showModal();
+        }).finally(() => {
+            processingDlg.shouldOpen = false;
+            processingDlg.close();
+        })
+    };
+
+    ackDlg.showModal();
+}
+
+main.onsubmit = function (ev) {
+    ev.preventDefault();
+    queueMicrotask(constructRequest);
+    return false;
+}
+
+    </script>
+
+    <template id="licenses_data">Academic Free License v3.0	AFL-3.0
+Apache license 2.0	Apache-2.0
+Artistic license 2.0	Artistic-2.0
+Boost Software License 1.0	BSL-1.0
+BSD 2-clause "Simplified" license	BSD-2-Clause
+BSD 3-clause "New" or "Revised" license	BSD-3-Clause
+BSD 3-clause Clear license	BSD-3-Clause-Clear
+BSD 4-clause "Original" or "Old" license	BSD-4-Clause
+BSD Zero-Clause license	0BSD
+Creative Commons license family	CC
+Creative Commons Zero v1.0 Universal	CC0-1.0
+Creative Commons Attribution 4.0	CC-BY-4.0
+Creative Commons Attribution ShareAlike 4.0	CC-BY-SA-4.0
+Do What The F*ck You Want To Public License	WTFPL
+Educational Community License v2.0	ECL-2.0
+Eclipse Public License 1.0	EPL-1.0
+Eclipse Public License 2.0	EPL-2.0
+European Union Public License 1.1	EUPL-1.1
+GNU Affero General Public License v3.0	AGPL-3.0
+GNU General Public License family	GPL
+GNU General Public License v2.0	GPL-2.0
+GNU General Public License v3.0	GPL-3.0
+GNU Lesser General Public License family	LGPL
+GNU Lesser General Public License v2.1	LGPL-2.1
+GNU Lesser General Public License v3.0	LGPL-3.0
+ISC	ISC
+LaTeX Project Public License v1.3c	LPPL-1.3c
+Microsoft Public License	MS-PL
+MIT	MIT
+Mozilla Public License 2.0	MPL-2.0
+Open Software License 3.0	OSL-3.0
+PostgreSQL License	PostgreSQL
+SIL Open Font License 1.1	OFL-1.1
+University of Illinois/NCSA Open Source License	NCSA
+The Unlicense	Unlicense
+zLib License	Zlib</template>
+
+</body>
+</html>
