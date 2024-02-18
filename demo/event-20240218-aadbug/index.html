@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event 20240218: [Anti Anti-debugger bug report demo page]</title>
+</head>
+<body>
+    <div>This is some text.</div>
+    <div>This is some text.</div>
+    <div>This is some text.</div>
+    <div id="demo">This text should be changed by JavaScript after 3s.</div>
+    
+    <script id="app logic">setTimeout(function () {
+        // the script doesn't load on page load (@run-at is not specified)
+        // so we use setTimeout to trigger the script
+
+        // bug1: because of the following line (Anti Anti-debugger.js, line 32)
+        //     if (callerContent.includes(/\bdebugger\b/gi)) { //Eliminate all debugger statements from the caller, if any
+        // any code that includes "debugger" cannot run because
+        // it is not allowed to call String.prototype.includes() with a RegExp
+        // MDN: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes#exceptions
+        //     "TypeError is thrown if searchString is a regex."
+        try {
+            const f = Function.prototype.constructor.call(Function.prototype, `
+            console.log('Function=', Function, Object.getOwnPropertyDescriptor(window, 'Function'))
+            console.log('Function.prototype.constructor=', Function.prototype.constructor, Object.getOwnPropertyDescriptor(Function.prototype, 'constructor'))
+
+            // many scripts...
+            const str = (() => {
+                // app logic...
+                let a = 1, b = 2;
+                let c = (a + b) * 0xa;
+                // breakpoint: we want to pause here to debug the code
+                debugger;
+                // app logic...
+                c &= 0xff;
+
+                return ("Hello world! (c=" + c + ")")
+            })();
+            document.getElementById('demo').innerHTML = str;
+            // many scripts...
+            `);
+
+            // app logic...
+            queueMicrotask(f);
+            // other app logic...
+        } catch (error) { console.error(error) }
+        // we use try-catch to continue demoing bug2
+
+
+        // bug2: cannot remove Anti-debugger which is created by directly call Function()
+        {
+            // this is a anti-debugger
+            const f2 = Function('debugger;console.log("lalala")\n//hahahaha, now you seen my anti-debugger');
+            queueMicrotask(f2);
+        }
+        
+    }, 3000)</script>
+</body>
+</html>
+
