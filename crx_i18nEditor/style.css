@@ -1,0 +1,126 @@
+
+
+@import url(./external.css);
+@import url(./default-ui.css);
+
+
+#app, #app * {
+    font-family: Consolas, monospace;
+}
+
+
+#app {
+    flex-direction: column;
+    padding: 0;
+    overflow: hidden;
+}
+#app[open] {
+    display: flex;
+}
+
+#app nav {
+    padding: 10px;
+    border-bottom: 1px solid;
+    display: flex;
+    user-select: none;
+    align-items: center;
+}
+
+#app .flex-split {
+    display: flex;
+    overflow: hidden;
+}
+
+#app .flex-area.flex-left {
+    border-right: 1px solid;
+    padding: 10px;
+    max-width: 30%;
+    min-width: 1px;
+}
+#app .flex-area {
+    overflow: auto;
+}
+
+
+
+table.table-main {
+    box-sizing: border-box;
+    width: calc(100% - 2 * var(--margin));
+    margin: var(--margin);
+    font-family: monospace;
+    --margin: 5px;
+}
+table.table-main,
+table.table-main th,
+table.table-main tr,
+table.table-main td {
+    border: 1px solid gray;
+    border-collapse: collapse;
+}
+table.table-main td {
+    padding: 5px;
+    /* white-space: nowrap; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}
+table.table-main tbody td:nth-child(1) {
+    font-weight: bold;
+    background-color: rgb(244, 247, 252);
+}
+table.table-main thead {
+    font-weight: bold;
+    background-color: #e4e7f0;
+}
+table.table-main td:nth-child(1) {
+    width: 240px;
+    overflow: hidden;
+}
+table.table-main td:nth-last-child(1) {
+    width: calc(5em);
+}
+
+
+#main-header-info {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid;
+    margin-bottom: 1em;
+    padding: 10px;
+    background-color: white;
+    z-index: 2;
+    line-height: 1em;
+    height: 2em;
+    box-sizing: content-box;
+}
+
+#main table thead {
+    position: sticky;
+    top: calc(2em + 20px);
+    z-index: 3;
+    border-collapse: separate;
+}
+
+
+#main .is-untranslated td:nth-child(1)::before {
+    content: "[untranslated]";
+    color: #673AB7;
+    margin-right: 0.5em;
+}
+
+
+#saveProject[data-count]::after {
+    content: " (" attr(data-count) ")";
+}
+
+
+
+#main tbody td:not(:nth-child(1)) editable-text-view {
+    display: block;
+}
+
+
+
+

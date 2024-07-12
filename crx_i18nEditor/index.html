@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>crx i18n editor</title>
+    <link rel="stylesheet" href="./style.css">
+    <script type="module" src="./el-native-proxy.js"></script>
+    <script type="module" src="./TreeView.js"></script>
+    <script type="module" src="./editable-text-view.js"></script>
+</head>
+<body>
+    <dialog id="app" class="dialog-app">
+        <nav>
+            <span>Current Project:</span>
+            <input type="text" id="currentProject" class="el-input__inner" value="&lt;null&gt;" style="flex: 1; margin: 0 1em;" readonly>
+            <button type="button" id="loadProject" class="el-button" title="Ctrl+L" disabled>Load</button>
+            <button type="button" id="saveProject" class="el-button el-button--primary is-plain" title="Ctrl+S" disabled>Save</button>
+            <button type="button" id="openProject" class="el-button el-button--primary is-plain" title="Ctrl+O">Open</button>
+        </nav>
+
+        <div class="flex-split" style="flex: 1;">
+            <div class="flex-area flex-left" style="width: 250px">
+                <tree-view id="treeExploRoot">
+                    <tree-node>
+                        <tree-text>messages</tree-text>
+                        <tree-content id="treeMessages"></tree-content>
+                    </tree-node>
+                    <tree-node>
+                        <tree-text>errors</tree-text>
+                        <tree-content id="treeErrors"></tree-content>
+                    </tree-node>
+                    <tree-node>
+                        <tree-text>options</tree-text>
+                        <tree-content>
+                            <div><a href="#nop" id="clearErrors">Clear Errors</a></div>
+                            <div><a href="#nop" id="i18n_langCreate">Create New i18n Language</a></div>
+                            <div><a href="#nop" id="i18n_langRemove">Remove i18n Language</a></div>
+                        </tree-content>
+                    </tree-node>
+                </tree-view>
+            </div>
+            <div id="main" class="flex-area flex-right" style="flex: 1;">
+                <header id="main-header-info">
+                    <div>Current File: <b id="currentFile">null</b></div>
+                    <div>Default_Lang: <b id="defaultLang_e">null</b></div>
+                </header>
+
+                <table class="table-main" style="margin: 10px; box-sizing: border-box; width: calc(100% - (2 * (10px)));">
+                    <thead>
+                        <td>Key</td>
+                        <td>Value</td>
+                        <td>Delete</td>
+                    </thead>
+
+                    <tbody class="table-main-body" id="i18n_data"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <dialog id="create_or_remove_i18nLang">
+            <h1 style="margin-top: 0;">Create or Remove i18n Language</h1>
+            <form method="dialog">
+                <label>
+                    <span>Language Code:</span>
+                    <input type="text" class="el-input__inner" id="create_or_remove_i18nLang__lang">
+                </label>
+                <div style="text-align: right; margin-top: 1em;">
+                    <button type="button" class="el-button el-button--primary is-plain" id="i18n_langopt1">Create</button>
+                    <button type="button" class="el-button el-button--primary is-plain" id="i18n_langopt2">Remove</button>
+                    <button type="submit" class="el-button el-button--danger is-plain">Cancel</button>
+                </div>
+            </form>
+        </dialog>
+    </dialog>
+
+    <script type="module" src="./script.js"></script>
+</body>
+</html>
