@@ -1,0 +1,106 @@
+<div v-deep>
+    <main v-deep style="width: 400px; margin: 0 auto; font-size: larger; display: flex; flex-direction: column; align-items: center;">
+        <div style="display: flex; align-items: center; width: 100%;">
+            <div style="margin-right: 0.5em;">座位总数：</div>
+            <input v-deep class="ui-input" type="number" v-model="count" min="8" max="999" step="5" style="flex: 1;">
+            <button type="button" @click="count += 5" class="ui-input" v-deep>+</button>
+            <button type="button" @click="count -= 5" class="ui-input" v-deep>-</button>
+        </div>
+
+        <style>
+            .ui-input>>> {
+                padding: 0.5em;
+            }
+            .ui-input[v-deep]+.ui-input>>> {
+                margin-left: 0.5em;
+            }
+            button.ui-input>>> {
+                font-family: Consolas, monospace;
+                background-color: #ffffff;
+                width: 1em; height: 1em;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: content-box;
+            }
+            button.ui-input>>>:hover {
+                background-color: #f0f0f0;
+            }
+            button.ui-input>>>:active {
+                background-color: #e0e0e0;
+            }
+            .container>>> {
+                margin-top: 0.5em;
+                width: calc(6 * var(--block-size) + 5 * var(--block-padding));
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+                --block-size: 60px;
+                --block-padding: 10px;
+            }
+            .block>>> {
+                display: grid;
+                place-items: center;
+                box-sizing: border-box;
+                width: var(--block-size);
+                height: var(--block-size);
+                padding: calc(var(--block-padding));
+                margin-bottom: calc(var(--block-padding));
+                border: 1px solid gray;
+                border-collapse: collapse;
+                background: var(--bg);
+                --bg: #ffffff;
+            }
+            .block>>>[data-type="normal"] { --bg: #e7ffff; }
+            .block>>>[data-type="road"] { --bg: #f7f7f7; }
+            .block>>>[data-type="windowed"] { --bg: #e8fdf5; }
+            .block>>>[data-type="roaded"] { --bg: #fdffe8; }
+            .demo>>> { font-size: 14px; }
+        </style>
+
+        <div class="container demo" v-deep>
+            <div v-deep class="block">图例:</div>
+            <div v-deep class="block"></div>
+            <div v-deep class="block" data-type="normal">正常</div>
+            <div v-deep class="block" data-type="road">过道</div>
+            <div v-deep class="block" data-type="windowed">靠窗</div>
+            <div v-deep class="block" data-type="roaded">靠过道</div>
+        </div>
+        <hr>
+        <template v-if="count < 1"><div style="text-align: center; margin-top: 0.5em; font-size: x-large;">请输入座位总数</div></template>
+        <div class="container" v-deep>
+            <template v-if="count < 1"></template>
+            <template v-else-if="count <= 4">
+                <div v-deep class="block" data-type="windowed" v-if="count > 0">1</div>
+                <div v-deep class="block" data-type="roaded" v-if="count > 1">2</div>
+                <div v-deep class="block" data-type="road" v-if="count > 2"></div>
+                <div v-deep class="block" data-type="road" v-if="count > 2"></div>
+                <div v-deep class="block" data-type="roaded" v-if="count > 2">3</div>
+                <div v-deep class="block" data-type="windowed" v-if="count > 3">4</div>
+            </template>
+            <template v-else>
+                <template v-for="i in countReversed">
+                    <template v-if="i <= 4">
+                        <template v-if="i === 2">
+                            <div v-deep class="block" data-type="road"></div>
+                            <div v-deep class="block" data-type="road"></div>
+                        </template>
+                        <div v-deep class="block" :data-type="computeType(i)">{{i}}</div>
+                    </template>
+                    <template v-else-if="i + 3 > count">
+                        <template v-if="i === count - 2">
+                            <div v-deep class="block" data-type="road"></div>
+                            <div v-deep class="block" data-type="road"></div>
+                        </template>
+                        <div v-deep class="block" :data-type="computeType(i)">{{i}}</div>
+                    </template>
+                    <template v-else>
+                        <template v-if="(i - 5 + 3) % 5 === 0">
+                            <div v-deep class="block" data-type="road"></div>
+                        </template>
+                        <div v-deep class="block" :data-type="computeType(i)">{{i}}</div>
+                    </template>
+                </template>
+            </template>
+        </div>
+    </main>
+</div>

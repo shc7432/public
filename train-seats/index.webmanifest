@@ -1,0 +1,21 @@
+{
+  "name": "Train Seats Emulator",
+  "short_name": "train-seats",
+  "description": "Train Seats Emulator",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "64x64",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "display": "standalone",
+  "theme_color": "#FFFFFF",
+  "background_color": "#FFFFFF",
+  "display_override": ["standalone"]
+}
