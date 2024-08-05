@@ -1,4 +1,4 @@
-import { createApp } from './vue.esm-browser.js';
+import { createApp } from 'vue';
 
 const Vue_App = (await import('./app.js')).default;
 
