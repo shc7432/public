@@ -69,11 +69,11 @@
 </div>
 
 <script>
-(function(){
-    var to = getUrlValue("redirect"),to2;
-    var auth_list,auth_acceptlen,auth_denylen;
-    (function(){
-        if(!localStorage.geo_pos_info) {
+(function () {
+    var to = getUrlValue("redirect"), to2;
+    var auth_list, auth_acceptlen, auth_denylen;
+    (function () {
+        if (!localStorage.geo_pos_info) {
             let obj = {
                 accept: [],
                 deny: []
@@ -83,13 +83,13 @@
         auth_list = JSON.parse(localStorage.geo_pos_info);
         auth_acceptlen = auth_list.accept.length;
         auth_denylen = auth_list.deny.length;
-        if(to) return false;
+        if (to) return false;
     })();
     if (!to) return false;
     to2 = to;
     if (to.indexOf("http://") == 0) to2 = to.replace("http://", '');
     if (to.indexOf("https://") == 0) to2 = to.replace("https://", '');
-    var site_name = to2.substr(0,to2.indexOf("/"));
+    var site_name = to2.substr(0, to2.indexOf("/"));
     auth_btn_1.onclick = (e) => {
         if (e && auth_remember.checked) {
             auth_list.accept.push(site_name);
@@ -101,7 +101,7 @@
         else {
             lon.remove();
             lat.remove();
-            deny.value="not-support"; 
+            deny.value = "not-support";
             auth_form.submit();
         }
     };
@@ -115,33 +115,33 @@
         deny.value = 'user';
         auth_form.submit();
     };
-    for(let i=0;i<auth_acceptlen;++i)
-        if(auth_list.accept[i]==site_name) return 
-        (conti.hidden = auth_box.hidden = false);
-    for(let i=0;i<auth_denylen;++i)
-        if(auth_list.deny[i]==site_name) return auth_btn_2.onclick();
+    for (let i = 0; i < auth_acceptlen; ++i)
+        if (auth_list.accept[i] == site_name) return
+    (conti.hidden = auth_box.hidden = false);
+    for (let i = 0; i < auth_denylen; ++i)
+        if (auth_list.deny[i] == site_name) return auth_btn_2.onclick();
     auth_site.innerHTML = site_name;
     auth_form.action = to;
-    var 
-    lon = auth_form.querySelector("[name=lon]"),
-    lat = auth_form.querySelector("[name=lat]"),
-    deny = auth_form.querySelector("[name=deny]");
+    var
+        lon = auth_form.querySelector("[name=lon]"),
+        lat = auth_form.querySelector("[name=lat]"),
+        deny = auth_form.querySelector("[name=deny]");
     function showPosition(position) {
         // x.innerHTML = "Latitude: " + position.coords.latitude +
         //     "<br />Longitude: " + position.coords.longitude;
         deny.remove();
-        lon.value=position.coords.longitude;
-        lat.value=position.coords.latitude;
+        lon.value = position.coords.longitude;
+        lat.value = position.coords.latitude;
         auth_form.submit();
     }
     function showError(error) {
         lon.remove();
         lat.remove();
-        deny.value=error.code;
+        deny.value = error.code;
         auth_form.submit();
     }
     auth_box.hidden = false;
-    globalThis.showPosition = showPosition
+    globalThis.showPosition = () => conti.hidden = true;
 })()
 </script>
 
